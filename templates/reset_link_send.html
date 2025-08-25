@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Link Sent - ANAZORI 15.0</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            padding: 1rem;
+        }
+
+        .success-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #4caf50;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            color: #4caf50;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .success-message {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .email-info {
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            color: #00f5ff;
+            font-weight: 500;
+        }
+
+        .dev-link {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+
+        .dev-link a {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .primary-btn {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            color: #ffffff;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .secondary-btn:hover {
+            border-color: #00f5ff;
+            background: rgba(0, 245, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .help-text {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .help-text a {
+            color: #00f5ff;
+            text-decoration: none;
+        }
+
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="logo">
+            <h1>ANAZORI 15.0</h1>
+        </div>
+
+        <div class="success-icon">
+            <i class="fas fa-envelope-circle-check"></i>
+        </div>
+
+        <h2 class="success-title">Reset Link Sent!</h2>
+
+        <p class="success-message">
+            We've sent a password reset link to your email address. Click the link in your email to create a new password.
+        </p>
+
+        <div class="email-info">
+            <i class="fas fa-envelope"></i> {{ email }}
+        </div>
+
+        {% if reset_link %}
+        <div class="dev-link">
+            <strong>Development Mode:</strong>
+            <a href="{{ reset_link }}" target="_blank">Click here to reset password</a>
+            (In production, this link would only be sent via email)
+        </div>
+        {% endif %}
+
+        <div class="action-buttons">
+            <a href="{{ url_for('signin') }}" class="btn primary-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Back to Sign In
+            </a>
+
+            <button onclick="resendEmail()" class="btn secondary-btn" id="resendBtn">
+                <i class="fas fa-paper-plane"></i>
+                Resend Email
+            </button>
+        </div>
+
+        <div class="help-text">
+            <p>
+                Didn't receive the email? Check your spam folder or
+                <a href="{{ url_for('forgot_password') }}">try again</a>.
+            </p>
+            <p style="margin-top: 1rem;">
+                Need help? <a href="mailto:support@anazori.com">Contact Support</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function resendEmail() {
+            const btn = document.getElementById('resendBtn');
+            const originalText = btn.innerHTML;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            // Simulate API call (replace with actual resend functionality)
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }, 2000);
+        }
+
+        // Auto-focus for better UX
+        window.addEventListener('load', function() {
+            // You can add any initialization code here
+        });
+    </script>
+</body>
+</html>

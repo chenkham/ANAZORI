@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Tech Festival 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .settings-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border: 2px dashed #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .profile-section:hover {
+            border-color: #667eea;
+            background: #f0f2ff;
+        }
+
+        .profile-image-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .default-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            font-weight: bold;
+            border: 4px solid #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(102, 126, 234, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-image-container:hover .upload-overlay {
+            opacity: 1;
+        }
+
+        .upload-icon {
+            color: white;
+            font-size: 24px;
+        }
+
+        .upload-text {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .file-input-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .remove-photo-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .remove-photo-btn:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+
+        .upload-progress {
+            width: 100%;
+            max-width: 300px;
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .upload-progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .avatar-options {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .avatar-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: white;
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.1);
+        }
+
+        .avatar-option.selected {
+            border: 3px solid #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .password-section {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .settings-container {
+                padding: 20px;
+            }
+
+            .profile-image, .default-avatar {
+                width: 120px;
+                height: 120px;
+            }
+
+            .default-avatar {
+                font-size: 48px;
+            }
+
+            .avatar-options {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <div class="header">
+            <h1>Account Settings</h1>
+            <p>Update your profile information</p>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'error' if category == 'error' else 'success' }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Profile Picture Section -->
+        <div class="profile-section">
+            <div class="profile-image-container">
+                {% if user.profile_url %}
+                    <img src="{{ user.profile_url }}" alt="Profile Picture" class="profile-image" id="profileImage">
+                {% elif user.avatar and user.avatar.type == 'avatar' %}
+                    <div class="default-avatar" id="defaultAvatar" style="background-color: {{ user.avatar.color }};">
+                        {{ user.avatar.initials }}
+                    </div>
+                {% else %}
+                    <div class="default-avatar" id="defaultAvatar" style="background-color: #667eea;">
+                        {{ user.name[0].upper() if user.name else 'U' }}
+                    </div>
+                {% endif %}
+                <div class="upload-overlay" onclick="document.getElementById('profileImageInput').click()">
+                    <span class="upload-icon">📷</span>
+                </div>
+            </div>
+
+            <div class="upload-text">Click on the image to change your profile picture</div>
+
+            <div class="file-input-container">
+                <input type="file" id="profileImageInput" class="file-input" accept="image/*">
+                <label for="profileImageInput" class="file-input-label">Choose Photo</label>
+                {% if user.profile_url %}
+                    <button type="button" class="remove-photo-btn" onclick="removeProfilePhoto()">Remove</button>
+                {% endif %}
+            </div>
+
+            <div class="upload-progress" id="uploadProgress">
+                <div class="upload-progress-bar" id="uploadProgressBar"></div>
+            </div>
+
+            <!-- Avatar Options -->
+            <div class="avatar-options-container mt-4">
+                <h4>Or choose an avatar:</h4>
+                <div class="avatar-options" id="avatarOptions">
+                    <div class="avatar-option" style="background-color: #667eea;" data-color="#667eea">A</div>
+                    <div class="avatar-option" style="background-color: #764ba2;" data-color="#764ba2">A</div>
+                    <div class="avatar-option" style="background-color: #f093fb;" data-color="#f093fb">A</div>
+                    <div class="avatar-option" style="background-color: #f5576c;" data-color="#f5576c">A</div>
+                    <div class="avatar-option" style="background-color: #4facfe;" data-color="#4facfe">A</div>
+                    <div class="avatar-option" style="background-color: #43e97b;" data-color="#43e97b">A</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Form -->
+        <form method="POST" id="settingsForm">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" value="{{ user.name or '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address (cannot be changed for Google accounts)</label>
+                <input type="email" id="email" name="email" value="{{ user.email or '' }}"
+                       {{ 'disabled' if user.is_google_account else '' }}>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" value="{{ user.phone or '' }}" placeholder="+91XXXXXXXXXX">
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="is_du_student" name="is_du_student" {{ 'checked' if user.is_du_student else '' }}>
+                    <label for="is_du_student">I am a Dibrugarh University student</label>
+                </div>
+            </div>
+
+            <input type="hidden" id="profileImageUrl" name="profile_url" value="{{ user.profile_url or '' }}">
+            <input type="hidden" id="avatarColor" name="avatar_color" value="{{ user.avatar.color if user.avatar and user.avatar.type == 'avatar' else '#667eea' }}">
+            <input type="hidden" id="avatarInitials" name="avatar_initials" value="{{ user.avatar.initials if user.avatar and user.avatar.type == 'avatar' else (user.name[0].upper() if user.name else 'U') }}">
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update Settings</button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+
+        <!-- Password Update Section -->
+        <div class="password-section">
+            <h3>Change Password</h3>
+            <form method="POST" action="{{ url_for('update_password') }}">
+                <div class="form-group">
+                    <label for="current_password">Current Password</label>
+                    <input type="password" id="current_password" name="current_password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="new_password">New Password</label>
+                    <input type="password" id="new_password" name="new_password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm New Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEaEg3tU9oZtz_hPedyx9yYh7_1VoMxAQ",
+            authDomain: "tai-khamyang-app.firebaseapp.com",
+            databaseURL: "https://tai-khamyang-app-default-rtdb.firebaseio.com/",
+            projectId: "tai-khamyang-app",
+            storageBucket: "tai-khamyang-app.appspot.com",
+            messagingSenderId: "1033902318161",
+            appId: "1:1033902318161:web:ec99ea6a81358e10278e70"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const storage = firebase.storage();
+
+        // Avatar selection
+        document.querySelectorAll('.avatar-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                document.querySelectorAll('.avatar-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Add selected class to clicked option
+                this.classList.add('selected');
+
+                // Update hidden inputs
+                document.getElementById('avatarColor').value = this.getAttribute('data-color');
+                document.getElementById('avatarInitials').value = this.textContent;
+
+                // Clear profile image
+                document.getElementById('profileImageUrl').value = '';
+
+                // Update UI to show selected avatar
+                const defaultAvatar = document.getElementById('defaultAvatar');
+                const profileImage = document.getElementById('profileImage');
+
+                if (profileImage) {
+                    profileImage.style.display = 'none';
+                }
+
+                if (!defaultAvatar) {
+                    // Create default avatar if it doesn't exist
+                    const avatarDiv = document.createElement('div');
+                    avatarDiv.className = 'default-avatar';
+                    avatarDiv.id = 'defaultAvatar';
+                    avatarDiv.style.backgroundColor = this.getAttribute('data-color');
+                    avatarDiv.textContent = this.textContent;
+
+                    const container = document.querySelector('.profile-image-container');
+                    container.insertBefore(avatarDiv, container.querySelector('.upload-overlay'));
+                } else {
+                    // Update existing avatar
+                    defaultAvatar.style.backgroundColor = this.getAttribute('data-color');
+                    defaultAvatar.textContent = this.textContent;
+                }
+
+                // Save the avatar selection
+                saveAvatar(this.getAttribute('data-color'), this.textContent);
+            });
+        });
+
+        // Profile image upload functionality
+        document.getElementById('profileImageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file.');
+                return;
+            }
+
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB.');
+                return;
+            }
+
+            uploadProfileImage(file);
+        });
+
+        function uploadProfileImage(file) {
+            const userId = '{{ session.user }}';
+            const fileName = `profile_images/${userId}_${Date.now()}.${file.name.split('.').pop()}`;
+            const storageRef = storage.ref(fileName);
+            const uploadTask = storageRef.put(file);
+
+            // Show progress
+            const progressContainer = document.getElementById('uploadProgress');
+            const progressBar = document.getElementById('uploadProgressBar');
+            progressContainer.style.display = 'block';
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Progress
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    progressBar.style.width = progress + '%';
+                },
+                (error) => {
+                    // Error
+                    console.error('Upload error:', error);
+                    alert('Upload failed: ' + error.message);
+                    progressContainer.style.display = 'none';
+                },
+                () => {
+                    // Success
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        console.log('File uploaded successfully:', downloadURL);
+
+                        // Update UI
+                        updateProfileImageUI(downloadURL);
+
+                        // Set hidden input for form submission
+                        document.getElementById('profileImageUrl').value = downloadURL;
+
+                        // Clear avatar selection
+                        document.getElementById('avatarColor').value = '';
+                        document.getElementById('avatarInitials').value = '';
+
+                        // Remove selected class from avatar options
+                        document.querySelectorAll('.avatar-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+
+                        // Hide progress
+                        progressContainer.style.display = 'none';
+
+                        // Auto-save the profile image
+                        saveProfileImage(downloadURL);
+                    });
+                }
+            );
+        }
+
+        function updateProfileImageUI(imageUrl) {
+            const defaultAvatar = document.getElementById('defaultAvatar');
+            const profileImage = document.getElementById('profileImage');
+            const container = document.querySelector('.profile-image-container');
+
+            if (defaultAvatar) {
+                // Remove default avatar
+                defaultAvatar.remove();
+            }
+
+            if (profileImage) {
+                // Update existing image
+                profileImage.src = imageUrl;
+                profileImage.style.display = 'block';
+            } else {
+                // Create new image element
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = 'Profile Picture';
+                img.className = 'profile-image';
+                img.id = 'profileImage';
+                container.insertBefore(img, container.querySelector('.upload-overlay'));
+            }
+
+            // Add remove button if not exists
+            if (!document.querySelector('.remove-photo-btn')) {
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.className = 'remove-photo-btn';
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = removeProfilePhoto;
+                document.querySelector('.file-input-label').parentNode.appendChild(removeBtn);
+            }
+        }
+
+        function saveProfileImage(imageUrl) {
+            fetch('/update_profile_image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    profile_url: imageUrl,
+                    avatar: null // Clear avatar when setting profile image
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Profile image saved successfully');
+                } else {
+                    console.error('Failed to save profile image:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error saving profile image:', error);
+            });
+        }
+
+        function saveAvatar(color, initials) {
+            fetch('/update_profile_image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    profile_url: '', // Clear profile image when setting avatar
+                    avatar: {
+                        type: 'avatar',
+                        color: color,
+                        initials: initials
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Avatar saved successfully');
+                } else {
+                    console.error('Failed to save avatar:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error saving avatar:', error);
+            });
+        }
+
+        function removeProfilePhoto() {
+            if (confirm('Are you sure you want to remove your profile photo?')) {
+                // Update UI
+                const profileImage = document.getElementById('profileImage');
+                const container = document.querySelector('.profile-image-container');
+
+                if (profileImage) {
+                    profileImage.remove();
+                }
+
+                // Create default avatar
+                const defaultAvatar = document.createElement('div');
+                defaultAvatar.className = 'default-avatar';
+                defaultAvatar.id = 'defaultAvatar';
+                defaultAvatar.style.backgroundColor = '#667eea';
+                defaultAvatar.textContent = '{{ user.name[0].upper() if user.name else "U" }}';
+                container.insertBefore(defaultAvatar, container.querySelector('.upload-overlay'));
+
+                // Clear hidden inputs
+                document.getElementById('profileImageUrl').value = '';
+                document.getElementById('avatarColor').value = '#667eea';
+                document.getElementById('avatarInitials').value = '{{ user.name[0].upper() if user.name else "U" }}';
+
+                // Remove the remove button
+                const removeBtn = document.querySelector('.remove-photo-btn');
+                if (removeBtn) {
+                    removeBtn.remove();
+                }
+
+                // Save change
+                saveProfileImage('');
+            }
+        }
+    </script>
+</body>
+</html>

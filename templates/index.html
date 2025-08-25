@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ANAZORI 15.0 | Ultimate Tech Festival</title>
+    <meta name="description" content="Join ANAZORI 15.0 - The Ultimate Tech Festival. Sign up now to access exclusive events and competitions.">
+    <meta name="keywords" content="tech festival, signup, signin, registration, programming, esports, ANAZORI">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='new.css') }}">
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand font-orbitron text-glow" href="#home">
+                <div class="logo-container">
+<!--                   <img src="/static/logo.png">-->
+                    ANAZORI 15.0
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" id="navbarToggler">
+                <div class="hamburger-menu">
+                    <div class="bar bar1"></div>
+                    <div class="bar bar2"></div>
+                    <div class="bar bar3"></div>
+                </div>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover-effect" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover-effect" href="#events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover-effect" href="#sponsors">Sponsors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover-effect" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-hover-effect" href="#contact">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="navbar-nav">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link nav-hover-effect dropdown-toggle" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-plus me-2"></i>Sign Up / Sign In
+                        </a>
+                        <ul class="dropdown-menu auth-dropdown-menu">
+                            <li><h6 class="dropdown-header">
+                                <i class="fas fa-rocket me-2"></i>Join ANAZORI 15.0
+                            </h6></li>
+                            <li><a class="dropdown-item" href="{{ url_for('signup') }}">
+                                <i class="fas fa-user-plus me-2"></i>Sign Up
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('signin') }}">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home" data-aos="fade-up">
+        <!-- Enhanced Netflix-style Background -->
+        <div class="hero-bg-mosaic">
+            <div class="mosaic-grid">
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop');"></div>
+                <div class="mosaic-item" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop');"></div>
+            </div>
+            <div class="mosaic-overlay"></div>
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-8 hero-content">
+                    <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
+                        <h1 class="display-1 font-orbitron hero-title mb-4">
+                            <span class="hero-gradient-text">Welcome to ANAZORI 15.0</span>
+                        </h1>
+                        <p class="lead mb-4 text-shadow">
+                            The Ultimate Tech Festival Experience where innovation meets creativity,
+                            and brilliant minds converge to shape the future of technology.
+                        </p>
+
+                        <div class="auth-message mb-5">
+                            <div class="alert alert-info auth-alert" style="background: rgba(13, 110, 253, 0.1) !important; border: 1px solid rgba(13, 110, 253, 0.3); color: #b6d7ff !important; backdrop-filter: blur(10px); border-radius: 1rem;">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Welcome to ANAZORI 15.0!</strong> Please sign in first to access exclusive events, competitions, and register for the most anticipated tech festival of the year!
+                            </div>
+                        </div>
+
+                        <div class="hero-buttons d-flex gap-3 flex-wrap justify-content-center">
+                            <a href="{{ url_for('signin') }}" class="btn btn-gradient-primary btn-lg px-4 py-3 btn-hover-glow">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </a>
+                            <a href="{{ url_for('signup') }}" class="btn btn-gradient-accent btn-lg px-4 py-3">
+                                <i class="fas fa-user-plus me-2"></i>Sign Up
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
+                        <div class="hero-icon">
+                            <i class="fas fa-code text-gradient-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator text-center">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section py-5" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="video-container">
+                        <h2 class="text-center mb-5 font-orbitron">
+                            <span class="text-gradient-primary">Experience the Innovation</span>
+                        </h2>
+
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/fXbY97v2k4s?si=18hPl77ThQmHuUht" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section py-5" id="events" data-aos="fade-up">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-3 font-orbitron mb-3">
+                    <span class="text-gradient-primary">Festival Events</span>
+                </h2>
+                <p class="lead">Explore our exciting lineup of tech competitions and workshops</p>
+            </div>
+
+            <!-- Coding Competition -->
+            <div class="event-item" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="event-content">
+                            <div class="event-icon mb-4">
+                                <i class="fas fa-code display-1 text-gradient-primary"></i>
+                            </div>
+                            <h3 class="display-4 mb-4 font-orbitron">Coding Competition</h3>
+                            <p class="lead mb-4">
+                                Test your programming prowess in the ultimate coding battlefield.
+                                Solve complex algorithmic puzzles, compete in real-time challenges,
+                                and prove your skills against the best minds in competitive programming.
+                            </p>
+                            <div class="event-details">
+                                <div class="detail-item mb-2">
+                                    <i class="fas fa-calendar-alt me-2 text-accent"></i>
+                                    Day 1 | 9:00 AM - 6:00 PM
+                                </div>
+                                <div class="detail-item mb-2">
+                                    <i class="fas fa-trophy me-2 text-accent"></i>
+                                    Prize Pool: ₹50,000
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-users me-2 text-accent"></i>
+                                    Team Size: 1-3 members
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="event-image-container">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="Coding Competition" class="img-fluid">
+                                <div class="image-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treasure Hunt -->
+            <div class="event-item" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="event-content">
+                            <div class="event-icon mb-4">
+                                <i class="fas fa-search display-1 text-gradient-accent"></i>
+                            </div>
+                            <h3 class="display-4 mb-4 font-orbitron">Digital Treasure Hunt</h3>
+                            <p class="lead mb-4">
+                                Embark on an exciting digital adventure combining technology,
+                                cryptographic clues, and strategic thinking. Navigate through
+                                virtual and physical challenges to uncover hidden treasures and win amazing prizes.
+                            </p>
+                            <div class="event-details">
+                                <div class="detail-item mb-2">
+                                    <i class="fas fa-calendar-alt me-2 text-accent"></i>
+                                    Day 2 | 10:00 AM - 4:00 PM
+                                </div>
+                                <div class="detail-item mb-2">
+                                    <i class="fas fa-trophy me-2 text-accent"></i>
+                                    Prize Pool: ₹30,000
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-users me-2 text-accent"></i>
+                                    Team Size: 2-4 members
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="event-image-container">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop" alt="Digital Treasure Hunt" class="img-fluid">
+                                <div class="image-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Esports Tournament -->
+            <div class="event-item" data-aos="fade-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="event-content">
+                            <div class="event-icon mb-4">
+                                <i class="fas fa-gamepad display-1 text-gradient-blue"></i>
+                            </div>
+                            <h3 class="display-4 mb-4 font-orbitron">Esports Tournament</h3>
+                            <p class="lead mb-4">
+                                Enter the ultimate gaming battleground featuring the most popular esports titles.
+                                From FPS shooters to strategic MOBAs, showcase your gaming skills and compete
+                                for glory in high-stakes tournaments.
+                            </p>
+                            <div class="event-details">
+                                <div class="detail-item mb-2">
+                                    <i class="fas fa-calendar-alt me-2 text-accent"></i>
+                                    All 3 Days | 2:00 PM - 10:00 PM
+                                </div>
+                                <div class="detail-item mb-2">
+                                    <i class="fas fa-trophy me-2 text-accent"></i>
+                                    Prize Pool: ₹1,00,000
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-users me-2 text-accent"></i>
+                                    Team Size: 5 members
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="event-image-container">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop" alt="Esports Tournament" class="img-fluid">
+                                <div class="image-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section py-5" data-aos="fade-up">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center p-4 h-100">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-users display-2 text-accent"></i>
+                        </div>
+                        <div class="stat-number display-3 mb-2">5000+</div>
+                        <h5 class="mb-0">Expected Participants</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center p-4 h-100">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-calendar-check display-2 text-tech-blue"></i>
+                        </div>
+                        <div class="stat-number display-3 mb-2">15+</div>
+                        <h5 class="mb-0">Amazing Events</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center p-4 h-100">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-trophy display-2 text-neon-green"></i>
+                        </div>
+                        <div class="stat-number display-3 mb-2">₹5L+</div>
+                        <h5 class="mb-0">Prize Pool</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center p-4 h-100">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-handshake display-2 text-cyber-pink"></i>
+                        </div>
+                        <div class="stat-number display-3 mb-2">50+</div>
+                        <h5 class="mb-0">Industry Partners</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section class="sponsors-section py-5" id="sponsors" data-aos="fade-up">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-3 font-orbitron mb-3">
+                    <span class="text-gradient-primary">Our Amazing Partners</span>
+                </h2>
+                <p class="lead">Partnering with industry leaders to create extraordinary experiences</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="sponsor-card text-center p-4 h-100">
+                        <div class="sponsor-icon mb-3">
+                            <i class="fab fa-microsoft display-2 text-primary"></i>
+                        </div>
+                        <h5 class="mb-2">Microsoft</h5>
+                        <p class="text-muted small">Technology Partner</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="sponsor-card text-center p-4 h-100">
+                        <div class="sponsor-icon mb-3">
+                            <i class="fab fa-google display-2 text-danger"></i>
+                        </div>
+                        <h5 class="mb-2">Google</h5>
+                        <p class="text-muted small">Innovation Partner</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="sponsor-card text-center p-4 h-100">
+                        <div class="sponsor-icon mb-3">
+                            <i class="fab fa-aws display-2 text-orange"></i>
+                        </div>
+                        <h5 class="mb-2">AWS</h5>
+                        <p class="text-muted small">Cloud Partner</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="sponsor-card text-center p-4 h-100">
+                        <div class="sponsor-icon mb-3">
+                            <i class="fab fa-github display-2"></i>
+                        </div>
+                        <h5 class="mb-2">GitHub</h5>
+                        <p class="text-muted small">Development Partner</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="sponsor-card text-center p-4 h-100">
+                        <div class="sponsor-icon mb-3">
+                            <i class="fab fa-docker display-2 text-info"></i>
+                        </div>
+                        <h5 class="mb-2">Docker</h5>
+                        <p class="text-muted small">Container Partner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section py-5" data-aos="fade-up">
+        <div class="container text-center">
+            <h2 class="display-3 font-orbitron mb-4">
+                <span class="text-gradient-primary">Connect With Us</span>
+            </h2>
+            <p class="lead mb-5">Follow us on social media for latest updates and behind-the-scenes content</p>
+
+            <div class="social-icons d-flex justify-content-center flex-wrap gap-4">
+                <a href="https://facebook.com/anazori" class="social-icon" target="_blank" rel="noopener">
+                    <div class="social-card d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fab fa-facebook-f display-4 text-primary"></i>
+                    </div>
+                    <span class="mt-2 d-block">Facebook</span>
+                </a>
+
+                <a href="https://twitter.com/anazori" class="social-icon" target="_blank" rel="noopener">
+                    <div class="social-card d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fab fa-twitter display-4 text-info"></i>
+                    </div>
+                    <span class="mt-2 d-block">Twitter</span>
+                </a>
+
+                <a href="https://instagram.com/anazori" class="social-icon" target="_blank" rel="nooper">
+                    <div class="social-card d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fab fa-instagram display-4 text-gradient-accent"></i>
+                    </div>
+                    <span class="mt-2 d-block">Instagram</span>
+                </a>
+
+                <a href="https://linkedin.com/company/anazori" class="social-icon" target="_blank" rel="noopener">
+                    <div class="social-card d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fab fa-linkedin-in display-4 text-primary"></i>
+                    </div>
+                    <span class="mt-2 d-block">LinkedIn</span>
+                </a>
+
+                <a href="https://youtube.com/anazori" class="social-icon" target="_blank" rel="noopener">
+                    <div class="social-card d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fab fa-youtube display-4 text-danger"></i>
+                    </div>
+                    <span class="mt-2 d-block">YouTube</span>
+                </a>
+
+                <a href="https://discord.gg/anazori" class="social-icon" target="_blank" rel="noopener">
+                    <div class="social-card d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fab fa-discord display-4 text-indigo"></i>
+                    </div>
+                    <span class="mt-2 d-block">Discord</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5" id="contact">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-section">
+                        <h3 class="font-orbitron mb-4">
+                            <i class="fas fa-rocket me-2"></i>ANAZORI 15.0
+                        </h3>
+                        <p class="mb-4">
+                            The ultimate tech festival where innovation meets creativity.
+                            Sign up now to access three days of groundbreaking competitions, workshops,
+                            and networking opportunities.
+                        </p>
+                        <div class="footer-social-links d-flex gap-3">
+                            <a href="https://facebook.com/anazori" target="_blank" rel="noopener">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/anazori" target="_blank" rel="noopener">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://instagram.com/anazori" target="_blank" rel="noopener">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://linkedin.com/company/anazori" target="_blank" rel="noopener">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-section">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#home">Home</a></li>
+                            <li class="mb-2"><a href="#events">Events</a></li>
+                            <li class="mb-2"><a href="#sponsors">Sponsors</a></li>
+                            <li class="mb-2"><a href="#signup">Sign Up</a></li>
+                            <li class="mb-2"><a href="#signin">Sign In</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h5>Contact Info</h5>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Tech Campus, Innovation Hub
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone me-2"></i>
+                            +91 9876543210
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@anazori.com
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock me-2"></i>
+                            24/7 Support Available
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h5>Newsletter</h5>
+                        <p class="mb-3">Stay updated with latest announcements and event details.</p>
+                        <form class="newsletter-form">
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Enter your email">
+                                <button class="btn btn-gradient-primary" type="submit">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 ANAZORI 15.0. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <a href="#privacy" class="me-3">Privacy Policy</a>
+                        <a href="#terms">Terms of Service</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="position-fixed bottom-0 end-0 m-4" style="display: none;">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // ============= FIXED HAMBURGER MENU LOGIC =============
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarToggler = document.getElementById('navbarToggler');
+            const navbarCollapse = document.getElementById('navbarNav');
+
+            // Toggle hamburger animation
+            navbarToggler.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+
+            // Close menu when clicking regular nav links (not dropdowns)
+            document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarToggler.classList.remove('active');
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                        bsCollapse.hide();
+                    }
+                });
+            });
+
+            // **KEY FIX**: Prevent dropdown menu from closing navbar on mobile
+            document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+                dropdown.addEventListener('click', function(e) {
+                    e.stopPropagation(); // This prevents the navbar from closing
+                });
+            });
+
+            // Handle dropdown toggle click (Auth button)
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    // Don't close the navbar when clicking the auth dropdown
+                    e.stopPropagation();
+                });
+            });
+
+            // Close navbar only when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navbarCollapse.contains(event.target);
+                const isClickOnToggler = navbarToggler.contains(event.target);
+
+                if (!isClickInsideNav && !isClickOnToggler && navbarCollapse.classList.contains('show')) {
+                    navbarToggler.classList.remove('active');
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Video placeholder interaction
+        const videoPlayer = document.getElementById('videoPlayer');
+        if (videoPlayer) {
+            videoPlayer.addEventListener('click', function() {
+                console.log('Video player clicked - load video here');
+            });
+        }
+    </script>
+</body>
+</html>
