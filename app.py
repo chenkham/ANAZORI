@@ -82,7 +82,7 @@ class Config:
     def __init__(self):
         if os.environ.get('RENDER'):
             # Running on Render
-            self.BASE_URL = 'https://anazori-1.onrender.com'
+            self.BASE_URL = 'https://anazori.onrender.com/'
         elif os.environ.get('PRODUCTION'):
             # Running with custom domain
             self.BASE_URL = 'https://anazori.online'
