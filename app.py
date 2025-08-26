@@ -50,9 +50,10 @@ firebase_config = {
 
 # Initialize Firebase Admin SDK
 try:
-    # Check if we're in a production environment (like Render)
-    if os.environ.get('RENDER') or os.environ.get('PRODUCTION'):
-        # Use environment variables for service account
+    cred_path = os.environ.get("FIREBASE_SERVICE_ACCOUNT_KEY")
+    if cred_path and os.path.exists(cred_path):
+        cred = credentials.Certificate(cred_path)
+    else:
         cred_dict = {
             "type": "service_account",
             "project_id": os.environ.get("FIREBASE_PROJECT_ID"),
@@ -61,23 +62,12 @@ try:
             "token_uri": "https://oauth2.googleapis.com/token",
         }
         cred = credentials.Certificate(cred_dict)
-    else:
-        # Use service account file for local development
-        cred_path = os.environ.get("FIREBASE_SERVICE_ACCOUNT_KEY")
-        if cred_path and os.path.exists(cred_path):
-            cred = credentials.Certificate(cred_path)
-        else:
-            raise Exception("Firebase service account key not found")
 
     firebase_admin.initialize_app(cred)
     db = firestore.client()
 except Exception as e:
     print(f"Firebase Admin initialization failed: {e}")
-    # Continue without Firebase Admin for basic functionality
     db = None
-
-app.config["SERVER_NAME"] = os.environ.get("PRIMARY_DOMAIN", "anazori.online")
-BASE_URL = os.environ.get('BASE_URL','https://anazori.onrender.com/')
 
 # Initialize Pyrebase for client-side auth
 try:
@@ -86,6 +76,22 @@ try:
 except Exception as e:
     print(f"Pyrebase initialization failed: {e}")
     auth_client = None
+
+# Configuration based on environment
+class Config:
+    def __init__(self):
+        if os.environ.get('RENDER'):
+            # Running on Render
+            self.BASE_URL = 'https://anazori.render.com'
+        elif os.environ.get('PRODUCTION'):
+            # Running with custom domain
+            self.BASE_URL = 'https://anazori.online'
+        else:
+            # Local development
+            self.BASE_URL = 'http://127.0.0.1:5000'
+
+config = Config()
+app.config['BASE_URL'] = config.BASE_URL
 
 # Logging setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
@@ -188,7 +194,7 @@ def send_verification_email(email, verification_token):
     """Send anti-spam optimized verification email using Titan"""
     try:
         base_url = get_base_url()
-        verification_url = f"{base_url}/verify_custom_email?token={verification_token}"
+        verification_url = f"{app.config['BASE_URL']}/verify/{verification_token}"
 
         print(f"📧 Sending verification email to: {email}")
         print(f"📮 From: {app.config['MAIL_DEFAULT_SENDER']}")
