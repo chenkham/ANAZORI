@@ -77,7 +77,7 @@ except Exception as e:
     db = None
 
 app.config["SERVER_NAME"] = os.environ.get("PRIMARY_DOMAIN", "anazori.online")
-BASE_URL = os.environ.get('BASE_URL')
+BASE_URL = os.environ.get('BASE_URL','https://anazori.onrender.com/')
 
 # Initialize Pyrebase for client-side auth
 try:
