@@ -6,10 +6,11 @@ import string
 import random
 import secrets
 import time
-from flask_mail import Mail, Message
+from datetime import datetime, timedelta
 from functools import wraps
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, abort
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask_mail import Mail, Message
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
 import pyrebase
@@ -20,7 +21,23 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "your-secret-key-here")
 
-# Firebase configuration (keep existing)
+# Domain Configuration
+PRIMARY_DOMAIN = os.environ.get("PRIMARY_DOMAIN", "anazori.online")
+WEBSITE_NAME = os.environ.get("WEBSITE_NAME", "ANAZORI 15.0")
+
+# Titan Email Configuration
+app.config['MAIL_SERVER'] = os.environ.get('TITAN_SMTP_SERVER', 'smtp.titan.email')
+app.config['MAIL_PORT'] = int(os.environ.get('TITAN_SMTP_PORT', 587))
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = os.environ.get('TITAN_USERNAME')  # noreply@anazori.online
+app.config['MAIL_PASSWORD'] = os.environ.get('TITAN_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('TITAN_USERNAME')
+
+# Initialize Flask-Mail
+mail = Mail(app)
+
+# Firebase configuration
 firebase_config = {
     "apiKey": os.environ.get("FIREBASE_API_KEY"),
     "authDomain": os.environ.get("FIREBASE_AUTH_DOMAIN"),
@@ -30,18 +47,6 @@ firebase_config = {
     "messagingSenderId": os.environ.get("FIREBASE_MESSAGING_SENDER_ID"),
     "appId": os.environ.get("FIREBASE_APP_ID"),
 }
-
-# Mailtrap configuration
-app.config['MAIL_SERVER'] = os.environ.get('MAILTRAP_SMTP_SERVER')
-app.config['MAIL_PORT'] = int(os.environ.get('MAILTRAP_SMTP_PORT'))
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = os.environ.get('MAILTRAP_SMTP_USER')
-app.config['MAIL_PASSWORD'] = os.environ.get('MAILTRAP_SMTP_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAILTRAP_SENDER_EMAIL')
-
-# Initialize Flask-Mail
-mail = Mail(app)
 
 # Initialize Firebase Admin SDK
 try:
@@ -142,7 +147,6 @@ def login_required(f):
                 clear_user_session()
                 flash('Session expired. Please sign in again.', 'warning')
                 return redirect(url_for('signin'))
-
         return f(*args, **kwargs)
 
     return decorated_function
@@ -165,25 +169,27 @@ def get_user_data(user_id):
         return None
 
 
+def get_base_url():
+    """Get base URL for email verification links"""
+    return os.environ.get('NGROK_URL', 'http://127.0.0.1:5000')
+
+
 def send_verification_email(email, verification_token):
-    """Send verification email using Flask-Mail with Mailtrap Sandbox"""
+    """Send verification email using Titan"""
     try:
-        # Debug info (remove in production)
-        print(f"DEBUG - Sending email to: {email}")
-        print(f"DEBUG - Using SMTP: {app.config.get('MAIL_SERVER')}:{app.config.get('MAIL_PORT')}")
-        print(f"DEBUG - Username: {app.config.get('MAIL_USERNAME')}")
+        base_url = get_base_url()
+        verification_url = f"{base_url}/verify_custom_email?token={verification_token}"
 
-        # Create verification URL
-        verification_url = url_for('verify_custom_email', token=verification_token, _external=True)
+        print(f"📧 Sending verification email to: {email}")
+        print(f"📮 From: {app.config['MAIL_DEFAULT_SENDER']}")
+        print(f"🔗 Verification URL: {verification_url}")
 
-        # Create Flask-Mail message
         msg = Message(
-            subject="Verify your ANAZORI 15.0 account",
+            subject=f"Verify your {WEBSITE_NAME} account",
             sender=app.config['MAIL_DEFAULT_SENDER'],
             recipients=[email]
         )
 
-        # Your existing beautiful HTML template
         msg.html = f"""
         <!DOCTYPE html>
         <html>
@@ -194,26 +200,28 @@ def send_verification_email(email, verification_token):
                 .container {{ max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }}
                 .header {{ text-align: center; margin-bottom: 30px; }}
                 .header h1 {{ background: linear-gradient(45deg, #00f5ff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; margin: 0; }}
+                .domain-badge {{ background: linear-gradient(45deg, #00f5ff, #ff00ff); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; display: inline-block; margin-top: 10px; }}
                 .content {{ color: #333; line-height: 1.6; }}
                 .button {{ display: inline-block; padding: 15px 30px; background: linear-gradient(45deg, #00f5ff, #ff00ff); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 20px 0; }}
+                .link-text {{ word-break: break-all; color: #00f5ff; background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0; font-size: 14px; }}
                 .footer {{ color: #666; font-size: 12px; text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }}
-                .link-text {{ word-break: break-all; color: #00f5ff; font-size: 14px; background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0; }}
             </style>
         </head>
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>ANAZORI 15.0</h1>
+                    <h1>{WEBSITE_NAME}</h1>
+                    <div class="domain-badge">Official • {PRIMARY_DOMAIN}</div>
                 </div>
                 <div class="content">
                     <h2>🚀 Welcome to the Ultimate Tech Festival!</h2>
-                    <p>Thank you for signing up for ANAZORI 15.0. Please verify your email address to complete your registration and join the most exciting tech event of the year!</p>
+                    <p>Thank you for signing up for {WEBSITE_NAME}. Please verify your email address to complete your registration!</p>
 
                     <div style="text-align: center; margin: 30px 0;">
                         <a href="{verification_url}" class="button">✉️ Verify Email Address</a>
                     </div>
 
-                    <p><strong>If the button doesn't work, copy and paste this link into your browser:</strong></p>
+                    <p><strong>If the button doesn't work, copy and paste this link:</strong></p>
                     <div class="link-text">{verification_url}</div>
 
                     <p>🎯 What's waiting for you:</p>
@@ -227,24 +235,89 @@ def send_verification_email(email, verification_token):
 
                 <div class="footer">
                     <p>⏰ This link will expire in 24 hours.</p>
-                    <p>If you didn't create an account, please ignore this email.</p>
-                    <p>© 2025 ANAZORI 15.0. All rights reserved.</p>
+                    <p>If you didn't sign up, please ignore this email.</p>
+                    <p>© 2025 {WEBSITE_NAME} • Powered by {PRIMARY_DOMAIN}</p>
+                    <p>Questions? Contact <a href="mailto:support@{PRIMARY_DOMAIN}">support</a></p>
                 </div>
             </div>
         </body>
         </html>
         """
 
-        # Send the email using Flask-Mail
         mail.send(msg)
-
-        logger.info(f"Verification email sent to {email} via Mailtrap Sandbox")
-        print("✅ Email sent successfully via Flask-Mail!")
+        print(f"✅ Verification email sent successfully to {email}")
         return True
 
     except Exception as e:
-        logger.error(f"Failed to send verification email: {e}")
-        print(f"❌ EMAIL ERROR: {e}")
+        print(f"❌ Email sending failed: {e}")
+        logger.error(f"Failed to send verification email to {email}: {e}")
+        return False
+
+
+def send_password_reset_email(email, reset_token):
+    """Send password reset email using Titan"""
+    try:
+        base_url = get_base_url()
+        reset_url = f"{base_url}/reset_password?token={reset_token}"
+
+        print(f"📧 Sending password reset to: {email}")
+        print(f"🔗 Reset URL: {reset_url}")
+
+        msg = Message(
+            subject=f"Reset Your {WEBSITE_NAME} Password",
+            sender=app.config['MAIL_DEFAULT_SENDER'],
+            recipients=[email]
+        )
+
+        msg.html = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body {{ font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }}
+                .container {{ max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }}
+                .header {{ text-align: center; margin-bottom: 30px; }}
+                .header h1 {{ background: linear-gradient(45deg, #00f5ff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; margin: 0; }}
+                .button {{ display: inline-block; padding: 15px 30px; background: linear-gradient(45deg, #00f5ff, #ff00ff); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 20px 0; }}
+                .link-text {{ word-break: break-all; color: #00f5ff; background: #f8f9fa; padding: 10px; border-radius: 5px; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>{WEBSITE_NAME}</h1>
+                </div>
+                <div class="content">
+                    <h2>🔒 Reset Your Password</h2>
+                    <p>We received a request to reset your password for your {WEBSITE_NAME} account.</p>
+
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="{reset_url}" class="button">🔑 Reset Password</a>
+                    </div>
+
+                    <p><strong>If the button doesn't work, copy this link:</strong></p>
+                    <div class="link-text">{reset_url}</div>
+
+                    <p>⚠️ This link will expire in 1 hour for security reasons.</p>
+                    <p>If you didn't request this password reset, you can safely ignore this email.</p>
+                </div>
+
+                <div style="color: #666; font-size: 12px; text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                    <p>© 2025 {WEBSITE_NAME} • Powered by {PRIMARY_DOMAIN}</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+
+        mail.send(msg)
+        print(f"✅ Password reset email sent successfully to {email}")
+        return True
+
+    except Exception as e:
+        print(f"❌ Password reset email failed: {e}")
+        logger.error(f"Failed to send password reset email to {email}: {e}")
         return False
 
 
@@ -263,7 +336,7 @@ def signup():
 
 @app.route('/email_signup', methods=['POST'])
 def email_signup():
-    """Send email verification for signup using Mailtrap"""
+    """Send email verification for signup using Titan"""
     try:
         data = request.get_json()
         email = data.get('email', '').strip().lower()
@@ -294,11 +367,11 @@ def email_signup():
         if db:
             db.collection('pending_users').document(verification_token).set(pending_user_data)
 
-        # Send verification email using Mailtrap
+        # Send verification email using Titan
         if send_verification_email(email, verification_token):
             return jsonify({
                 'success': True,
-                'message': 'Verification email sent! Please check your inbox (and your Mailtrap inbox for development).'
+                'message': f'Verification email sent to {email}! Please check your inbox.'
             })
         else:
             return jsonify({'success': False, 'error': 'Failed to send verification email'})
@@ -444,7 +517,7 @@ def complete_registration():
         session.pop('verified_email', None)
         session.pop('verification_token', None)
 
-        flash('Registration completed successfully! Welcome to ANAZORI 15.0!', 'success')
+        flash(f'Registration completed successfully! Welcome to {WEBSITE_NAME}!', 'success')
         return redirect(url_for('new'))
 
     except Exception as e:
@@ -454,143 +527,6 @@ def complete_registration():
                                captcha=generate_captcha(), email=session['verified_email'])
 
 
-# Keep all your existing routes (Google signup, signin, etc.)
-@app.route('/google_signup', methods=['POST'])
-def google_signup():
-    """Handle Google OAuth signup"""
-    try:
-        data = request.get_json()
-        id_token = data.get('idToken')
-
-        if not id_token:
-            return jsonify({'success': False, 'error': 'Missing ID token'})
-
-        # Verify token
-        decoded = auth.verify_id_token(id_token)
-        uid = decoded['uid']
-        email = decoded.get('email', '')
-        name = decoded.get('name', '')
-        picture = decoded.get('picture', '')
-
-        # Check if user exists
-        if db:
-            user_doc = db.collection('users').document(uid).get()
-            if user_doc.exists:
-                # Existing user - login
-                user_data = user_doc.to_dict()
-                session['user'] = uid
-                session['email'] = email
-                session['name'] = user_data.get('name', name)
-                session['phone'] = user_data.get('phone', '')
-                session['is_google_account'] = True
-                session['id_token'] = id_token
-
-                # Update last login
-                db.collection('users').document(uid).update({
-                    'last_login': firestore.SERVER_TIMESTAMP
-                })
-
-                return jsonify({
-                    'success': True,
-                    'redirect': url_for('new'),
-                    'existing_user': True
-                })
-
-        # New user - store temp data for profile completion
-        session['google_user_data'] = {
-            'uid': uid,
-            'email': email,
-            'name': name,
-            'picture': picture
-        }
-
-        return jsonify({
-            'success': True,
-            'redirect': url_for('complete_google_profile'),
-            'existing_user': False
-        })
-
-    except Exception as e:
-        logger.error(f"Google signup error: {e}")
-        return jsonify({'success': False, 'error': 'Google sign-in failed'})
-
-
-@app.route('/complete_google_profile', methods=['GET', 'POST'])
-def complete_google_profile():
-    """Complete Google user profile"""
-    google_data = session.get('google_user_data')
-    if not google_data:
-        flash('Please sign in with Google first.', 'warning')
-        return redirect(url_for('signup'))
-
-    if request.method == 'GET':
-        captcha_code = generate_captcha()
-        return render_template('complete_google_profile.html',
-                               captcha=captcha_code,
-                               user_data=google_data)
-
-    try:
-        # Get form data
-        phone = request.form.get('phone', '').strip()
-        captcha_input = request.form.get('captcha', '').strip()
-        is_du_student = request.form.get('is_du_student') == 'on'
-
-        if not validate_captcha(captcha_input):
-            flash('Invalid or expired security code.', 'error')
-            return render_template('complete_google_profile.html',
-                                   captcha=generate_captcha(), user_data=google_data)
-
-        # Validate phone
-        formatted_phone = ""
-        if phone:
-            formatted_phone = validate_phone(phone)
-            if formatted_phone is None:
-                flash('Invalid phone number format.', 'error')
-                return render_template('complete_google_profile.html',
-                                       captcha=generate_captcha(), user_data=google_data)
-
-        uid = google_data['uid']
-        email = google_data['email']
-        name = google_data['name']
-        picture = google_data['picture']
-
-        # Save to Firestore
-        user_doc_data = {
-            'name': name,
-            'email': email,
-            'phone': formatted_phone,
-            'is_du_student': is_du_student,
-            'email_verified': True,
-            'is_google_account': True,
-            'photo_url': picture,
-            'created_at': firestore.SERVER_TIMESTAMP,
-            'updated_at': firestore.SERVER_TIMESTAMP
-        }
-
-        if db:
-            db.collection('users').document(uid).set(user_doc_data)
-
-        # Set user session
-        session['user'] = uid
-        session['email'] = email
-        session['name'] = name
-        session['phone'] = formatted_phone
-        session['is_google_account'] = True
-
-        # Clear temp data
-        session.pop('google_user_data', None)
-
-        flash('Profile completed successfully! Welcome to ANAZORI 15.0!', 'success')
-        return redirect(url_for('new'))
-
-    except Exception as e:
-        logger.error(f"Complete Google profile error: {e}")
-        flash('Failed to complete profile. Please try again.', 'error')
-        return render_template('complete_google_profile.html',
-                               captcha=generate_captcha(), user_data=google_data)
-
-
-# Keep all your existing routes (signin, dashboard, settings, etc.)
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     """User sign in page"""
@@ -665,49 +601,63 @@ def signin():
                                firebase_config=firebase_config)
 
 
-@app.route('/google_signin', methods=['POST'])
-def google_signin():
-    """Handle Google OAuth signin"""
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    """Forgot password page"""
+    if request.method == 'GET':
+        return render_template('forgot_password.html')
+
     try:
-        data = request.get_json()
-        id_token = data.get('idToken')
+        email = request.form.get('email', '').strip().lower()
+        if not email:
+            flash('Please enter your email address.', 'error')
+            return render_template('forgot_password.html')
 
-        if not id_token:
-            return jsonify({'success': False, 'error': 'Missing ID token'})
+        # Generate reset token
+        reset_token = secrets.token_urlsafe(32)
 
-        # Verify token
-        decoded = auth.verify_id_token(id_token)
-        uid = decoded['uid']
-        email = decoded.get('email', '')
-        name = decoded.get('name', '')
+        # Store reset token in Firestore with expiration
+        reset_data = {
+            'email': email,
+            'reset_token': reset_token,
+            'created_at': time.time(),
+            'expires_at': time.time() + 3600,  # 1 hour
+        }
 
-        # Get user data
-        user_data = get_user_data(uid)
-        if not user_data:
-            return jsonify({'success': False, 'error': 'User not found. Please sign up first.'})
-
-        # Set session
-        session['user'] = uid
-        session['email'] = email
-        session['name'] = user_data.get('name', name)
-        session['phone'] = user_data.get('phone', '')
-        session['is_google_account'] = True
-        session['id_token'] = id_token
-
-        # Update last login
         if db:
-            db.collection('users').document(uid).update({
-                'last_login': firestore.SERVER_TIMESTAMP
-            })
+            db.collection('password_resets').document(reset_token).set(reset_data)
 
-        return jsonify({'success': True, 'redirect': url_for('new')})
+        # Send reset email using Titan
+        if send_password_reset_email(email, reset_token):
+            flash('Password reset email sent! Please check your inbox.', 'success')
+            return redirect(url_for('reset_link_sent'))
+        else:
+            flash('Failed to send reset email. Please try again.', 'error')
+            return render_template('forgot_password.html')
 
     except Exception as e:
-        logger.error(f"Google signin error: {e}")
-        return jsonify({'success': False, 'error': 'Google sign-in failed'})
+        logger.error(f"Forgot password error: {e}")
+        flash('Failed to send reset email. Please try again.', 'error')
+        return render_template('forgot_password.html')
 
 
-# Keep all your existing protected routes
+@app.route('/reset_link_sent')
+def reset_link_sent():
+    """Password reset link sent confirmation page"""
+    return render_template('reset_link_send.html')
+
+
+@app.route('/reset_password')
+def reset_password():
+    """Password reset page"""
+    token = request.args.get('token')
+    if not token:
+        flash('Invalid reset link.', 'error')
+        return redirect(url_for('forgot_password'))
+
+    return render_template('reset_password.html', token=token)
+
+
 @app.route('/new')
 @login_required
 def new():
@@ -726,6 +676,20 @@ def new():
         logger.error(f"/new error: {e}")
         flash('An error occurred. Please try again.', 'error')
         return redirect(url_for('signin'))
+
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    """User dashboard"""
+    user_id = session.get('user')
+    user_data = get_user_data(user_id)
+
+    if not user_data:
+        flash('User data not found.', 'error')
+        return redirect(url_for('signin'))
+
+    return render_template('dashboard.html', user=user_data)
 
 
 @app.route('/settings', methods=['GET', 'POST'])
@@ -776,20 +740,6 @@ def settings():
     return render_template('settings.html', user=user_data)
 
 
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    """User dashboard"""
-    user_id = session.get('user')
-    user_data = get_user_data(user_id)
-
-    if not user_data:
-        flash('User data not found.', 'error')
-        return redirect(url_for('signin'))
-
-    return render_template('dashboard.html', user=user_data)
-
-
 @app.route('/myregistration')
 @login_required
 def myregistration():
@@ -801,7 +751,7 @@ def myregistration():
         flash('User data not found.', 'error')
         return redirect(url_for('signin'))
 
-    registrations = []
+    registrations = []  # Add logic to fetch user registrations
 
     return render_template('myregistration.html', user=user_data, registrations=registrations)
 
@@ -812,6 +762,56 @@ def logout():
     clear_user_session()
     flash('You have been logged out successfully.', 'success')
     return redirect(url_for('index'))
+
+
+# Test Routes
+@app.route('/test_titan_email')
+def test_titan_email():
+    """Test Titan email configuration"""
+    test_email = request.args.get('email', 'your-email@gmail.com')
+
+    try:
+        token = secrets.token_urlsafe(32)
+        success = send_verification_email(test_email, token)
+
+        return f"""
+        <h2>📧 Titan Email Test Results</h2>
+        <p><strong>Domain:</strong> {PRIMARY_DOMAIN}</p>
+        <p><strong>Test email sent to:</strong> {test_email}</p>
+        <p><strong>From:</strong> {app.config['MAIL_DEFAULT_SENDER']}</p>
+        <p><strong>SMTP Server:</strong> {app.config['MAIL_SERVER']}</p>
+        <p><strong>Status:</strong> {'✅ SUCCESS - Check your inbox!' if success else '❌ FAILED - Check console logs'}</p>
+
+        <hr>
+        <h3>✅ Expected Results:</h3>
+        <ul>
+            <li>Email from <strong>{app.config['MAIL_DEFAULT_SENDER']}</strong></li>
+            <li>Professional {PRIMARY_DOMAIN} branding</li>
+            <li>Working verification link</li>
+            <li>Delivered to real inbox</li>
+        </ul>
+
+        <p><a href="/test_titan_email?email=different@example.com">Test with different email</a></p>
+        <p><a href="/">← Back to Home</a></p>
+        """
+
+    except Exception as e:
+        return f"<h2>❌ Error:</h2><p>{e}</p>"
+
+
+@app.route('/debug_email_config')
+def debug_email_config():
+    """Debug your current email configuration"""
+    return f"""
+    <h2>📧 Current Titan Email Configuration</h2>
+    <p><strong>MAIL_SERVER:</strong> {app.config.get('MAIL_SERVER')}</p>
+    <p><strong>MAIL_PORT:</strong> {app.config.get('MAIL_PORT')}</p>
+    <p><strong>MAIL_USERNAME:</strong> {app.config.get('MAIL_USERNAME')}</p>
+    <p><strong>MAIL_DEFAULT_SENDER:</strong> {app.config.get('MAIL_DEFAULT_SENDER')}</p>
+    <p><strong>Password Set:</strong> {'Yes' if app.config.get('MAIL_PASSWORD') else 'No'}</p>
+    <p><strong>Domain:</strong> {PRIMARY_DOMAIN}</p>
+    <p><strong>Website:</strong> {WEBSITE_NAME}</p>
+    """
 
 
 # API Routes
@@ -836,122 +836,6 @@ def check_login_status():
             })
 
     return jsonify({'logged_in': False})
-
-
-# Keep existing routes
-@app.route('/update_password', methods=['POST'])
-@login_required
-def update_password():
-    """Update user password"""
-    user_id = session.get('user')
-    user_data = get_user_data(user_id)
-
-    if not user_data:
-        flash('User data not found.', 'error')
-        return redirect(url_for('signin'))
-
-    # Check if this is a Google account
-    if user_data.get('is_google_account', False):
-        flash('Password cannot be changed for Google accounts.', 'error')
-        return redirect(url_for('settings'))
-
-    try:
-        current_password = request.form.get('current_password', '')
-        new_password = request.form.get('new_password', '')
-        confirm_password = request.form.get('confirm_password', '')
-
-        # Validation
-        if not all([current_password, new_password, confirm_password]):
-            flash('All password fields are required.', 'error')
-            return redirect(url_for('settings'))
-
-        if new_password != confirm_password:
-            flash('New passwords do not match.', 'error')
-            return redirect(url_for('settings'))
-
-        if len(new_password) < 6:
-            flash('New password must be at least 6 characters long.', 'error')
-            return redirect(url_for('settings'))
-
-        # Verify current password
-        email = user_data.get('email')
-        if not email:
-            flash('Email not found in user data.', 'error')
-            return redirect(url_for('settings'))
-
-        try:
-            if auth_client:
-                auth_client.sign_in_with_email_and_password(email, current_password)
-            else:
-                flash('Authentication service unavailable.', 'error')
-                return redirect(url_for('settings'))
-        except Exception as e:
-            flash('Current password is incorrect.', 'error')
-            return redirect(url_for('settings'))
-
-        # Update password in Firebase Auth
-        auth.update_user(user_id, password=new_password)
-
-        flash('Password updated successfully!', 'success')
-        return redirect(url_for('settings'))
-
-    except Exception as e:
-        logger.error(f"Password update error: {e}")
-        flash('Failed to update password. Please try again.', 'error')
-        return redirect(url_for('settings'))
-@app.route('/forgot_password', methods=['GET', 'POST'])
-def forgot_password():
-    if request.method == 'GET':
-        return render_template('forgot_password.html')
-
-    try:
-        email = request.form.get('email', '').strip().lower()
-        if not email:
-            flash('Please enter your email address.', 'error')
-            return render_template('forgot_password.html')
-
-        # Send password reset email via Firebase
-        if auth_client:
-            auth_client.send_password_reset_email(email)
-            flash('Password reset email sent! Please check your inbox.', 'success')
-            return redirect(url_for('signin'))
-        else:
-            flash('Authentication service unavailable.', 'error')
-            return render_template('forgot_password.html')
-
-    except Exception as e:
-        flash('Failed to send reset email. Please try again.', 'error')
-        return render_template('forgot_password.html')
-
-
-@app.route('/home')
-def home():
-    """Redirect /home to /new"""
-    return redirect(url_for('new'))
-
-@app.route('/test_mailtrap')
-def test_mailtrap():
-    """Test Mailtrap integration - remove in production"""
-    try:
-        msg = Message(
-            subject="🧪 Test Email - ANAZORI 15.0",
-            sender=app.config['MAIL_DEFAULT_SENDER'],
-            recipients=['test@example.com']
-        )
-        msg.html = """
-        <h2>✅ Mailtrap Integration Test</h2>
-        <p>If you're seeing this in your Mailtrap inbox, the integration is working perfectly!</p>
-        <p><strong>Configuration:</strong></p>
-        <ul>
-            <li>Server: sandbox.smtp.mailtrap.io</li>
-            <li>Port: 2525</li>
-            <li>Flask-Mail: ✅ Working</li>
-        </ul>
-        """
-        mail.send(msg)
-        return "<h2>✅ Test email sent!</h2><p>Check your Mailtrap inbox to see if it was received.</p>"
-    except Exception as e:
-        return f"<h2>❌ Test failed:</h2><p>{e}</p>"
 
 
 if __name__ == '__main__':
