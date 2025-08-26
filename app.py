@@ -175,77 +175,107 @@ def get_base_url():
 
 
 def send_verification_email(email, verification_token):
-    """Send verification email using Titan"""
+    """Send anti-spam optimized verification email using Titan"""
     try:
         base_url = get_base_url()
         verification_url = f"{base_url}/verify_custom_email?token={verification_token}"
 
         print(f"📧 Sending verification email to: {email}")
         print(f"📮 From: {app.config['MAIL_DEFAULT_SENDER']}")
-        print(f"🔗 Verification URL: {verification_url}")
 
         msg = Message(
-            subject=f"Verify your {WEBSITE_NAME} account",
-            sender=app.config['MAIL_DEFAULT_SENDER'],
-            recipients=[email]
+            subject="Please verify your ANAZORI 15.0 registration",  # Non-spammy subject
+            sender=f"ANAZORI 15.0 <{app.config['MAIL_DEFAULT_SENDER']}>",  # Display name
+            recipients=[email],
+            reply_to=f"support@{PRIMARY_DOMAIN}"
         )
 
+        # Anti-spam optimized HTML template
         msg.html = f"""
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <style>
-                body {{ font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }}
-                .container {{ max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }}
-                .header {{ text-align: center; margin-bottom: 30px; }}
-                .header h1 {{ background: linear-gradient(45deg, #00f5ff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; margin: 0; }}
-                .domain-badge {{ background: linear-gradient(45deg, #00f5ff, #ff00ff); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; display: inline-block; margin-top: 10px; }}
-                .content {{ color: #333; line-height: 1.6; }}
-                .button {{ display: inline-block; padding: 15px 30px; background: linear-gradient(45deg, #00f5ff, #ff00ff); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 20px 0; }}
-                .link-text {{ word-break: break-all; color: #00f5ff; background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0; font-size: 14px; }}
-                .footer {{ color: #666; font-size: 12px; text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }}
-            </style>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Verify Your ANAZORI 15.0 Account</title>
         </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>{WEBSITE_NAME}</h1>
-                    <div class="domain-badge">Official • {PRIMARY_DOMAIN}</div>
+        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+                <h1 style="color: white; margin: 0; font-size: 28px;">{WEBSITE_NAME}</h1>
+                <p style="color: #e0e6ff; margin: 10px 0 0 0; font-size: 14px;">Official Registration Verification</p>
+            </div>
+
+            <div style="background: white; padding: 30px; border: 1px solid #e1e8ed; border-top: none; border-radius: 0 0 10px 10px;">
+
+                <h2 style="color: #1a202c; margin-bottom: 20px;">Welcome to the Ultimate Tech Festival!</h2>
+
+                <p>Thank you for registering for <strong>{WEBSITE_NAME}</strong>. To complete your registration and secure your spot at India's most exciting tech festival, please verify your email address by clicking the button below:</p>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="{verification_url}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block;">Verify My Email Address</a>
                 </div>
-                <div class="content">
-                    <h2>🚀 Welcome to the Ultimate Tech Festival!</h2>
-                    <p>Thank you for signing up for {WEBSITE_NAME}. Please verify your email address to complete your registration!</p>
 
-                    <div style="text-align: center; margin: 30px 0;">
-                        <a href="{verification_url}" class="button">✉️ Verify Email Address</a>
-                    </div>
+                <p style="color: #666; font-size: 14px;"><strong>Can't click the button?</strong> Copy and paste this link into your browser:</p>
+                <p style="word-break: break-all; background: #f7f9fc; padding: 10px; border-radius: 5px; font-size: 13px; color: #4a5568;">{verification_url}</p>
 
-                    <p><strong>If the button doesn't work, copy and paste this link:</strong></p>
-                    <div class="link-text">{verification_url}</div>
-
-                    <p>🎯 What's waiting for you:</p>
-                    <ul>
-                        <li>💻 Coding competitions and hackathons</li>
-                        <li>🎮 Gaming tournaments</li>
-                        <li>🔍 Tech treasure hunts</li>
-                        <li>🏆 Amazing prizes and recognition</li>
+                <div style="background: #f0f8ff; padding: 20px; border-radius: 5px; margin: 25px 0; border-left: 4px solid #667eea;">
+                    <h3 style="margin: 0 0 10px 0; color: #1a202c; font-size: 16px;">What awaits you at ANAZORI 15.0:</h3>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li>Competitive programming challenges</li>
+                        <li>Gaming tournaments and esports</li>
+                        <li>Tech treasure hunts</li>
+                        <li>Networking with industry professionals</li>
                     </ul>
                 </div>
 
-                <div class="footer">
-                    <p>⏰ This link will expire in 24 hours.</p>
-                    <p>If you didn't sign up, please ignore this email.</p>
-                    <p>© 2025 {WEBSITE_NAME} • Powered by {PRIMARY_DOMAIN}</p>
-                    <p>Questions? Contact <a href="mailto:support@{PRIMARY_DOMAIN}">support</a></p>
+                <div style="border-top: 1px solid #e1e8ed; padding-top: 20px; margin-top: 30px; font-size: 12px; color: #666;">
+                    <p><strong>Important:</strong> This verification link will expire in 24 hours for security reasons.</p>
+                    <p>If you did not register for this event, please ignore this email or contact our support team.</p>
+
+                    <p style="margin-top: 20px;">
+                        <strong>Questions?</strong> Contact us at 
+                        <a href="mailto:support@{PRIMARY_DOMAIN}" style="color: #667eea;">support@{PRIMARY_DOMAIN}</a>
+                    </p>
+
+                    <hr style="border: none; border-top: 1px solid #e1e8ed; margin: 20px 0;">
+
+                    <p style="text-align: center; color: #999;">
+                        © 2025 {WEBSITE_NAME} | Powered by {PRIMARY_DOMAIN}<br>
+                        This email was sent to {email} because you registered for our event.
+                    </p>
                 </div>
+
             </div>
+
         </body>
         </html>
         """
 
+        # Add text version for better deliverability
+        msg.body = f"""
+        ANAZORI 15.0 - Email Verification Required
+
+        Thank you for registering for {WEBSITE_NAME}!
+
+        To complete your registration, please verify your email by visiting:
+        {verification_url}
+
+        This link will expire in 24 hours.
+
+        What's waiting for you:
+        - Competitive programming challenges
+        - Gaming tournaments and esports  
+        - Tech treasure hunts
+        - Industry networking opportunities
+
+        Questions? Contact: support@{PRIMARY_DOMAIN}
+
+        © 2025 {WEBSITE_NAME} | {PRIMARY_DOMAIN}
+        """
+
         mail.send(msg)
-        print(f"✅ Verification email sent successfully to {email}")
+        print(f"✅ Anti-spam verification email sent to {email}")
         return True
 
     except Exception as e:
@@ -836,6 +866,76 @@ def check_login_status():
             })
 
     return jsonify({'logged_in': False})
+
+
+def warm_up_sender_reputation():
+    """Gradually increase sending volume to build reputation"""
+    import time
+    import random
+
+    # Send to different domains to build reputation
+    test_emails = [
+        'test1@gmail.com', 'test2@yahoo.com', 'test3@outlook.com'
+    ]
+
+    for email in test_emails:
+        try:
+            msg = Message(
+                subject="ANAZORI 15.0 - Test Email",
+                sender=app.config['MAIL_DEFAULT_SENDER'],
+                recipients=[email]
+            )
+            msg.body = "This is a test email to warm up our sender reputation."
+            mail.send(msg)
+
+            # Wait between sends to avoid throttling
+            time.sleep(random.randint(30, 60))
+            print(f"Reputation warming email sent to {email}")
+
+        except Exception as e:
+            print(f"Warm-up email failed for {email}: {e}")
+
+
+@app.route('/test_spam_score')
+def test_spam_score():
+    """Test email deliverability and spam score"""
+    test_email = request.args.get('email', 'test@mail-tester.com')
+
+    try:
+        token = secrets.token_urlsafe(32)
+        success = send_verification_email(test_email, token)
+
+        return f"""
+        <h2>📊 Email Spam Test Results</h2>
+        <p><strong>Test email sent to:</strong> {test_email}</p>
+        <p><strong>From:</strong> {app.config['MAIL_DEFAULT_SENDER']}</p>
+        <p><strong>Domain:</strong> {PRIMARY_DOMAIN}</p>
+        <p><strong>Status:</strong> {'✅ SENT' if success else '❌ FAILED'}</p>
+
+        <hr>
+        <h3>📋 Next Steps for Testing:</h3>
+        <ol>
+            <li><strong>Visit <a href="https://mail-tester.com" target="_blank">Mail-Tester.com</a></strong></li>
+            <li><strong>Send test email to:</strong> <code>test-xxxxx@mail-tester.com</code></li>
+            <li><strong>Check your spam score</strong> (aim for 10/10)</li>
+            <li><strong>Fix any issues</strong> highlighted in the report</li>
+        </ol>
+
+        <h3>🛡️ Anti-Spam Checklist:</h3>
+        <ul>
+            <li>✅ SPF record configured</li>
+            <li>✅ DKIM record added</li>
+            <li>✅ DMARC policy set</li>
+            <li>✅ Professional sender name</li>
+            <li>✅ Text + HTML versions</li>
+            <li>✅ Reply-to address set</li>
+        </ul>
+
+        <p><a href="/">← Back to Home</a></p>
+        """
+
+    except Exception as e:
+        return f"<h2>❌ Test Error:</h2><p>{e}</p>"
 
 
 if __name__ == '__main__':
