@@ -69,6 +69,10 @@ except Exception as e:
     print(f"Firebase Admin initialization failed: {e}")
     db = None
 
+BASE_URL = os.environ.get('BASE_URL')
+verify_url = f"{BASE_URL}/verify/{token}"
+
+
 # Initialize Pyrebase for client-side auth
 try:
     firebase = pyrebase.initialize_app(firebase_config)
@@ -213,7 +217,7 @@ def send_verification_email(email, verification_token):
                 <p>Thank you for registering for <strong>{WEBSITE_NAME}</strong>. To complete your registration and secure your spot at India's most exciting tech festival, please verify your email address by clicking the button below:</p>
 
                 <div style="text-align: center; margin: 30px 0;">
-                    <a href="{verification_url}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block;">Verify My Email Address</a>
+                    <a href="{verify_url}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block;">Verify My Email Address</a>
                 </div>
 
                 <p style="color: #666; font-size: 14px;"><strong>Can't click the button?</strong> Copy and paste this link into your browser:</p>
