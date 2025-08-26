@@ -1,0 +1,290 @@
+2025-08-22 13:25:40,435 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 13:25:40,435 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 13:25:40,437 INFO werkzeug  * Restarting with stat
+2025-08-22 13:25:41,790 WARNING werkzeug  * Debugger is active!
+2025-08-22 13:25:41,797 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 13:25:46,135 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 13:25:46] "GET /signin HTTP/1.1" 200 -
+2025-08-22 13:25:47,414 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 13:25:47] "GET /signin HTTP/1.1" 200 -
+2025-08-22 13:25:48,051 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 13:25:48] "GET /signin HTTP/1.1" 200 -
+2025-08-22 13:25:48,350 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 13:25:48] "GET /signin HTTP/1.1" 200 -
+2025-08-22 13:25:50,898 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 13:25:50] "GET / HTTP/1.1" 200 -
+2025-08-22 13:25:55,115 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 13:25:55] "GET /signin HTTP/1.1" 200 -
+2025-08-22 13:26:39,169 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 13:26:39] "POST /signin HTTP/1.1" 200 -
+2025-08-22 14:11:03,490 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 14:11:03,490 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 14:11:03,492 INFO werkzeug  * Restarting with stat
+2025-08-22 14:11:04,604 WARNING werkzeug  * Debugger is active!
+2025-08-22 14:11:04,610 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 14:11:15,616 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 14:11:15,616 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 14:11:15,621 INFO werkzeug  * Restarting with stat
+2025-08-22 14:11:16,730 WARNING werkzeug  * Debugger is active!
+2025-08-22 14:11:16,733 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 14:11:28,132 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:11:28] "GET / HTTP/1.1" 200 -
+2025-08-22 14:11:28,242 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:11:28] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 14:12:06,165 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:12:06] "GET /signup HTTP/1.1" 200 -
+2025-08-22 14:14:42,719 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:14:42] "POST /signup HTTP/1.1" 200 -
+2025-08-22 14:15:22,190 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:15:22] "[32mPOST /signup HTTP/1.1[0m" 302 -
+2025-08-22 14:15:23,068 ERROR __main__ Token verification failed: Token used too early, 1755852323 < 1755852324. Check that your computer's clock is set correctly.
+2025-08-22 14:15:23,069 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:15:23] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 14:15:23,088 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:15:23] "GET /signin HTTP/1.1" 200 -
+2025-08-22 14:15:49,259 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:15:49] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 14:15:49,268 ERROR __main__ Token verification failed: Token used too early, 1755852349 < 1755852351. Check that your computer's clock is set correctly.
+2025-08-22 14:15:49,269 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:15:49] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 14:15:49,277 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:15:49] "GET /signin HTTP/1.1" 200 -
+2025-08-22 14:16:12,838 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:16:12] "POST /signin HTTP/1.1" 200 -
+2025-08-22 14:20:04,212 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:20:04] "GET /signup HTTP/1.1" 200 -
+2025-08-22 14:20:53,320 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:20:53] "[32mPOST /signup HTTP/1.1[0m" 302 -
+2025-08-22 14:20:53,331 ERROR __main__ Token verification failed: Token used too early, 1755852653 < 1755852655. Check that your computer's clock is set correctly.
+2025-08-22 14:20:53,333 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:20:53] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 14:20:53,349 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:20:53] "GET /signin HTTP/1.1" 200 -
+2025-08-22 14:24:54,248 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 14:24:54] "GET /generate_captcha HTTP/1.1" 200 -
+2025-08-22 16:18:07,539 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 16:18:07,539 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 16:18:07,542 INFO werkzeug  * Restarting with stat
+2025-08-22 16:18:08,924 WARNING werkzeug  * Debugger is active!
+2025-08-22 16:18:08,930 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 16:18:58,715 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 16:18:58,715 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 16:18:58,717 INFO werkzeug  * Restarting with stat
+2025-08-22 16:18:59,980 WARNING werkzeug  * Debugger is active!
+2025-08-22 16:18:59,985 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 16:19:19,633 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:19:19] "GET / HTTP/1.1" 200 -
+2025-08-22 16:19:19,808 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:19:19] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 16:19:25,583 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:19:25] "GET /signin HTTP/1.1" 200 -
+2025-08-22 16:19:59,821 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:19:59] "POST /signin HTTP/1.1" 200 -
+2025-08-22 16:20:41,494 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:20:41] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 16:20:42,797 ERROR __main__ /new error: Could not build url for endpoint 'settings'. Did you mean 'static' instead?
+2025-08-22 16:20:42,800 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:20:42] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 16:20:42,812 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:20:42] "GET /signin HTTP/1.1" 200 -
+2025-08-22 16:21:06,377 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:21:06] "POST /signin HTTP/1.1" 200 -
+2025-08-22 16:21:18,840 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:21:18] "GET /signin HTTP/1.1" 200 -
+2025-08-22 16:21:20,877 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:21:20] "GET /signin HTTP/1.1" 200 -
+2025-08-22 16:21:22,324 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:21:22] "GET / HTTP/1.1" 200 -
+2025-08-22 16:21:33,124 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:21:33] "GET /signup HTTP/1.1" 200 -
+2025-08-22 16:21:40,940 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:21:40] "GET / HTTP/1.1" 200 -
+2025-08-22 16:21:44,004 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:21:44] "GET /signin HTTP/1.1" 200 -
+2025-08-22 16:25:44,254 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 16:25:44] "GET /generate_captcha HTTP/1.1" 200 -
+2025-08-22 17:12:28,167 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 17:12:28,167 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 17:12:28,169 INFO werkzeug  * Restarting with stat
+2025-08-22 17:12:29,328 WARNING werkzeug  * Debugger is active!
+2025-08-22 17:12:29,334 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 17:12:40,748 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:12:40] "GET / HTTP/1.1" 200 -
+2025-08-22 17:12:40,885 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:12:40] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 17:12:48,656 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:12:48] "GET /signup HTTP/1.1" 200 -
+2025-08-22 17:13:59,143 ERROR __main__ Failed to send email: (334, b'UGFzc3dvcmQ6')
+2025-08-22 17:14:00,295 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:14:00] "POST /signup HTTP/1.1" 200 -
+2025-08-22 17:18:00,479 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:18:00] "GET /generate_captcha HTTP/1.1" 200 -
+2025-08-22 17:21:01,249 ERROR __main__ Failed to send email: (334, b'UGFzc3dvcmQ6')
+2025-08-22 17:21:02,318 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:21:02] "POST /signup HTTP/1.1" 200 -
+2025-08-22 17:21:09,483 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:21:09] "GET /signin HTTP/1.1" 200 -
+2025-08-22 17:21:52,891 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:21:52] "POST /signin HTTP/1.1" 200 -
+2025-08-22 17:21:56,019 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:21:56] "GET /signup HTTP/1.1" 200 -
+2025-08-22 17:25:56,448 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:25:56] "GET /generate_captcha HTTP/1.1" 200 -
+2025-08-22 17:27:35,693 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 17:27:35,693 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 17:27:35,694 INFO werkzeug  * Restarting with stat
+2025-08-22 17:27:37,050 WARNING werkzeug  * Debugger is active!
+2025-08-22 17:27:37,057 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 17:27:40,884 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:27:40] "GET /signin HTTP/1.1" 200 -
+2025-08-22 17:27:44,824 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:27:44] "GET /signup HTTP/1.1" 200 -
+2025-08-22 17:27:50,321 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:27:50] "GET / HTTP/1.1" 200 -
+2025-08-22 17:27:50,463 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:27:50] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 17:28:05,682 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:28:05] "GET /signup HTTP/1.1" 200 -
+2025-08-22 17:28:13,567 ERROR __main__ Token verification failed: Token expired, 1755863441 < 1755863893
+2025-08-22 17:28:13,569 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:28:13] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2025-08-22 17:28:13,583 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:28:13] "GET /signin HTTP/1.1" 200 -
+2025-08-22 17:28:24,324 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:28:24] "GET /signup HTTP/1.1" 200 -
+2025-08-22 17:29:07,880 ERROR __main__ Failed to send email: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-08-22 17:29:08,842 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:29:08] "POST /signup HTTP/1.1" 200 -
+2025-08-22 17:33:09,002 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:33:09] "GET /generate_captcha HTTP/1.1" 200 -
+2025-08-22 17:37:09,256 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:37:09] "GET /generate_captcha HTTP/1.1" 200 -
+2025-08-22 17:38:23,197 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 17:38:23,197 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 17:38:23,199 INFO werkzeug  * Restarting with stat
+2025-08-22 17:38:24,455 WARNING werkzeug  * Debugger is active!
+2025-08-22 17:38:24,461 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 17:38:32,504 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:38:32] "GET / HTTP/1.1" 200 -
+2025-08-22 17:38:32,676 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:38:32] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 17:38:35,513 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:38:35] "GET /signin HTTP/1.1" 200 -
+2025-08-22 17:38:40,658 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:38:40] "GET / HTTP/1.1" 200 -
+2025-08-22 17:38:43,706 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:38:43] "GET /signup HTTP/1.1" 200 -
+2025-08-22 17:39:16,815 ERROR __main__ Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-245fb4c8811sm56033535ad.44 - gsmtp')
+2025-08-22 17:39:17,630 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:39:17] "POST /signup HTTP/1.1" 200 -
+2025-08-22 17:42:33,702 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 17:42:33,703 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 17:42:33,705 INFO werkzeug  * Restarting with stat
+2025-08-22 17:42:35,162 WARNING werkzeug  * Debugger is active!
+2025-08-22 17:42:35,167 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 17:42:38,942 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:42:38] "POST /signup HTTP/1.1" 200 -
+2025-08-22 17:43:15,232 ERROR __main__ Failed to send email: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-32537ea5799sm701599a91.28 - gsmtp')
+2025-08-22 17:43:16,043 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 17:43:16] "POST /signup HTTP/1.1" 200 -
+2025-08-22 18:03:18,105 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 18:03:18,105 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 18:03:18,107 INFO werkzeug  * Restarting with stat
+2025-08-22 18:03:19,259 WARNING werkzeug  * Debugger is active!
+2025-08-22 18:03:19,264 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 18:03:19,340 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:03:19] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 18:03:34,652 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:03:34] "GET / HTTP/1.1" 200 -
+2025-08-22 18:03:34,812 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:03:34] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 18:03:37,805 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:03:37] "GET /signup HTTP/1.1" 200 -
+2025-08-22 18:04:23,190 ERROR __main__ Signup error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-08-22 18:04:23,192 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:04:23] "POST /signup HTTP/1.1" 200 -
+2025-08-22 18:44:18,855 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 18:44:18,855 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 18:44:18,859 INFO werkzeug  * Restarting with stat
+2025-08-22 18:44:20,104 WARNING werkzeug  * Debugger is active!
+2025-08-22 18:44:20,109 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 18:44:24,629 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:44:24] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 18:44:27,738 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:44:27] "GET / HTTP/1.1" 200 -
+2025-08-22 18:44:27,970 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:44:27] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 18:44:32,635 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:44:32] "GET /signup HTTP/1.1" 200 -
+2025-08-22 18:45:03,652 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:45:03] "[32mPOST /signup HTTP/1.1[0m" 302 -
+2025-08-22 18:45:03,817 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:45:03] "GET /verification_pending HTTP/1.1" 200 -
+2025-08-22 18:45:43,210 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:45:43] "GET /signin HTTP/1.1" 200 -
+2025-08-22 18:46:09,934 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:46:09] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 18:46:10,091 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:46:10] "GET /verification_pending HTTP/1.1" 200 -
+2025-08-22 18:46:22,794 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:46:22] "GET /signin HTTP/1.1" 200 -
+2025-08-22 18:46:39,772 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:46:39] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 18:46:39,944 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:46:39] "GET /verification_pending HTTP/1.1" 200 -
+2025-08-22 18:48:58,404 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:48:58] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 18:51:35,008 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:51:35] "GET /signin HTTP/1.1" 200 -
+2025-08-22 18:55:17,893 INFO werkzeug  * Detected change in 'C:\\Users\\chenk\\PycharmProjects\\PythonProject3\\app.py', reloading
+2025-08-22 18:55:20,195 INFO werkzeug  * Restarting with stat
+2025-08-22 18:55:21,458 WARNING werkzeug  * Debugger is active!
+2025-08-22 18:55:21,463 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 18:55:35,719 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 18:55:35] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 18:59:24,908 INFO werkzeug  * Detected change in 'C:\\Users\\chenk\\PycharmProjects\\PythonProject3\\app.py', reloading
+2025-08-22 18:59:25,214 INFO werkzeug  * Restarting with stat
+2025-08-22 18:59:26,558 WARNING werkzeug  * Debugger is active!
+2025-08-22 18:59:26,562 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:00:23,948 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 19:00:23,948 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 19:00:23,949 INFO werkzeug  * Restarting with stat
+2025-08-22 19:00:25,318 WARNING werkzeug  * Debugger is active!
+2025-08-22 19:00:25,322 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:00:29,101 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:00:29] "GET / HTTP/1.1" 200 -
+2025-08-22 19:00:29,222 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:00:29] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 19:00:36,105 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:00:36] "GET /signup HTTP/1.1" 200 -
+2025-08-22 19:01:16,868 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:01:16] "[32mPOST /signup HTTP/1.1[0m" 302 -
+2025-08-22 19:01:17,060 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:01:17] "GET /verification_pending HTTP/1.1" 200 -
+2025-08-22 19:02:06,210 ERROR __main__ Resend verification link error: Error while calling Auth service (TOO_MANY_ATTEMPTS_TRY_LATER).
+2025-08-22 19:02:06,211 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:02:06] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:02:09,077 ERROR __main__ Resend verification link error: Error while calling Auth service (TOO_MANY_ATTEMPTS_TRY_LATER).
+2025-08-22 19:02:09,078 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:02:09] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:02:19,967 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:02:19] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:02:47,519 ERROR __main__ Resend verification link error: Error while calling Auth service (TOO_MANY_ATTEMPTS_TRY_LATER).
+2025-08-22 19:02:47,520 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:02:47] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:02:56,642 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:02:56] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:03:27,684 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:03:27] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 19:03:28,711 ERROR __main__ Token verification failed: Token used too early, 1755869608 < 1755869609. Check that your computer's clock is set correctly.
+2025-08-22 19:03:28,712 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:03:28] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 19:03:28,723 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:03:28] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:03:44,315 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:03:44] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 19:03:44,326 ERROR __main__ Token verification failed: Token used too early, 1755869624 < 1755869626. Check that your computer's clock is set correctly.
+2025-08-22 19:03:44,327 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:03:44] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 19:03:44,335 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:03:44] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:03:57,131 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:03:57] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:04:01,684 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:01] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:02,860 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:02] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:03,073 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:03] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:03,486 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:03] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:03,615 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:03] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:03,770 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:03] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:03,891 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:03] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:04,109 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:04] "POST /resend_verification HTTP/1.1" 200 -
+2025-08-22 19:04:18,806 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:04:18] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:07:44,497 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:07:44] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 19:10:36,868 INFO werkzeug  * Detected change in 'C:\\Users\\chenk\\PycharmProjects\\PythonProject3\\app.py', reloading
+2025-08-22 19:10:39,166 INFO werkzeug  * Restarting with stat
+2025-08-22 19:10:40,391 WARNING werkzeug  * Debugger is active!
+2025-08-22 19:10:40,396 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:11:44,645 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:11:44] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 19:12:14,114 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 19:12:14,114 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 19:12:14,116 INFO werkzeug  * Restarting with stat
+2025-08-22 19:12:15,578 WARNING werkzeug  * Debugger is active!
+2025-08-22 19:12:15,584 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:12:22,055 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:12:22] "GET / HTTP/1.1" 200 -
+2025-08-22 19:12:22,169 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:12:22] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 19:12:27,033 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:12:27] "GET /signup HTTP/1.1" 200 -
+2025-08-22 19:12:27,192 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:12:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-22 19:13:14,993 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:13:14] "POST /signup HTTP/1.1" 200 -
+2025-08-22 19:13:19,626 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:13:19] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:13:51,901 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:13:51] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 19:13:53,578 ERROR __main__ /new error: Could not build url for endpoint 'settings'. Did you mean 'static' instead?
+2025-08-22 19:13:53,580 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:13:53] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 19:13:53,592 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:13:53] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:14:48,980 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 19:14:48,980 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 19:14:48,981 INFO werkzeug  * Restarting with stat
+2025-08-22 19:14:50,189 WARNING werkzeug  * Debugger is active!
+2025-08-22 19:14:50,194 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:14:55,013 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:14:55] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:15:22,742 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:15:22] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 19:15:27,992 ERROR __main__ /new error: Could not build url for endpoint 'settings'. Did you mean 'static' instead?
+2025-08-22 19:15:27,993 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:15:27] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 19:15:28,003 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:15:28] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:15:44,816 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:15:44] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 19:15:47,921 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:15:47] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:16:00,144 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:16:00] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 19:16:00,153 ERROR __main__ Token verification failed: Token used too early, 1755870360 < 1755870362. Check that your computer's clock is set correctly.
+2025-08-22 19:16:00,157 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:16:00] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 19:16:00,167 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:16:00] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:17:41,147 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:17:41] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:19:15,285 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:19:15] "GET / HTTP/1.1" 200 -
+2025-08-22 19:19:15,433 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:19:15] "GET /static/new.css HTTP/1.1" 200 -
+2025-08-22 19:19:18,323 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:19:18] "GET /signup HTTP/1.1" 200 -
+2025-08-22 19:19:50,950 WARNING urllib3.connectionpool Retrying (Retry(total=9, connect=1, read=0, redirect=None, status=4)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /v1/projects/tai-khamyang-app/accounts:lookup
+2025-08-22 19:19:52,825 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:19:52] "POST /signup HTTP/1.1" 200 -
+2025-08-22 19:19:58,955 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:19:58] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:20:12,034 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:20:12] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 19:20:12,048 ERROR __main__ Token verification failed: Token used too early, 1755870612 < 1755870613. Check that your computer's clock is set correctly.
+2025-08-22 19:20:12,051 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:20:12] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 19:20:12,066 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:20:12] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:24:12,633 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:24:12] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 19:24:17,803 INFO werkzeug  * Detected change in 'C:\\Users\\chenk\\PycharmProjects\\PythonProject3\\app.py', reloading
+2025-08-22 19:24:20,083 INFO werkzeug  * Restarting with stat
+2025-08-22 19:24:21,314 WARNING werkzeug  * Debugger is active!
+2025-08-22 19:24:21,324 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:26:12,183 INFO werkzeug  * Detected change in 'C:\\Users\\chenk\\PycharmProjects\\PythonProject3\\app.py', reloading
+2025-08-22 19:26:12,449 INFO werkzeug  * Restarting with stat
+2025-08-22 19:26:13,669 WARNING werkzeug  * Debugger is active!
+2025-08-22 19:26:13,673 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:28:12,639 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:28:12] "[33mGET /generate_captcha HTTP/1.1[0m" 404 -
+2025-08-22 19:29:15,763 INFO werkzeug [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-22 19:29:15,763 INFO werkzeug [33mPress CTRL+C to quit[0m
+2025-08-22 19:29:15,765 INFO werkzeug  * Restarting with stat
+2025-08-22 19:29:17,241 WARNING werkzeug  * Debugger is active!
+2025-08-22 19:29:17,250 INFO werkzeug  * Debugger PIN: 830-419-185
+2025-08-22 19:29:22,213 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:29:22] "GET / HTTP/1.1" 200 -
+2025-08-22 19:29:22,326 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:29:22] "[36mGET /static/new.css HTTP/1.1[0m" 304 -
+2025-08-22 19:29:25,118 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:29:25] "GET /signup HTTP/1.1" 200 -
+2025-08-22 19:30:07,815 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:30:07] "[32mPOST /signup HTTP/1.1[0m" 302 -
+2025-08-22 19:30:08,369 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:30:08] "GET /verification_pending HTTP/1.1" 200 -
+2025-08-22 19:30:53,102 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:30:53] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:32:00,960 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:32:00] "[32mPOST /signin HTTP/1.1[0m" 302 -
+2025-08-22 19:32:02,347 ERROR __main__ /new error: Could not build url for endpoint 'settings'. Did you mean 'static' instead?
+2025-08-22 19:32:02,349 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:32:02] "[32mGET /new HTTP/1.1[0m" 302 -
+2025-08-22 19:32:02,360 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:32:02] "GET /signin HTTP/1.1" 200 -
+2025-08-22 19:32:06,885 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:32:06] "GET /recover_account HTTP/1.1" 200 -
+2025-08-22 19:32:42,871 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:32:42] "GET /recover_account HTTP/1.1" 200 -
+2025-08-22 19:32:49,074 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:32:49] "[31m[1mPOST /recover_account HTTP/1.1[0m" 400 -
+2025-08-22 19:32:58,741 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:32:58] "[31m[1mPOST /recover_account HTTP/1.1[0m" 400 -
+2025-08-22 19:33:00,680 INFO werkzeug 127.0.0.1 - - [22/Aug/2025 19:33:00] "GET /recover_account HTTP/1.1" 200 -
