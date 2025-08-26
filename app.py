@@ -50,10 +50,9 @@ firebase_config = {
 
 # Initialize Firebase Admin SDK
 try:
-    cred_path = os.environ.get("FIREBASE_SERVICE_ACCOUNT_KEY")
-    if cred_path and os.path.exists(cred_path):
-        cred = credentials.Certificate(cred_path)
-    else:
+    # Check if we're in a production environment (like Render)
+    if os.environ.get('RENDER') or os.environ.get('PRODUCTION'):
+        # Use environment variables for service account
         cred_dict = {
             "type": "service_account",
             "project_id": os.environ.get("FIREBASE_PROJECT_ID"),
@@ -62,16 +61,23 @@ try:
             "token_uri": "https://oauth2.googleapis.com/token",
         }
         cred = credentials.Certificate(cred_dict)
+    else:
+        # Use service account file for local development
+        cred_path = os.environ.get("FIREBASE_SERVICE_ACCOUNT_KEY")
+        if cred_path and os.path.exists(cred_path):
+            cred = credentials.Certificate(cred_path)
+        else:
+            raise Exception("Firebase service account key not found")
 
     firebase_admin.initialize_app(cred)
     db = firestore.client()
 except Exception as e:
     print(f"Firebase Admin initialization failed: {e}")
+    # Continue without Firebase Admin for basic functionality
     db = None
 
-BASE_URL = os.environ.get('BASE_URL')
-verify_url = f"{BASE_URL}/verify/{token}"
-
+app.config["SERVER_NAME"] = os.environ.get("PRIMARY_DOMAIN", "anazori.online")
+BASE_URL = os.environ.get('BASE_URL', 'http://127.0.0.1:5000')
 
 # Initialize Pyrebase for client-side auth
 try:
@@ -217,7 +223,7 @@ def send_verification_email(email, verification_token):
                 <p>Thank you for registering for <strong>{WEBSITE_NAME}</strong>. To complete your registration and secure your spot at India's most exciting tech festival, please verify your email address by clicking the button below:</p>
 
                 <div style="text-align: center; margin: 30px 0;">
-                    <a href="{verify_url}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block;">Verify My Email Address</a>
+                    <a href="{verification_url}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-block;">Verify My Email Address</a>
                 </div>
 
                 <p style="color: #666; font-size: 14px;"><strong>Can't click the button?</strong> Copy and paste this link into your browser:</p>
