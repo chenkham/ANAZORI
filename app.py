@@ -80,15 +80,12 @@ except Exception as e:
 # Configuration based on environment
 class Config:
     def __init__(self):
-        # Check the host to determine which domain we're on
-        host = request.host if 'request' in globals() else ''
-
-        if 'anazori.online' in host:
-            # Custom domain
-            self.BASE_URL = 'https://anazori.online'
-        elif 'anazori.onrender.com' in host:
-            # Render domain
+        if os.environ.get('RENDER'):
+            # Running on Render
             self.BASE_URL = 'https://anazori.onrender.com'
+        elif os.environ.get('PRODUCTION'):
+            # Running with custom domain
+            self.BASE_URL = 'https://anazori.online'
         else:
             # Local development
             self.BASE_URL = 'http://127.0.0.1:5000'
@@ -196,7 +193,7 @@ def get_base_url():
 def send_verification_email(email, verification_token):
     """Send anti-spam optimized verification email using Titan"""
     try:
-        # base_url = get_base_url()
+        base_url = get_base_url()
         verification_url = f"{app.config['BASE_URL']}/verify/{verification_token}"
 
         print(f"📧 Sending verification email to: {email}")
@@ -430,9 +427,10 @@ def email_signup():
         return jsonify({'success': False, 'error': 'Failed to send verification email'})
 
 
-@app.route('/verify/<token>')
-def verify_email(token):
-    """Handle email verification"""
+@app.route('/verify_custom_email')
+def verify_custom_email():
+    """Handle custom email verification"""
+    token = request.args.get('token')
     if not token:
         flash('Invalid verification link.', 'error')
         return redirect(url_for('signup'))
@@ -955,16 +953,7 @@ def test_spam_score():
     except Exception as e:
         return f"<h2>❌ Test Error:</h2><p>{e}</p>"
 
-@app.route('/__/auth/iframe')
-def auth_iframe():
-    """Handle Firebase Auth iframe requests"""
-    return '', 204  # No content
 
-@app.route('/__/auth/handler')
-def auth_handler():
-    """Handle Firebase Auth handler requests"""
-    # You might want to redirect to your signup page or handle this differently
-    return redirect(url_for('signup'))
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=int(os.environ.get('PORT', 5000)))
 
