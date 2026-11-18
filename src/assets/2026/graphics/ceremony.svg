@@ -1,11 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 640" fill="none">
-<defs><linearGradient id="plinth" x1="130" y1="230" x2="390" y2="570" gradientUnits="userSpaceOnUse"><stop stop-color="#d9c3fa"/><stop offset="1" stop-color="#8276ac"/></linearGradient><linearGradient id="flame" x1="225" y1="105" x2="270" y2="285"><stop stop-color="#ffedb4"/><stop offset="1" stop-color="#e7a599"/></linearGradient></defs>
-<path d="M260 75v35m-122 30 26 25m218-25-26 25M100 250h35m250 0h35" stroke="#d0c3ea" stroke-width="7" stroke-linecap="round"/>
-<path d="M257 121c40 52 63 67 58 99-4 39-28 58-59 58s-64-22-58-59c6-35 35-51 59-98Z" fill="url(#flame)"/>
-<path d="M257 201c21 25 28 33 23 49-4 15-26 27-38 10-13-21 4-37 15-59Z" fill="#fff5d5"/>
-<path d="M168 288h176l-29 51H197Z" fill="#263b43" stroke="#e5d7b4" stroke-width="6"/>
-<path d="M244 339h30v78h-30Z" fill="#e5d7b4"/>
-<path d="M157 415h207l35 155H122Z" fill="url(#plinth)" stroke="#efe4fc" stroke-width="5"/>
-<path d="M157 415h207l-22 24H179Z" fill="#f2eafc"/><path d="M181 470h158m-134 34h109" stroke="#514268" stroke-width="8" stroke-linecap="round"/>
-<path d="M104 571h310v24H104Z" fill="#27333f" stroke="#bde4db" stroke-width="4"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 520 640"><defs><linearGradient id="plinth" x1="130" x2="390" y1="230" y2="570" gradientUnits="userSpaceOnUse"><stop stop-color="#d9c3fa"/><stop offset="1" stop-color="#8276ac"/></linearGradient><linearGradient id="flame" x1="225" x2="270" y1="105" y2="285"><stop stop-color="#ffedb4"/><stop offset="1" stop-color="#e7a599"/></linearGradient></defs><path stroke="#d0c3ea" stroke-linecap="round" stroke-width="7" d="M260 75v35m-122 30 26 25m218-25-26 25M100 250h35m250 0h35"/><path fill="url(#flame)" d="M257 121c40 52 63 67 58 99-4 39-28 58-59 58s-64-22-58-59c6-35 35-51 59-98Z"/><path fill="#fff5d5" d="M257 201c21 25 28 33 23 49-4 15-26 27-38 10-13-21 4-37 15-59Z"/><path fill="#263b43" stroke="#e5d7b4" stroke-width="6" d="M168 288h176l-29 51H197Z"/><path fill="#e5d7b4" d="M244 339h30v78h-30Z"/><path fill="url(#plinth)" stroke="#efe4fc" stroke-width="5" d="M157 415h207l35 155H122Z"/><path fill="#f2eafc" d="M157 415h207l-22 24H179Z"/><path stroke="#514268" stroke-linecap="round" stroke-width="8" d="M181 470h158m-134 34h109"/><path fill="#27333f" stroke="#bde4db" stroke-width="4" d="M104 571h310v24H104Z"/></svg>
