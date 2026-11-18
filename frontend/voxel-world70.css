@@ -1,0 +1,89 @@
+/* Original block-built scenery, layered behind the existing public design. */
+.festival-glass-background { display: none; }
+body.reference-background .site-header .header-cta {
+  background: transparent; color: var(--pdf-text); border-color: var(--accent-border);
+  transition: background-color .2s,color .2s,border-color .2s;
+}
+body.reference-background .site-header .header-cta:is(:hover,:focus-visible) {
+  background: var(--pdf-violet); color: var(--pdf-base); border-color: var(--pdf-violet);
+}
+.festival-pixel-relic {
+  display: block; width: 104px; height: 81px; margin-top: 24px;
+  background: url('/assets/2026/graphics/voxel-relic70.svg') center/contain no-repeat;
+  image-rendering: pixelated; pointer-events: none;
+}
+@media screen {
+  body.reference-background:not(.legacy-admin) {
+    isolation: isolate;
+    background: #080712;
+  }
+  .reference-background .festival-glass-background {
+    display: block; position: fixed; inset: 0; z-index: -1;
+    overflow: hidden; pointer-events: none; contain: strict;
+    /* Keep the same viewport artwork on one retained layer. A fixed body
+       background makes mobile browsers repaint the scrolling document. */
+    background: radial-gradient(ellipse at 82% 24%,#342457 0,transparent 52%),
+      radial-gradient(ellipse at 10% 90%,#14333c80,transparent 45%),#080712;
+    transform: translateZ(0);
+  }
+  .festival-glass-background>span { position: absolute; pointer-events: none; }
+  .voxel-world-sky { inset: 0; background: url('/assets/2026/graphics/voxel-sky70.svg') center/cover no-repeat; }
+  .voxel-world-clouds {
+    inset: -5%; background: url('/assets/2026/graphics/voxel-clouds70.svg') center/cover no-repeat;
+    animation: voxel-cloud-drift 48s ease-in-out infinite alternate;
+  }
+  .voxel-world-island {
+    width: clamp(440px,48vw,760px); aspect-ratio: 800/620;
+    right: -16%; top: 28%; opacity: .55;
+    background: url('/assets/2026/graphics/voxel-island70.svg') center/contain no-repeat;
+    image-rendering: pixelated; animation: voxel-island-float 12s ease-in-out infinite alternate;
+  }
+  .voxel-world-island-small {
+    width: clamp(250px,28vw,460px); aspect-ratio: 500/440;
+    left: -13%; bottom: -10%; opacity: .42;
+    background: url('/assets/2026/graphics/voxel-island-small70.svg') center/contain no-repeat;
+    image-rendering: pixelated; animation: voxel-island-float 15s ease-in-out -7s infinite alternate-reverse;
+  }
+  .voxel-world-fireflies {
+    inset: 0;
+    background-image: linear-gradient(#a2f2df,#a2f2df),linear-gradient(#eab5ed,#eab5ed),linear-gradient(#8adbe4,#8adbe4),linear-gradient(#c8a6ff,#c8a6ff),linear-gradient(#a2f2df,#a2f2df);
+    background-size: 3px 3px,4px 4px,3px 3px,4px 4px,3px 3px;
+    background-position: 72% 46%,85% 62%,93% 35%,12% 82%,77% 77%; background-repeat: no-repeat;
+    animation: voxel-fireflies 8s ease-in-out infinite alternate;
+  }
+  .voxel-world-shade {
+    inset: 0;
+    background: linear-gradient(90deg,#08071280,transparent 75%),
+      radial-gradient(ellipse at 30% 44%,#08071260,transparent 67%),
+      linear-gradient(0deg,#08071266,transparent 28%,transparent 90%,#08071220);
+  }
+  @keyframes voxel-island-float { from { transform: translateY(-7px); } to { transform: translateY(9px); } }
+  @keyframes voxel-cloud-drift { from { transform: translateX(-2%); } to { transform: translateX(3%); } }
+  @keyframes voxel-fireflies { from { transform: translateY(6px); opacity: .18; } to { transform: translateY(-14px); opacity: .65; } }
+  html.motion-paused .festival-glass-background>span,
+  .festival-glass-background.motion-outside>span { animation-play-state: paused; }
+  body[data-scene-motion=off] .festival-glass-background>span { animation: none; }
+  @media (max-width:760px) {
+    .voxel-world-island { width: 520px; right: -240px; top: 23%; opacity: .4; animation-duration: 18s; }
+    .voxel-world-island-small { width: 280px; left: -170px; bottom: -5%; opacity: .36; animation: none; }
+    .voxel-world-sky,.voxel-world-clouds { background-position: 75% center; }
+    .voxel-world-clouds { animation-duration: 60s; }
+    .voxel-world-shade { background: linear-gradient(90deg,#08071285,#08071225); }
+    .festival-pixel-relic { width: 84px; height: 65px; margin-top: 18px; }
+  }
+  @media (prefers-reduced-motion:reduce) { .festival-glass-background>span { animation: none; } }
+  @media (prefers-reduced-transparency:reduce) {
+    .festival-glass-background { display: none !important; }
+    body.reference-background:not(.legacy-admin) {
+      background: radial-gradient(ellipse at 82% 24%,#342457 0,transparent 52%),
+        radial-gradient(ellipse at 10% 90%,#14333c80,transparent 45%),#080712;
+    }
+  }
+  @media (forced-colors:active) {
+    body.reference-background:not(.legacy-admin) { background: Canvas; }
+    .festival-glass-background,.festival-pixel-relic { display: none !important; }
+    body.reference-background .site-header .header-cta { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
+    body.reference-background .site-header .header-cta:is(:hover,:focus-visible) { background: Highlight; color: HighlightText; }
+  }
+}
+@media print { .festival-pixel-relic { display: none; } }

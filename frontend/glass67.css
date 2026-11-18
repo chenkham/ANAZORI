@@ -1,0 +1,85 @@
+/* Surface treatment only: existing frames, artwork, geometry and motion stay
+   in their original stylesheets. The complete sponsor subtree is excluded. */
+@media screen {
+  body.reference-background .nav-shell {
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
+    backdrop-filter: blur(14px) saturate(115%);
+  }
+  body.reference-background .nav-shell::after {
+    background: radial-gradient(ellipse at var(--light-x,40%) var(--light-y,0%),#abb7ff15,transparent 55%),
+      linear-gradient(115deg,#140a2e94,#100c2170);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  body.reference-background .mobile-nav {
+    background: linear-gradient(145deg,#140a2ed6,#080013cc);
+    -webkit-backdrop-filter: blur(18px) saturate(115%);
+    backdrop-filter: blur(18px) saturate(115%);
+  }
+
+  body.reference-background :is(.clock-card,.duration-card,.event-card,.person-card,.account-card,.order-card,.dashboard-empty,.passport-invitation,.frequency-control,.faq details,.interest-dialog,.passport-dialog):not(#partners *) {
+    background: linear-gradient(145deg,#e3d6f80c,#a24bff08 45%,transparent 70%),
+      linear-gradient(155deg,#140a2ebd,#0b041ca8);
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
+    backdrop-filter: blur(14px) saturate(115%);
+  }
+  body.reference-background :is(.event-card,.person-card):hover:not(#partners *),
+  body.reference-background .faq details[open]:not(#partners *) {
+    background: linear-gradient(145deg,#e3d6f812,#a24bff10 45%,transparent 70%),
+      linear-gradient(155deg,#1e0c3dca,#0b041cb8);
+  }
+
+  /* Retain the memories' alternating tints and the photographs above them. */
+  body.reference-background .gallery-item:not(#partners *) {
+    background: linear-gradient(125deg,#161d31c7,#151529a8);
+    -webkit-backdrop-filter: blur(12px) saturate(115%);
+    backdrop-filter: blur(12px) saturate(115%);
+  }
+  body.reference-background .gallery-item:nth-child(4n+2):not(#partners *) {
+    background: linear-gradient(125deg,#25223bc7,#181a30a8);
+  }
+  body.reference-background .gallery-item:nth-child(4n+3):not(#partners *) {
+    background: linear-gradient(125deg,#152d33c7,#111d2da8);
+  }
+
+  /* Small inset surfaces use transparency without additional blur layers. */
+  body.reference-background :is(.detail-facts>div,.detail-steps article,.detail-steps article:first-child,.event-search,.pass-link):not(#partners *) {
+    background: linear-gradient(145deg,#e3d6f809,transparent 65%),#140a2ea8;
+  }
+  body.reference-background :is(.account-form input:not([type=checkbox]):not([type=radio]),.account-form select,.account-form textarea,.checkout-form input:not([type=checkbox]):not([type=radio]),.checkout-form select,.checkout-form textarea,.payment-proof-form input:not([type=checkbox]):not([type=radio]),.payment-proof-form textarea,.interest-dialog input:not([type=checkbox]):not([type=radio]),.interest-dialog textarea):not(#partners *) {
+    background: #0800139e;
+  }
+
+  /* A readable fill remains when a browser cannot blur the backdrop. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    body.reference-background .nav-shell::after { background-color: #140a2e; }
+    body.reference-background :is(.mobile-nav,.clock-card,.duration-card,.event-card,.person-card,.gallery-item,.account-card,.order-card,.dashboard-empty,.passport-invitation,.frequency-control,.faq details,.interest-dialog,.passport-dialog):not(#partners *) {
+      background-color: #140a2e;
+    }
+  }
+  @media (max-width:760px) {
+    body.reference-background .nav-shell,
+    body.reference-background :is(.mobile-nav,.clock-card,.duration-card,.event-card,.person-card,.gallery-item,.account-card,.order-card,.dashboard-empty,.passport-invitation,.frequency-control,.faq details,.interest-dialog,.passport-dialog):not(#partners *) {
+      -webkit-backdrop-filter: blur(8px) saturate(110%);
+      backdrop-filter: blur(8px) saturate(110%);
+    }
+  }
+  @media (prefers-reduced-transparency:reduce) {
+    body.reference-background .nav-shell,
+    body.reference-background :is(.mobile-nav,.clock-card,.duration-card,.event-card,.person-card,.gallery-item,.account-card,.order-card,.dashboard-empty,.passport-invitation,.frequency-control,.faq details,.interest-dialog,.passport-dialog):not(#partners *) {
+      background-color: #140a2e;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+  @media (forced-colors:active) {
+    body.reference-background .nav-shell,
+    body.reference-background .nav-shell::after,
+    body.reference-background :is(.mobile-nav,.clock-card,.duration-card,.event-card,.person-card,.gallery-item,.account-card,.order-card,.dashboard-empty,.passport-invitation,.frequency-control,.faq details,.interest-dialog,.passport-dialog,.detail-facts>div,.detail-steps article,.event-search,.pass-link):not(#partners *) {
+      background: Canvas;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+}

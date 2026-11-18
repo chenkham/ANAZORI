@@ -1,0 +1,45 @@
+/* Keep the ticket wordmark crop independent of generic pass-image dimensions. */
+.simple-event-ticket .pass-brand>.anazori-wordmark {display:block;min-width:98px;aspect-ratio:1490/344;overflow:hidden;height:auto;flex-shrink:0}
+.simple-event-ticket .pass-brand>.anazori-wordmark>img {position:absolute;display:block;width:144.966443%;max-width:none;height:auto;left:-22.550336%;top:-263.953488%;object-fit:contain}
+.ticket-row a[data-ticket-reveal] {display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:72px}
+.ticket-row a[data-ticket-reveal]::after {content:'↗';font-size:23px}
+.qr-open95 {overflow:hidden}
+dialog.qr-reveal95 {border:0;margin:auto;padding:48px 18px 22px;width:min(100%,650px);max-width:100%;max-height:100dvh;background:#f3f0f6;color:#21192c;overflow:auto;border-radius:24px;overscroll-behavior:contain}
+.qr-reveal95::backdrop {background:#090610e8}
+.qr-close95 {position:absolute;right:16px;top:10px;z-index:2;display:grid;place-items:center;width:40px;height:40px;border:1px solid #4f3b6033;border-radius:50%;background:#fff;color:#30203e;font-size:28px;cursor:pointer}
+.qr-panel95 {transform-origin:center;overflow:hidden;border-radius:16px}
+.qr-loading95 {min-height:220px;display:grid;place-items:center}
+body.reference-background .qr-reveal95 .digital-pass.simple-event-ticket {margin:0;max-width:none;background:#fff;color:#21192c;border:0;box-shadow:none;border-radius:16px;padding:24px 18px}
+body.reference-background .qr-reveal95 .digital-pass.simple-event-ticket :is(p,h1,h2,strong,.ticket-id) {color:#30203e}
+body.reference-background .qr-reveal95 .simple-event-ticket .ticket-qr {width:min(100%,310px);height:auto;aspect-ratio:1;margin:26px auto;background:#fff}
+body.reference-background .qr-reveal95 .simple-event-ticket .payment-badge {background:#e4f1e8;color:#3a654b;border-color:#b9d4c2}
+body.reference-background .qr-reveal95 .simple-event-ticket .ticket-downloads .text-link {color:#382043}
+body.reference-background .qr-reveal95 .qr-close95 {color:#30203e!important;clip-path:none;opacity:1}
+body.reference-background .qr-reveal95 .qr-continue95 {color:#382043!important}
+body.reference-background .qr-reveal95 .simple-event-ticket .account-help {color:#574c60!important}
+.payment-qr-card95 {padding:20px 18px;background:#fff;border-radius:16px;text-align:center;overflow:hidden}
+.qr-brand95 {display:flex;justify-content:center;padding:8px 0 20px}
+.qr-brand95>.anazori-wordmark {width:180px;flex:none}
+.payment-qr-card95 h2 {font:600 25px/1.3 Satoshi,Arial,sans-serif;margin:0 0 24px}
+.payment-qr-card95 .native-form-media {display:block;margin:0 auto 24px;width:min(100%,330px);max-height:360px;object-fit:contain;background:#fff}
+.qr-details95 {padding:22px 8px 0;border-top:1px solid #30203e22}
+.qr-details95 p {color:#574c60;font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.qr-details95 .qr-amount95 {font-size:20px;font-weight:650;color:#30203e}
+.qr-details95 :is(a,button) {display:flex;align-items:center;justify-content:center;width:100%;min-height:46px;margin-top:14px;padding:10px 14px;border-radius:8px;clip-path:none;background:#382043;color:#fff;border:0;font:600 14px/1.4 Satoshi,Arial,sans-serif;cursor:pointer}
+.qr-details95 .qr-continue95 {background:#efe8f6;color:#382043}
+@media(max-width:700px){
+ .reference-background .passport-invitation {display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px 16px;align-items:center;flex-wrap:nowrap;padding-block:26px}
+ .reference-background .passport-invitation>div {min-width:0;width:auto}
+ .reference-background .passport-invitation p {font-size:20px;line-height:1.35;margin:0 0 7px;word-break:normal}
+ .reference-background .passport-invitation>div>span {display:block;line-height:1.6}
+ .reference-background .passport-invitation button,.reference-background .passport-invitation:has(.passport-guide) button {grid-column:2;justify-self:start;margin:0;gap:16px;font-size:13px;min-height:44px;max-width:100%;white-space:normal}
+ dialog.qr-reveal95 {width:100%;min-height:100dvh;max-height:100dvh;border-radius:0;padding:calc(env(safe-area-inset-top) + 54px) 16px calc(env(safe-area-inset-bottom) + 20px)}
+ .qr-reveal95 .ticket-downloads {flex-direction:column;gap:10px}
+}
+/* Lower tiers keep content, interactions and the lightweight pixel sequence.
+   Heavy perpetual decoration gives way to its supplied still artwork. */
+html[data-motion-quality=medium] .frequency-wave {animation:none}
+html[data-motion-quality=low] :is(.voxel-world-clouds,.voxel-world-island,.voxel-world-island-small,.voxel-world-fireflies,.frequency-wave,.record-orbit) {animation:none!important}
+html[data-motion-quality=low] .hero-wordmark-glow {display:none}
+html[data-motion-quality=low] body.reference-background :is(.clock-card,.duration-card,.event-card,.account-card,.passport-invitation,.faq details) {backdrop-filter:none;-webkit-backdrop-filter:none}
+@media print {.qr-reveal95 {display:none!important}}

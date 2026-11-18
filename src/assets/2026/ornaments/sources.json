@@ -1,0 +1,26 @@
+[
+  {
+    "source_pack": "kenney_fantasy-ui-borders.zip",
+    "member": "PNG/Default/Border/panel-border-024.png",
+    "file": "gallery-border.png",
+    "license": "CC0"
+  },
+  {
+    "source_pack": "kenney_ui-pack-adventure.zip",
+    "member": "Vector/panel_border_brown_detail.svg",
+    "file": "passport-border.svg",
+    "license": "CC0"
+  },
+  {
+    "source_pack": "kenney_ui-pack-adventure.zip",
+    "member": "Vector/minimap_icon_jewel_yellow.svg",
+    "file": "passport-gem.svg",
+    "license": "CC0"
+  },
+  {
+    "source_pack": "kenney_ui-pack-space-expansion.zip",
+    "member": "Vector/Extra/panel_glass_notches.svg",
+    "file": "code-panel.svg",
+    "license": "CC0"
+  }
+]

@@ -1,0 +1,5 @@
+/* Transparent character cutouts share the existing programme and event artwork space. */
+.programme-photo-theatre :is([data-programme-pane="inauguration"],[data-programme-pane="youth-parliament"]) .programme-companion{width:40%;height:80%}
+.programme-photo-theatre .programme-companion>.programme-character-art{display:block;object-fit:contain;object-position:center bottom;stroke:none;filter:none}
+body.reference-background .event-art>.programme-character-art{position:absolute;inset:0;display:block;width:100%;height:100%;padding:16px;object-fit:contain;object-position:center bottom;stroke:none;filter:drop-shadow(0 8px 6px #08090e25)}
+body.reference-background .detail-art>.programme-character-art{padding:24px 16px 56px}

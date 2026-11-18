@@ -1,0 +1,76 @@
+/* Neon glow is painted once; only layer opacity/scale breathe on each refresh. */
+#hero-title { filter: none; }
+#hero-title .hero-title-text { position: relative; display: inline-block; }
+#hero-title .hero-title-text::before, #hero-title .hero-title-text::after {
+  content: attr(data-glow) / ''; position: absolute; inset: 0; pointer-events: none;
+  z-index: -1; color: transparent; -webkit-text-fill-color: transparent;
+  font: inherit; letter-spacing: inherit; white-space: nowrap;
+  animation: hero-neon-breathe 4.8s ease-in-out infinite alternate;
+}
+#hero-title .hero-title-text::before {
+  text-shadow: 0 0 .035em #e5ffffc0,0 0 .12em #83f4edaa,0 0 .32em #71cce777;
+  opacity: .5;
+}
+#hero-title .hero-title-text::after {
+  text-shadow: 0 0 .08em #d6bcffaa,0 0 .22em #b497ff88,0 0 .42em #ed9bcf66;
+  opacity: .35; animation-delay: -2.4s;
+}
+.hero:not(.motion-outside) .hero-title-text::before,
+.hero:not(.motion-outside) .hero-title-text::after { will-change: opacity, transform; }
+@keyframes hero-neon-breathe {
+  from { opacity: .22; transform: scale(1); }
+  to { opacity: .78; transform: scale(1.004); }
+}
+
+/* Preview cards appear only until actual sponsors are published in the Studio. */
+.partner-preview-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; margin-bottom: 15px; }
+.sponsor-preview { position: relative; display: flex; flex-direction: column; min-height: 285px; padding: 27px 32px; overflow: hidden; border-radius: 22px; }
+.sponsor-preview::after { content: ''; position: absolute; inset: 8px; border: 1px solid #4d35561c; border-radius: 15px; pointer-events: none; }
+.sponsor-preview-sbi { background: radial-gradient(ellipse at 100% 0,#bde9f870,transparent 70%),#f0f6f3; }
+.sponsor-preview-redbull { background: radial-gradient(ellipse at 100% 0,#ffe0a58a,transparent 65%),#fff3dd; }
+.partner-preview-top,.partner-preview-bottom { display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+.partner-preview-top { color: #665666; font: 11px var(--mono); letter-spacing: .025em; }
+.partner-preview-top > span:first-child { padding: 7px 10px; border: 1px solid #69567238; border-radius: 99px; }
+.sponsor-preview-logo { display: flex; justify-content: center; align-items: center; flex: 1; min-height: 160px; padding: 24px 0; }
+.sponsor-preview-logo img { width: 170px; height: auto; max-width: 80%; margin: 0; object-fit: contain; }
+.redbull-preview-wordmark { display: inline-block; position: relative; font: 750 clamp(38px,4.5vw,66px)/1 var(--display); letter-spacing: -.065em; color: #d52246; padding-bottom: 16px; }
+.redbull-preview-wordmark > span { position: absolute; left: 2%; right: 2%; bottom: 0; height: 6px; background: linear-gradient(90deg,#d52246 0 30%,#f2bb3b 30% 70%,#263672 70%); border-radius: 99px; }
+.partner-preview-bottom { padding-top: 18px; border-top: 1px solid #69567226; }
+.partner-preview-bottom h3 { margin: 0; font: 600 clamp(17px,1.8vw,23px)/1.2 var(--display); letter-spacing: -.02em; color: #30202d; }
+.partner-preview-bottom > span { font-size: 12px; color: #665666; }
+.partners .partner-preview-note { margin: 0 0 35px; color: #6e5266; font-size: 12px; line-height: 1.6; }
+
+@media (max-width:560px) {
+  .nav-shell { padding-inline: 12px; gap: 8px; }
+  .brand { font-size: 20px; gap: 6px; }
+  .brand small { display: none; }
+  .brand .official-logo { width: 26px; height: 32px; }
+  .header-cta { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; white-space: nowrap; min-height: 44px; padding: 10px; font-size: 12px; margin-left: auto; }
+  .menu-button { width: 44px; height: 44px; margin-left: 0; }
+  .partner-preview-grid { gap: 12px; }
+  .sponsor-preview { min-height: 226px; padding: 18px 16px; border-radius: 20px; }
+  .partner-preview-top { font-size: 9px; gap: 4px; }
+  .partner-preview-top > span:first-child { padding: 5px 7px; }
+  .sponsor-preview-logo { min-height: 125px; padding: 22px 0; }
+  .sponsor-preview-logo img { width: 122px; max-width: 100%; }
+  .redbull-preview-wordmark { font-size: clamp(27px,8vw,42px); padding-bottom: 12px; }
+  .redbull-preview-wordmark > span { height: 4px; }
+  .partner-preview-bottom { flex-direction: column; align-items: flex-start; gap: 6px; padding-top: 12px; }
+  .partner-preview-bottom h3 { font-size: 16px; }
+  .partner-preview-bottom > span { font-size: 11px; }
+}
+@media (max-width:375px) {
+  .nav-shell { padding-inline: 10px; gap: 6px; }
+  .brand { font-size: 18px; }
+  .brand .official-logo { width: 24px; }
+  .header-cta { padding-inline: 8px; font-size: 11px; }
+  .partner-preview-grid { grid-template-columns: 1fr; }
+  .sponsor-preview { min-height: 236px; }
+  .redbull-preview-wordmark { font-size: 46px; }
+  .partner-preview-bottom { flex-direction: row; align-items: center; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #hero-title .hero-title-text::before, #hero-title .hero-title-text::after { animation: none; will-change: auto; }
+}
+html.motion-paused .hero-title-text::before, html.motion-paused .hero-title-text::after { animation-play-state: paused !important; will-change: auto; }
+@media print { #hero-title .hero-title-text::before, #hero-title .hero-title-text::after { display: none; } }

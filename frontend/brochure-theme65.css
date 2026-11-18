@@ -1,0 +1,120 @@
+/* Colours sampled from the supplied V16.0 brochure's text and vector artwork.
+   The sponsor section is deliberately isolated from this theme update. */
+html { background: #030010; }
+body.reference-background {
+  --pdf-violet: #a24bff; --pdf-soft-violet: #a66bff;
+  --pdf-pink: #ff3fc8; --pdf-heading: #ffc8f5; --pdf-cyan: #6fd3ff;
+  --pdf-blue: #3a55c8; --pdf-text: #e3d6f8; --pdf-muted: #b9a4e8;
+  --pdf-link: #c8a6ff; --pdf-panel: #140a2e; --pdf-base: #030010;
+  --ink: var(--pdf-base); --paper: var(--pdf-text); --muted: var(--pdf-muted);
+  --panel: var(--pdf-panel); --lilac: var(--pdf-link); --pink: var(--pdf-pink);
+  --orange: var(--pdf-pink); --mint: var(--pdf-cyan); --cyan: var(--pdf-cyan);
+  --line: #a24bff40;
+  --accent: var(--pdf-violet); --accent-hover: var(--pdf-soft-violet);
+  --accent-text: var(--pdf-link); --accent-ink: var(--pdf-base);
+  --accent-link: var(--pdf-link); --accent-focus: var(--pdf-cyan);
+  --accent-pink: var(--pdf-pink); --accent-cyan: var(--pdf-cyan);
+  --accent-border: #a24bff80; --accent-wash: #a24bff18;
+  --spectrum: linear-gradient(110deg,#a24bff,#ff3fc8 70%,#6fd3ff);
+  background: radial-gradient(ellipse at 48% 0,#a24bff2e,transparent 42%),
+    radial-gradient(ellipse at 100% 66%,#ff3fc818,transparent 45%),
+    linear-gradient(145deg,#030010,#080013 54%,#140a2e);
+  background-attachment: fixed; color: var(--pdf-text);
+}
+/* Preserve inherited colours for the complete existing sponsor section. */
+body.reference-background #partners {
+  --ink: #17151d; --paper: #fff2da; --mint: #93dfc6; --orange: #ff9b76;
+  --lilac: #c5afff; --pink: #fda7c1; --line: #49404f; --muted: #c6bbc8;
+  --panel: #24202c; --brass: #dfc69b; --frame: #fff2da35; --cyan: #83f4ed;
+  --accent: #7c3aed; --accent-hover: #6d28d9; --accent-text: #c8acff;
+  --accent-ink: #6535ad; --accent-link: var(--accent-ink); --accent-focus: #925de6;
+  --accent-pink: #ed79c5; --accent-cyan: #65d9ee;
+  --accent-border: #6535ad45; --accent-wash: #7c3aed0c;
+  --spectrum: linear-gradient(110deg,#c8acff 0%,#c8acff 56%,#ed79c5 100%);
+}
+/* Components shared with sponsors explicitly exclude that entire subtree. */
+body.reference-background :is(.button-orange,.passport-dialog .button,.simple-event-ticket .ticket-downloads .button):not(#partners *) {
+  background: var(--pdf-violet); border-color: var(--pdf-violet); color: var(--pdf-base);
+}
+body.reference-background :is(.button-orange,.passport-dialog .button,.simple-event-ticket .ticket-downloads .button):is(:hover,:focus-visible):not(#partners *) {
+  background: var(--pdf-soft-violet); border-color: var(--pdf-soft-violet); color: var(--pdf-base);
+}
+body.reference-background :is(.button-dark,.programme-swipe-controls button,.filters button):not(#partners *) {
+  background: var(--pdf-panel); color: var(--pdf-link); border-color: var(--accent-border);
+}
+body.reference-background :is(.button-dark,.programme-swipe-controls button,.filters button):hover:not(#partners *) {
+  background: #a24bff24; border-color: var(--pdf-pink); color: var(--pdf-text);
+}
+body.reference-background .filters button[aria-pressed=true]:not(#partners *) {
+  background: var(--pdf-violet); border-color: var(--pdf-violet); color: var(--pdf-base);
+}
+body.reference-background :is(.intro h2,.section-heading h2,.programme-heading h2,.team-section h2,.detail-copy h1,.detail-next h2,.page-intro h1,.visit h2,.footer-top h2,.account-card h2,.account-story h1,.dashboard-heading h1,.checkout-layout h1,.payment-proof-layout h1):not(#partners *) {
+  color: var(--pdf-heading);
+}
+body.reference-background :is(.intro .serif-word,.visit .serif-word,.programme-heading em,.section-heading h2>span,.page-intro h1>span,.footer-top h2>em):not(#partners *) { color: var(--pdf-link); }
+body.reference-background :is(.intro-bottom p,.section-heading>p,.detail-description,.detail-tagline,.detail-steps p,.detail-facts strong,.visit-heading>p,.faq details>p,.account-card>p,.account-story>p,.account-help,.account-links,.order-meta,.order-card p):not(#partners *) { color: var(--pdf-text); }
+body.reference-background :is(.programme-number,.programme-link-copy>span,.clock-caption,.duration-dates,.duration-footer,.footer-bottom,.person-edition):not(#partners *) { color: var(--pdf-muted); }
+body.reference-background :is(.clock-card,.duration-card,.account-card,.order-card,.dashboard-empty,.interest-dialog,.passport-dialog):not(#partners *) {
+  background: linear-gradient(145deg,#a24bff0d,transparent 65%),var(--pdf-panel);
+  border-color: var(--accent-border); color: var(--pdf-text);
+}
+body.reference-background .clock-unit:not(#partners *) { border-color: #3a55c880; }
+body.reference-background .duration-portal span:not(#partners *) { color: var(--pdf-link); }
+body.reference-background :is(.event-card,.person-card,.person-card:nth-child(n)):not(#partners *) { background: linear-gradient(155deg,#140a2e,#0b041c); border-color: #3a55c8; }
+body.reference-background :is(.event-card,.person-card):hover:not(#partners *) { background: linear-gradient(155deg,#1e0c3d,#0b041c); border-color: var(--pdf-pink); }
+body.reference-background :is(.person-initials,.event-art):not(#partners *) { background-color: var(--pdf-panel); }
+body.reference-background .person-initials:not(#partners *) { background-image: linear-gradient(145deg,#140a2e,#1e0c3d); color: var(--pdf-link); }
+body.reference-background .person-card h3:not(#partners *) { color: var(--pdf-heading); }
+body.reference-background .person-card p:not(#partners *) { color: var(--pdf-muted); }
+body.reference-background .programme-photo-frame:not(#partners *) { border-color: var(--pdf-text); }
+body.reference-background .programme-theatre .theatre-sun { background: linear-gradient(140deg,#a24bff70,#3a55c850); }
+body.reference-background .programme-theatre[data-category=culture] .theatre-sun { background: linear-gradient(140deg,#a24bff70,#ff3fc850); }
+body.reference-background .programme-theatre[data-category=adventure] .theatre-sun { background: linear-gradient(140deg,#a24bff70,#6fd3ff50); }
+body.reference-background .programme-theatre .theatre-line { border-color: #a24bff50; }
+body.reference-background .programme-theatre .theatre-ground { background-image: repeating-linear-gradient(0deg,transparent 0 8px,#a24bff18 8px 9px); }
+body.reference-background .programme-link::before { background: linear-gradient(90deg,#a24bff24,transparent); }
+body.reference-background .programme-link:is(.is-selected,:hover) h3 { color: var(--pdf-link); }
+body.reference-background .faq details { background: #140a2e88; border-color: #3a55c880; }
+body.reference-background .faq details[open] { background: var(--pdf-panel); border-color: var(--pdf-pink); }
+body.reference-background .faq summary { color: var(--pdf-text); }
+body.reference-background .nav-shell { background-color: #140a2e6b; }
+body.reference-background .nav-trim { color: var(--pdf-blue); }
+body.reference-background .nav-trim path:last-child { stroke: var(--pdf-cyan); }
+body.reference-background .mobile-nav { background: linear-gradient(145deg,#140a2ef5,#080013f5); }
+body.reference-background .mobile-nav a::after { background: linear-gradient(90deg,#a24bff66,#ff3fc828,transparent); }
+body.reference-background .desktop-nav a:hover { color: var(--pdf-heading); }
+body.reference-background .menu-trace { background: var(--pdf-violet); box-shadow: 0 0 10px #a24bff88; }
+body.reference-background .passport-invitation { background: var(--pdf-panel); color: var(--pdf-heading); border-color: #3a55c8; --accent-link: var(--pdf-link); }
+body.reference-background .passport-invitation>div>span { color: var(--pdf-muted); }
+body.reference-background .passport-invitation button { color: var(--pdf-cyan); border-color: #6fd3ff66; }
+body.reference-background .passport-dialog { --accent-link: var(--pdf-link); --accent-border: #a24bff80; --accent-wash: #a24bff18; }
+body.reference-background .culture-tech::before {
+  background: radial-gradient(ellipse at 0 50%,rgba(255,63,200,calc(.25 - var(--mix,.5) * .15)),transparent 53%),
+    radial-gradient(ellipse at 100% 50%,rgba(111,211,255,calc(.05 + var(--mix,.5) * .16)),transparent 55%),
+    linear-gradient(110deg,#140a2e,#080013 52%,#140a2e);
+}
+body.reference-background .culture-tech { --paper: var(--pdf-text); --mint: var(--pdf-cyan); --pink: var(--pdf-pink); --lilac: var(--pdf-link); }
+body.reference-background .culture-tech h2 { color: var(--pdf-heading); }
+body.reference-background .culture-tech p:not(.eyebrow) { color: var(--pdf-text); }
+body.reference-background .record-label { background: linear-gradient(145deg,#ffc8f5,#c8a6ff 65%,#6fd3ff); color: var(--pdf-base); }
+body.reference-background .record-needle { background: var(--pdf-text); }
+body.reference-background .record-needle::after { background: var(--pdf-heading); }
+body.reference-background .frequency-control { background: #140a2ec0; }
+body.reference-background .frequency-control label { color: var(--pdf-heading); }
+body.reference-background .frequency-labels { color: var(--pdf-muted); }
+body.reference-background :is(.account-form input:not([type=checkbox]):not([type=radio]),.account-form select,.account-form textarea,.checkout-form input:not([type=checkbox]):not([type=radio]),.checkout-form select,.checkout-form textarea,.payment-proof-form input:not([type=checkbox]),.payment-proof-form textarea,.interest-dialog input,.interest-dialog textarea):not(#partners *) {
+  background: #080013; color: var(--pdf-text); border-color: #a24bff66;
+}
+body.reference-background .conduit-rail { background: linear-gradient(90deg,transparent,#a24bff66,#6fd3ff40,transparent); }
+body.reference-background .energy-packet::before { background: linear-gradient(90deg,transparent,#a24bff55 35%,#c8a6ff 80%,#ffc8f5); }
+body.reference-background .energy-packet::after { background: var(--pdf-heading); box-shadow: 0 0 12px 4px #a24bff4a; }
+/* A duplicate original image mask paints the halo. Only opacity animates. */
+body.reference-background .hero-title-art { position: relative; isolation: isolate; }
+body.reference-background .hero-title-art>.anazori-wordmark { position: relative; z-index: 1; filter: drop-shadow(0 0 3px #ffc8f599) drop-shadow(0 0 9px #a24bff99); }
+body.reference-background .hero-wordmark-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; filter: drop-shadow(0 0 8px #a24bff) drop-shadow(0 0 22px #ff3fc8aa) drop-shadow(0 0 44px #a24bff80); opacity: .7; animation: brochure-wordmark-glow 4.8s ease-in-out infinite alternate; }
+body.reference-background .hero-wordmark-glow>.anazori-wordmark { filter: none; }
+@keyframes brochure-wordmark-glow { from { opacity: .55; } to { opacity: 1; } }
+html.motion-paused .hero-wordmark-glow,.hero.motion-outside .hero-wordmark-glow { animation-play-state: paused; }
+@media (prefers-reduced-motion:reduce) { body.reference-background .hero-wordmark-glow { animation: none; opacity: .7; } }
+@media (forced-colors:active) { body.reference-background .hero-wordmark-glow { display: none; } }
+@media print { html,body.reference-background { background: #fff !important; color: #111; } body.reference-background .hero-wordmark-glow { display: none; } }

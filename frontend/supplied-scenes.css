@@ -1,0 +1,45 @@
+/* Supplied character animations: small, flat scenes, no production Lottie player. */
+.animation-sprite{--sprite-size:90px;position:relative;display:block;width:var(--sprite-size);height:var(--sprite-size);overflow:hidden;pointer-events:none;user-select:none;contain:paint}
+.animation-sprite img{display:block;width:100%;height:100%;max-width:none;object-fit:fill;pointer-events:none}
+.animation-sprite .sprite-sheet{position:absolute;left:0;top:0;visibility:hidden}
+.animation-sprite.sprite-ready .sprite-sheet{width:calc(100% * var(--sprite-columns));height:calc(100% * var(--sprite-rows))}
+.sprites-ready .sprite-ready .sprite-sheet{visibility:visible}
+.sprites-ready .sprite-poster{visibility:hidden}
+.animation-sprite:not(.sprite-ready) .sprite-sheet{animation:none!important;transform:none!important}
+.scene-running.sprites-ready .sprite-ready .sprite-sheet{animation-play-state:running;will-change:transform}
+.scene-still .sprite-sheet{visibility:hidden!important;animation:none!important;transform:none!important}
+.scene-still .sprite-poster{visibility:visible!important}
+.ticker.energy-conduit.character-chase{height:118px;--door-left:24px;--door-width:57px;--door-height:98px;background:linear-gradient(180deg,#0d1621,#111a29)}
+.character-chase::before{inset:auto 0 17px;height:1px;clip-path:none;background:repeating-linear-gradient(90deg,#97c7c326 0 60px,transparent 60px 125px)}
+.character-chase .conduit-rail{top:auto;bottom:17px;opacity:.45}
+.chase-portal,.chase-door{position:absolute;left:var(--door-left);bottom:17px;width:var(--door-width);height:var(--door-height);pointer-events:none}
+.chase-portal{z-index:1;border:5px solid transparent;background:radial-gradient(ellipse at 50% 62%,#b5ffea,#76c7d1 40%,#274c69 73%,#17273a);background-clip:padding-box;opacity:.7;box-shadow:0 0 26px #83e7cf28}
+.chase-door{z-index:4;border:5px solid #db889f;border-radius:2px;box-shadow:0 0 0 1px #f2b6c2,3px 2px 0 #834659;perspective:280px}
+.chase-door-leaf{position:absolute;inset:0;display:block;background:linear-gradient(110deg,#f1bdc9,#d98ca3 70%,#bd738e);border:1px solid #f2bac8;box-shadow:inset 2px 0 0 #fff2e748,2px 0 0 #874b64;transform-origin:0 50%;transform:rotateY(-108deg)}
+.chase-door-leaf::before{content:'';position:absolute;inset:7px 6px 9px;border:1px solid #b86b856b;border-radius:1px;box-shadow:inset 0 1px 0 #ffe1e78c;background:linear-gradient(180deg,transparent 0 57%,#b86b8570 57% 59%,transparent 59%)}
+.chase-door-leaf::after{content:'';position:absolute;right:5px;top:49%;width:6px;height:6px;border-radius:50%;background:#f8dfb2;box-shadow:0 1px 2px #70435680}
+/* The portal clips their first steps, so both runners emerge from its opening. */
+.chase-exit{position:absolute;inset:0 0 0 calc(var(--door-left) + 5px);overflow:hidden;z-index:2;pointer-events:none}
+.chase-runner{position:absolute;inset:0;--sprite-size:96px;transform:translateX(65px)}
+.chase-runner-doraemon{--sprite-size:94px;transform:translateX(164px)}
+.chase-runner .animation-sprite{position:absolute;left:0;bottom:16px}
+.character-chase.sprites-ready .chase-door-leaf{animation:anywhere-door-open var(--chase-cycle,8s) ease-in-out infinite paused}
+.character-chase.sprites-ready .chase-portal{animation:anywhere-door-glow var(--chase-cycle,8s) ease-in-out infinite paused}
+.character-chase.sprites-ready .chase-runner-pikachu{animation:door-pikachu-run var(--chase-cycle,8s) linear infinite paused}
+.character-chase.sprites-ready .chase-runner-doraemon{animation:door-doraemon-run var(--chase-cycle,8s) linear infinite paused}
+.character-chase.scene-running.sprites-ready :is(.chase-door-leaf,.chase-portal,.chase-runner){animation-play-state:running}
+.character-chase.scene-running.sprites-ready .chase-runner{will-change:transform}
+.character-chase.scene-still :is(.chase-door-leaf,.chase-portal,.chase-runner){animation:none!important}
+@keyframes anywhere-door-open{0%,100%{transform:rotateY(0)}11%,86%{transform:rotateY(-108deg)}96%{transform:rotateY(0)}}
+@keyframes anywhere-door-glow{0%,100%{opacity:.15}11%,86%{opacity:1}96%{opacity:.15}}
+@keyframes door-pikachu-run{0%,12%{transform:translateX(calc(var(--sprite-size)*-1))}78%,100%{transform:translateX(calc(100% + 8px))}}
+@keyframes door-doraemon-run{0%,20%{transform:translateX(calc(var(--sprite-size)*-1))}86%,100%{transform:translateX(calc(100% + 8px))}}
+.record-musician{--sprite-size:clamp(122px,10vw,160px);position:absolute;right:-6%;bottom:6%;z-index:5}
+@media(max-width:700px){
+ .ticker.energy-conduit.character-chase{height:104px;--door-left:20px;--door-width:50px;--door-height:85px}
+ .chase-runner{--sprite-size:82px;transform:translateX(55px)}
+ .chase-runner-doraemon{transform:translateX(141px)}
+ .record-musician{--sprite-size:clamp(105px,32vw,125px);right:-8%;bottom:6%}
+}
+@media(prefers-reduced-motion:reduce){.sprite-sheet{visibility:hidden!important}.sprite-poster{visibility:visible!important}.sprite-sheet{animation:none!important;transform:none}.character-chase :is(.chase-door-leaf,.chase-portal,.chase-runner){animation:none!important}}
+@media print{.character-chase,.record-musician{display:none!important}}

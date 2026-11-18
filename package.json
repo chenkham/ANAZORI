@@ -1,0 +1,47 @@
+{
+  "name": "anazori-culture-tech-2026",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "serve:mobile": "node scripts/mobile-preview.mjs",
+    "phpmyadmin": "node scripts/phpmyadmin.mjs",
+    "test:launch": "node tests/launch52.mjs",
+    "test:profile": "node tests/profile53.mjs",
+    "test:home-film": "node tests/home-film58.mjs",
+    "test:coordinator": "php tests/coordinator-migration57.php && node tests/coordinator-workflow57.mjs",
+    "test": "node tests/site.mjs",
+    "test:cms": "node tests/cms.mjs",
+    "test:browser": "node tests/flagship.mjs",
+    "test:retro": "node tests/retro.mjs",
+    "test:world": "node tests/world.mjs",
+    "test:scroll": "node tests/scroll-motion.mjs",
+    "test:refinements": "node tests/refinements.mjs",
+    "test:scenes": "node tests/festival-scenes.mjs",
+    "test:supplied-scenes": "node tests/supplied-scenes.mjs",
+    "test:content-cast": "node tests/content-cast.mjs",
+    "profile:mobile": "node scripts/profile-performance.mjs",
+    "test:participants": "node tests/manual-payment-browser.mjs",
+    "test:studio": "php tests/studio-access.php && php tests/studio-finance.php && node tests/studio-scope.mjs && node tests/studio-finance-browser.mjs",
+    "test:manual": "php tests/manual-payments.php && node tests/manual-payment-browser.mjs",
+    "test:forms": "node tests/native-forms78.mjs",
+    "test:options": "node tests/event-options81.mjs"
+  },
+  "dependencies": {
+    "@zxing/browser": "^0.1.5",
+    "gsap": "3.15.0",
+    "lucide": "1.48.0",
+    "mediabunny": "1.61.4",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "esbuild": "0.25.12",
+    "lottie-web": "5.13.0",
+    "playwright": "1.62.1",
+    "pngjs": "^7.0.0",
+    "tailwindcss": "3.4.17"
+  }
+}

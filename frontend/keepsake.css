@@ -1,0 +1,25 @@
+/* A personal festival keepsake. One design, your name, one download. */
+.festival-share-station.keepsake-studio{display:block;margin-top:65px;padding:52px 0 0;border-top:1px solid #6d4d6336;color:#302537}
+.keepsake-heading{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-bottom:28px}
+.keepsake-heading h3{font:500 clamp(24px,3.1vw,42px)/1.15 var(--festival-display);letter-spacing:-.05em;margin:0 0 13px}
+.keepsake-heading p{font:13px/1.65 var(--sans);color:#756376;margin:0;max-width:420px}
+.keepsake-actions{flex:0 1 420px;min-width:310px;max-width:100%;margin:0}
+.keepsake-actions label{display:block;font:12px/1.5 var(--sans);color:#705b75;margin-bottom:7px}
+.keepsake-name-row{display:flex;align-items:stretch;gap:10px}
+.keepsake-name-row input{width:100%;min-width:0;min-height:50px;padding:12px 14px;border:1px solid #b7a6b4;border-radius:7px;background:#fff9eb;color:#302537;font:14px/1.4 var(--sans)}
+.keepsake-name-row input::placeholder{color:#8b798b}.keepsake-name-row input:disabled{opacity:.65}
+.keepsake-actions .keepsake-download{display:flex;flex-shrink:0;align-items:center;justify-content:space-between;gap:16px;min-height:50px;padding:14px 17px;background:#29242f;color:#faf5ed;border:1px solid #29242f;border-radius:7px;font:500 13px/1.4 var(--sans);text-transform:none;letter-spacing:0}
+.keepsake-actions .keepsake-download:hover{background:#48374e}.keepsake-download>span{font:21px/1 Arial}.keepsake-download:disabled{opacity:.55;cursor:wait}
+.keepsake-actions [hidden],.keepsake-studio [hidden]{display:none!important}
+.keepsake-stage{position:relative;overflow:hidden;border-radius:16px;border:1px solid #415d64;background:#132b34;box-shadow:0 20px 45px -28px #30253755}
+.keepsake-stage canvas,.keepsake-stage video{display:block;width:100%;height:auto;aspect-ratio:16/9}
+.keepsake-play{position:absolute;right:15px;bottom:13px;width:34px;height:34px;display:grid;place-items:center;border:1px solid #8c839544;border-radius:50%;color:#d9d3df;background:#18161c9e;font:14px/1 Arial;transition:background .2s}
+.keepsake-play:hover{background:#37313f}
+.keepsake-feedback{display:flex;flex-wrap:wrap;align-items:center;gap:0 18px;min-height:39px;padding-top:10px}
+.keepsake-studio .share-feedback{font:12px/1.6 var(--sans);color:#67516e;min-height:0;margin:0}
+.keepsake-feedback progress{width:140px;max-width:100%;height:4px;accent-color:#8468a4}
+.keepsake-save-again{font-size:12px;color:#604967;text-decoration:underline;text-underline-offset:4px}
+.keepsake-studio :is(a,button,input):focus-visible{outline:2px solid #92749f;outline-offset:4px}
+@media(max-width:1000px){.keepsake-heading{align-items:flex-start;flex-direction:column;gap:20px}.keepsake-actions{flex:auto;width:100%;min-width:0}}
+@media(max-width:700px){.festival-share-station.keepsake-studio{margin-top:45px;padding-top:34px}.keepsake-heading{margin-bottom:24px}.keepsake-heading h3{font-size:clamp(24px,5.5vw,36px);margin-bottom:10px}.keepsake-heading p{font-size:12px}.keepsake-name-row{flex-direction:column}.keepsake-actions .keepsake-download{width:100%;min-height:50px}.keepsake-stage{border-radius:10px}.keepsake-play{width:28px;height:28px;right:9px;bottom:9px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.keepsake-play{transition:none}}

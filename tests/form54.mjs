@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {parseFormChoices,copiedQuestionLabel} from '../frontend/form-builder.js';
+assert.deepEqual(parseFormChoices(' Team \r\nSolo\n0\nTeam\n\n'),['Team','Solo','0']);
+assert.equal(copiedQuestionLabel('Team name',['Team name']),'Team name (copy)');
+assert.equal(copiedQuestionLabel('Team name',['Team name (copy)','TEAM NAME (COPY 2)']),'Team name (copy 3)');
+const long='名'.repeat(120);
+const copy=copiedQuestionLabel(long,[]);
+assert.equal([...copy].length,120);
+assert(copy.endsWith(' (copy)'));
+assert.equal(copiedQuestionLabel('',[]),'Untitled question (copy)');
+console.log('PASS Form builder preserves zero choices and generates unique bounded duplicate question labels.');

@@ -1,0 +1,40 @@
+<?php
+declare(strict_types=1);
+putenv('ANAZORI_DB_PATH=:memory:');putenv('ANAZORI_TEST_MODE=1');
+require __DIR__.'/../src/includes/commerce.php';require __DIR__.'/../src/includes/google-auth.php';
+$db=cms_db();$checks=0;
+function check(bool $yes,string $label):void{global $checks;if(!$yes)throw new RuntimeException($label);$checks++;}
+function denied(callable $call,string $label):void{try{$call();}catch(RuntimeException|InvalidArgumentException $e){check(true,$label);return;}throw new RuntimeException('Expected rejection: '.$label);}
+$identity=az_google_identity(['email'=>'GOOGLE@example.invalid','sub'=>'google-one','name'=>'Participant','email_verified'=>true]);
+$user=az_google_participant($db,$identity);check((int)$user['email_verified']===1&&$user['google_sub']==='google-one','Verified Google email automatically registers');
+$again=az_google_participant($db,$identity);check($user['id']===$again['id'],'Repeat sign-in uses one account');
+denied(fn()=>az_google_identity(['email'=>'x@example.invalid','sub'=>'x','email_verified'=>false]),'Unverified identity');
+denied(fn()=>az_google_identity(['email'=>'x@example.invalid','sub'=>'','email_verified'=>true]),'Missing subject');
+denied(fn()=>az_google_participant($db,array_replace($identity,['sub'=>'other-subject'])),'Conflicting subject');
+$hash=password_hash('Verified-Password-2026!',PASSWORD_DEFAULT);$db->prepare('UPDATE az_participants SET password_hash=? WHERE id=?')->execute([$hash,$user['id']]);
+check(az_google_participant($db,$identity)['password_hash']===$hash,'Verified password preserved');
+$db->prepare('UPDATE az_participants SET email=? WHERE id=?')->execute(['GOOGLE@example.invalid',$user['id']]);
+check(az_google_participant($db,$identity)['id']===$user['id'],'Registered email matching is case insensitive');
+$db->prepare('UPDATE az_participants SET email_verified=0 WHERE id=?')->execute([$user['id']]);check(az_google_participant($db,$identity)['password_hash']===null,'Unverified password cleared on verified linking');
+$db->prepare('UPDATE az_participants SET active=0 WHERE id=?')->execute([$user['id']]);denied(fn()=>az_google_participant($db,$identity),'Disabled account');$db->prepare('UPDATE az_participants SET active=1 WHERE id=?')->execute([$user['id']]);
+$query=$db->prepare('SELECT * FROM az_participants WHERE id=?');$query->execute([$user['id']]);$user=$query->fetch();
+$event=az_event('joystick');$fields=$event['fields'];$fields['registration_mode']='open';$fields['registration_opens']='';$fields['registration_closes']='';
+$fields['registration_form']='[]';
+$fields['game_categories']=az_validate_games([['id'=>'mlbb','label'=>'Mobile Legends','active'=>1],['id'=>'other-game','label'=>'Other competition','active'=>1],['id'=>'paused-game','label'=>'Paused game']]);
+$fields['ticket_types']=az_validate_prices([['id'=>'mlbb-pass','label'=>'MLBB pass','price'=>'0','capacity'=>1,'game'=>'mlbb','active'=>1],['id'=>'shared','label'=>'Shared pass','price'=>'0','capacity'=>0,'active'=>1]]);
+$db->prepare('UPDATE cms_content SET data=? WHERE id=?')->execute([json_encode($fields),$event['id']]);
+denied(fn()=>az_create_order($user,'joystick','mlbb-pass',1,[],'',''),'Game required');
+denied(fn()=>az_create_order($user,'joystick','shared',1,[],'','paused-game'),'Paused game');
+denied(fn()=>az_create_order($user,'joystick','mlbb-pass',1,[],'','other-game'),'Pass must match game');
+$order=az_create_order($user,'joystick','mlbb-pass',1,[],'','mlbb');$snapshot=json_decode($order['snapshot'],true);check($snapshot['game_id']==='mlbb'&&$snapshot['game']==='Mobile Legends','Game snapshot');
+require_once __DIR__.'/../src/includes/studio-workspace.php';$db->exec("UPDATE users SET must_change_password=0 WHERE role='SUPERADMIN'");$master=$db->query("SELECT * FROM users WHERE role='SUPERADMIN'")->fetch();
+$query=$db->prepare('SELECT token FROM az_tickets WHERE order_id=?');$query->execute([$order['id']]);$scan=az_scan($query->fetchColumn(),$master,false);check($scan['game']==='Mobile Legends'&&str_contains($scan['type'],'Mobile Legends'),'Scanner displays the selected game');
+check(count(st_operation_rows($master,'payments',(int)$event['id'],'live','','',1,'mlbb'))===1,'Game register filter');
+check(count(st_operation_rows($master,'payments',(int)$event['id'],'live','','',1,'other-game'))===0,'Other game excluded');
+denied(fn()=>st_operation_rows($master,'payments',(int)$event['id'],'live','','',1,"invalid'--"),'Game filter validation');
+denied(fn()=>az_create_order($user,'joystick','mlbb-pass',1,[],'','mlbb'),'Game pass capacity');
+$fields['game_categories']=str_replace('Mobile Legends','Renamed competition',$fields['game_categories']);$db->prepare('UPDATE cms_content SET data=? WHERE id=?')->execute([json_encode($fields),$event['id']]);check(json_decode(az_order((int)$order['id'])['snapshot'],true)['game']==='Mobile Legends','Old label stays frozen');
+check(az_create_order($user,'joystick','shared',1,[],'','other-game')['state']==='PAID','Shared pass accepts another active game');
+$fields['game_categories']=az_validate_games([['id'=>'mlbb','label'=>'Mobile Legends']]);$db->prepare('UPDATE cms_content SET data=? WHERE id=?')->execute([json_encode($fields),$event['id']]);denied(fn()=>az_create_order($user,'joystick','shared',1,[],'',''),'All games paused');
+$record=cms_db()->query("SELECT id FROM cms_content WHERE type='event' AND slug='treasure-hunt'")->fetchColumn();check((bool)$record&&!cms_db()->query("SELECT id FROM cms_content WHERE type='event' AND slug='futsal'")->fetchColumn(),'Treasure Hunt replaces Futsal');
+echo "PASS $checks game selection and Google identity checks.\n";

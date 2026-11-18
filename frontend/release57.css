@@ -1,0 +1,38 @@
+/* Display the source image through a viewport without altering its pixels. */
+.anazori-wordmark{display:block;position:relative;overflow:hidden;width:100%;height:auto;aspect-ratio:1490/344}
+.anazori-wordmark>img{display:block;position:absolute;width:144.966443%;max-width:none;height:auto;left:-22.550336%;top:-263.953488%;object-fit:contain}
+.brand .brand-wordmark{display:block;width:155px;flex-shrink:0;line-height:1}
+.brand .brand-wordmark>.anazori-wordmark{width:100%;height:auto}
+.hero-wordmark #hero-title{display:block;width:min(980px,100%);margin-inline:auto;line-height:1}
+.hero-title-art{display:block;width:100%;color:inherit;background:none;line-height:1}
+.hero-title-art::before,.hero-title-art::after,.footer-wordmark.brand-art::before,.footer-wordmark.brand-art::after{display:none}
+.hero-title-art .anazori-wordmark{filter:drop-shadow(0 0 18px #be91f860);image-rendering:auto}
+.footer-wordmark.brand-art{width:min(1050px,100%);margin:40px auto 20px;padding:0;line-height:1;letter-spacing:0;font-size:0}
+.console-brand .anazori-wordmark{width:140px;height:auto;object-fit:contain}
+.console-brand>span{min-width:0}
+/* Our People uses the exact film border: the same corner asset, rim and mint details. */
+.page-teams .person-card{border-radius:0;border:1px solid #b9b3d380;padding:17px 17px 26px;background:linear-gradient(155deg,#172231,#141426);box-shadow:0 16px 34px #02071524,inset 0 0 0 5px #090e1780;overflow:visible}
+.page-teams .person-card:nth-child(n){background:linear-gradient(155deg,#172231,#141426)}
+.page-teams .person-card::before{inset:7px;border-radius:0;border-color:#c3c8e038}
+.page-teams .person-card::after{display:none}
+.page-teams .person-card>.arcane-frame{inset:-8px}
+.page-teams .person-card>.arcane-frame i{width:70px;height:70px}
+.page-teams .person-photo{border-radius:0;overflow:hidden}
+.page-teams .person-photo::after{border-radius:0}
+.page-teams .person-card:hover{border-color:#c8b8efaa;box-shadow:0 16px 34px #02071524,inset 0 0 0 5px #090e1780}
+/* An admission ticket stays plain, readable and easy to print. */
+.digital-pass.simple-event-ticket{max-width:610px;padding:30px;background:#fff;color:#172330;border:1px solid #cbd1d9;border-radius:10px;box-shadow:none}
+.simple-event-ticket .pass-brand{border-bottom:1px solid #dce1e7;padding-bottom:16px}
+.simple-event-ticket .pass-brand .anazori-wordmark{width:145px;height:auto;flex:0 1 145px}
+.simple-event-ticket .payment-badge{font:600 11px/1.5 Satoshi,Arial,sans-serif;border:0;background:none;padding:0;color:#36534a;white-space:normal}
+.digital-pass.simple-event-ticket h1{font:600 25px/1.35 Satoshi,Arial,sans-serif;letter-spacing:0;margin:24px 0 8px}
+.digital-pass.simple-event-ticket h2{font:600 20px/1.4 Satoshi,Arial,sans-serif;margin:22px 0 8px}
+.digital-pass.simple-event-ticket p{font-family:Satoshi,Arial,sans-serif;color:#435162;line-height:1.65}
+.simple-event-ticket .ticket-qr{width:210px;height:210px;padding:4px;border-radius:0;margin-top:22px}
+.simple-event-ticket .ticket-id{font:600 14px/1.5 monospace;letter-spacing:0}
+.simple-event-ticket .ticket-downloads{gap:20px;padding-top:18px;border-top:1px solid #dce1e7}
+.simple-event-ticket .ticket-downloads .button{background:#173c3c;color:#fff;border-radius:6px;clip-path:none;box-shadow:none;font:600 14px/1.5 Satoshi,Arial,sans-serif}
+.simple-event-ticket .ticket-downloads .text-link{color:#173c3c}
+@media(max-width:700px){.brand .brand-wordmark{width:124px}.hero-wordmark #hero-title{width:100%}.page-teams .person-card>.arcane-frame i{width:54px;height:54px}.digital-pass.simple-event-ticket{padding:22px 18px}.simple-event-ticket .pass-brand .anazori-wordmark{width:120px;flex-basis:120px}.digital-pass.simple-event-ticket h1{font-size:23px}}
+@media(max-width:380px){.brand .brand-wordmark{width:102px}.simple-event-ticket .pass-brand .anazori-wordmark{width:98px;flex-basis:98px}}
+@media print{.digital-pass.simple-event-ticket{border-color:#777;border-radius:0}.simple-event-ticket .ticket-downloads{display:none}}

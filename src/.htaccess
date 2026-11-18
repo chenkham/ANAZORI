@@ -1,0 +1,92 @@
+# Anazori High-Performance .htaccess for Hostinger Apache
+
+DirectoryIndex index.php index.html
+
+# Prevent Directory Browsing
+Options -Indexes -MultiViews
+
+# Security: Deny direct web access to sensitive directories & files
+<FilesMatch "(^\.env|^\.git|config\.php|application-key|anazori\.sqlite|\.lock$|\.json$|\.(?:sql|sqlite|sqlite3|bak|zip|log)$)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Enable URL Rewriting
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Google sign-in and account cookies use the published HTTPS origin.
+    RewriteCond %{HTTP_HOST} ^anazori\.ccsdu\.in$ [NC]
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://anazori.ccsdu.in%{REQUEST_URI} [R=301,L]
+
+    # Preserve PhonePe's webhook authentication header on PHP/CGI hosting.
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Keep source, local QA databases, and recoverable backups private.
+    RewriteRule ^(?:\.|config(?:/|$)|data(?:/|$)|deploy(?:/|$)|docs(?:/|$)|includes(?:/|$)|src(?:/|$)|scripts(?:/|$)|tests(?:/|$)|vendor(?:/|$)|node_modules(?:/|$)|anazori-private(?:/|$)|tmp(?:/|$)|output(?:/|$)|artifacts(?:/|$)|scratch(?:/|$)) - [F,L]
+    RewriteRule ^index\.html$ / [R=301,L]
+
+    # Redirect /default.php to homepage
+    RewriteRule ^default\.php$ / [R=301,L]
+
+    # Clean URL Routes
+    RewriteRule ^events/?$ events.php [L,QSA]
+    RewriteRule ^register/?$ register.php [L,QSA]
+    RewriteRule ^event/([a-zA-Z0-9_-]+)/?$ event.php?name=$1 [L,QSA]
+    RewriteRule ^teams/?$ teams.php [L,QSA]
+    RewriteRule ^gallery/?$ gallery.php [L,QSA]
+    RewriteRule ^admin/?$ admin.php [L,QSA]
+    RewriteRule ^login/?$ login.php [L,QSA]
+    RewriteRule ^logout/?$ logout.php [L,QSA]
+
+    # Allow existing files & directories to be served directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Fallback to index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Compress text assets only; HTML, APIs and private account responses keep their existing policy.
+<IfModule mod_deflate.c>
+    <FilesMatch "\.(?:css|m?js|svg)$">
+        AddOutputFilterByType DEFLATE text/css application/javascript text/javascript image/svg+xml
+    </FilesMatch>
+</IfModule>
+
+# Caching for Static Assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType audio/mpeg "access plus 1 month"
+    # Match static filenames so private PHP-generated ticket SVGs retain their policy.
+    <FilesMatch "\.(?:svg|m?js|webm|m4a|mp4|wav)$">
+        ExpiresByType image/svg+xml "access plus 1 month"
+        ExpiresByType text/javascript "access plus 1 week"
+        ExpiresByType video/webm "access plus 1 month"
+        ExpiresByType audio/mp4 "access plus 1 month"
+        ExpiresByType audio/wav "access plus 1 month"
+    </FilesMatch>
+</IfModule>
+
+# Build chunks and CMS uploads get new names when their contents change.
+# Entry scripts/styles remain on the shorter policy above and use release query versions.
+<IfModule mod_headers.c>
+    <FilesMatch "(?:-[A-Z0-9]{8}\.js|^[a-f0-9]{36}\.(?:jpg|jpeg|png|webp|gif|mp4|webm|mp3|m4a|wav|pdf))$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>

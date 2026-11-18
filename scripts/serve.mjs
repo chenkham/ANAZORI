@@ -1,0 +1,12 @@
+import {spawn} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=resolve(fileURLToPath(new URL('../',import.meta.url)));
+const wsl=process.platform==='win32'&&existsSync(resolve(root,'.local/use-wsl-php'));
+const command=wsl?'wsl.exe':(process.env.ANAZORI_PHP||'php');
+const args=[...(wsl?['-d','Ubuntu','--cd',root,'--','php']:[]),'-d','upload_max_filesize=64M','-d','post_max_size=70M','-d','max_input_vars=3000','-S','127.0.0.1:8000','-t','src','scripts/router.php'];
+const server=spawn(command,args,{cwd:root,stdio:'inherit',windowsHide:true});
+server.on('error',error=>{console.error(error.message);process.exitCode=1;});
+server.on('exit',code=>{process.exitCode=code||0;});
+for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>server.kill(signal));

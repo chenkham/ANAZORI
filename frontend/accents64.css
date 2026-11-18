@@ -1,0 +1,137 @@
+/* One public interaction palette. Brand logos, photographs and character art
+   keep their own colours; success/error states keep their existing meaning. */
+.reference-background {
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-text: #c8acff;
+  --accent-ink: #6535ad;
+  --accent-link: var(--accent-text);
+  --accent-focus: #925de6;
+  --accent-pink: #ed79c5;
+  --accent-cyan: #65d9ee;
+  --accent-border: #b794ed66;
+  --accent-wash: #7c3aed1c;
+  --spectrum: linear-gradient(110deg, #c8acff 0%, #c8acff 56%, #ed79c5 100%);
+}
+.reference-background :is(.partners,.passport-invitation,.passport-dialog) {
+  --accent-link: var(--accent-ink);
+  --accent-border: #6535ad45;
+  --accent-wash: #7c3aed0c;
+}
+.reference-background :is(a,button,input,textarea,select,summary):focus-visible { outline-color: var(--accent-focus); }
+.reference-background ::selection { background: var(--accent); color: #fff; }
+
+/* Primary actions share one solid violet, on both dark and paper surfaces. */
+.reference-background :is(.button-orange,.bento-invitation .button,.share-actions .button,.keepsake-download,.passport-dialog .button,.simple-event-ticket .ticket-downloads .button) {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+}
+.reference-background :is(.button-orange,.bento-invitation .button,.share-actions .button,.keepsake-download,.passport-dialog .button,.simple-event-ticket .ticket-downloads .button):is(:hover,:focus-visible) {
+  background: var(--accent-hover); color: #fff; border-color: var(--accent-hover);
+}
+.reference-background .button-dark { background: #21162f; color: #f9f5ff; border-color: var(--accent-border); }
+.reference-background .button-dark:hover { background: #352047; color: #fff; border-color: var(--accent-focus); }
+.reference-background :is(.text-link,.programme-all,.theatre-caption a,.person-card a,.visit-contact a,.back-link,.share-button,.account-links a) {
+  color: var(--accent-link); border-color: var(--accent-border);
+}
+.reference-background :is(.text-link,.programme-all,.theatre-caption a,.person-card a,.visit-contact a,.back-link,.share-button,.account-links a):hover {
+  color: var(--accent-link); border-color: var(--accent-focus);
+}
+.reference-background .simple-event-ticket .ticket-downloads .text-link { color: var(--accent-ink); }
+.reference-background .round-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Keep the existing navigation outline and motion, with violet active states. */
+.reference-background .nav-trim { color: #b794ed; }
+.reference-background .desktop-nav a[aria-current] { color: var(--accent-text); box-shadow: inset 0 -2px var(--accent); }
+.reference-background .desktop-nav a:hover { color: #e2d2ff; background: var(--accent-wash); }
+.reference-background .desktop-nav::before { border-color: var(--accent-text); }
+.reference-background .desktop-nav::after { border-color: var(--accent-pink); }
+.reference-background .mobile-nav { border-color: var(--accent-border); }
+.reference-background .mobile-nav a:is([aria-current],:hover,:focus-visible) { color: var(--accent-text); }
+.reference-background .mobile-nav a::after { background: linear-gradient(90deg,#b794ed66,#b794ed24,transparent); }
+.reference-background .menu-coordinate { color: var(--accent-cyan); }
+.reference-background .menu-trace { background: var(--accent-text); box-shadow: 0 0 10px #7c3aed88; }
+.reference-background .menu-button { border-color: var(--accent-border); }
+.reference-background .menu-button[aria-expanded=true] { border-color: var(--accent-text); background: var(--accent-wash); }
+.reference-background .reading-progress { background: var(--spectrum); }
+.reference-background :is(.sound-toggle,.motion-toggle,.back-top) { border-color: var(--accent-border); }
+.reference-background :is(.sound-toggle,.motion-toggle,.back-top):hover { color: var(--accent-text); border-color: var(--accent-focus); }
+.reference-background .film-button:hover .play-circle { background: var(--accent); border-color: var(--accent); color: #fff; }
+.reference-background .sound-bars i { background: var(--accent-text); }
+.reference-background .sound-bars i:nth-child(3) { background: var(--accent-cyan); }
+.reference-background .sound-bars i:nth-child(4) { background: var(--accent-pink); }
+.reference-background .conduit-rail { background: linear-gradient(90deg,transparent,#b794ed66,#65d9ee40,transparent); }
+.reference-background .energy-packet::before { background: linear-gradient(90deg,transparent,#7c3aed55 35%,#c8acff 80%,#f9f5ff); }
+.reference-background .energy-packet::after { background: #f9f5ff; box-shadow: 0 0 12px 4px #7c3aed4a; }
+
+/* Event selection, links and decorative seams follow the same hierarchy. */
+.reference-background :is(.intro .serif-word,.visit .serif-word,.programme-heading em,.section-heading h2>span) { color: var(--accent-link); }
+.reference-background .programme-link::before { background: linear-gradient(90deg,#7c3aed26,transparent); }
+.reference-background .programme-link:is(.is-selected,:hover) h3 { color: var(--accent-text); }
+.reference-background .programme-number { color: #a69aba; }
+.reference-background .programme-link.is-selected .programme-arrow { color: var(--accent-text); }
+.reference-background .programme-swipe-controls button { color: var(--accent-text); background: var(--accent-wash); border-color: var(--accent-border); }
+.reference-background .programme-swipe-controls button:hover { background: #7c3aed33; border-color: var(--accent-focus); }
+.reference-background .filters button:hover { background: var(--accent-wash); border-color: var(--accent-focus); }
+.reference-background .filters button[aria-pressed=true] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.reference-background .event-card { --card-accent: var(--accent-text); }
+.reference-background :is(.event-card,.person-card):hover { border-color: var(--accent-focus); }
+.reference-background :is(.detail-copy h1>span,.faq summary>span) { color: var(--accent-pink); }
+.reference-background :is(.detail-facts .eyebrow,.detail-steps article>span) { color: var(--accent-cyan); }
+.reference-background .faq details { border-color: var(--accent-border); }
+.reference-background .faq details[open] { border-color: var(--accent-focus); background: var(--accent-wash); }
+.reference-background .visit-contacts { border-color: var(--accent-border); }
+.reference-background .footer-links a:hover,.reference-background .footer-bottom a:hover { color: var(--accent-text); }
+.reference-background .social-row a:hover { color: var(--accent-text); border-color: var(--accent-focus); }
+
+/* The record still responds to the culture/tech dial. Its colours now stay
+   within pink, violet and cyan instead of rotating into orange and green. */
+.reference-background .culture-tech::before {
+  background: radial-gradient(ellipse at 0 50%,rgba(237,121,197,calc(.28 - var(--mix,.5) * .18)),transparent 53%),
+    radial-gradient(ellipse at 100% 50%,rgba(101,217,238,calc(.05 + var(--mix,.5) * .20)),transparent 55%),
+    linear-gradient(110deg,#2b1634,#21152f 52%,#142433);
+  filter: none;
+}
+.reference-background .record-label { background: linear-gradient(145deg,#e9d8ff,#c8acff 65%,#b9d8ed); filter: none; }
+.reference-background .culture-half .assamese-word { color: var(--accent-pink); }
+.reference-background .record-orbit { border-color: var(--accent-border); }
+.reference-background .record-orbit::before { background: var(--accent-pink); }
+.reference-background .record-orbit::after { background: var(--accent-cyan); }
+.reference-background .frequency-wave { stroke: var(--accent-cyan); filter: drop-shadow(0 0 6px #65d9ee55); }
+.reference-background .record-needle { background: #dfd1ec; }
+.reference-background .record-needle::before { background: var(--accent-pink); }
+.reference-background .frequency-control { border-color: var(--accent-border); }
+.reference-background .frequency-control input { background: linear-gradient(90deg,var(--accent-pink),var(--accent-text) 50%,var(--accent-cyan)); }
+.reference-background .frequency-control input::-webkit-slider-thumb { border-color: var(--accent-ink); background: #f9f5ff; }
+.reference-background .frequency-control input::-moz-range-thumb { border-color: var(--accent-ink); background: #f9f5ff; }
+
+/* Paper invitations stay light; the approved blue sponsor poster is untouched. */
+.reference-background .collaboration-card:hover { border-color: var(--accent-ink); }
+.reference-background .collaboration-kind { color: var(--accent-ink); }
+.reference-background .collaboration-card a { color: var(--accent-ink); }
+.reference-background .collaboration-invitation { background: #eee6f5; border-color: var(--accent-border); color: #30213f; }
+.reference-background .collaboration-invitation:hover { border-color: var(--accent-ink); }
+.reference-background .passport-invitation { background: #eee6f5; color: #30213f; border-color: var(--accent-border); }
+.reference-background .passport-invitation>div>span { color: #66516f; }
+.reference-background .passport-invitation button { color: var(--accent-ink); border-color: var(--accent-border); }
+.reference-background .passport-dialog { border-color: var(--accent-border); }
+
+/* Public forms and the MP4 download use the same focus and selection accents. */
+.reference-background :is(.account-form,.checkout-form,.payment-proof-form,.interest-dialog) :is(input,select,textarea):focus-visible {
+  border-color: var(--accent-focus);
+}
+.reference-background :is(.ticket-option,.account-consent,.consent-label,.registration-choice) input { accent-color: var(--accent); }
+.reference-background .registration-question .registration-choice input { accent-color: var(--accent); }
+.reference-background .account-story h1 span { color: var(--accent-text); }
+.reference-background .keepsake-stage { border-color: var(--accent-border); }
+.reference-background .keepsake-name-row input:focus-visible { border-color: var(--accent-focus); }
+.reference-background .keepsake-play:is(:hover,:focus-visible) { color: var(--accent-text); border-color: var(--accent-focus); }
+.reference-background .keepsake-save-again { color: var(--accent-ink); }
+.reference-background .keepsake-feedback progress { accent-color: var(--accent); }
+
+@media (forced-colors:active) {
+  .reference-background :is(a,button,input,textarea,select,summary):focus-visible { outline-color: Highlight; }
+  .reference-background :is(.button-orange,.header-cta,.keepsake-download,.filters button[aria-pressed=true]) { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
+}
+@media print {
+  .reference-background { --accent-link: #30213f; }
+}

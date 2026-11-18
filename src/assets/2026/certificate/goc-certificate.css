@@ -1,0 +1,26 @@
+/* GOC certificates use the supplied Anazori artwork as a flattened print-safe image. */
+.certificate-preview{container-type:inline-size}
+.certificate-sheet.certificate-goc{aspect-ratio:2000 / 1411;background:#fffdf6}
+.certificate-web.certificate-goc{--u:0.076452cqw}
+.certificate-sheet.certificate-goc .certificate-template{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:fill}
+.certificate-sheet.certificate-goc .goc-pres,.certificate-sheet.certificate-goc .goc-name,.certificate-sheet.certificate-goc .goc-name-rule,.certificate-sheet.certificate-goc .goc-name-rule-small,.certificate-sheet.certificate-goc .goc-certificate-body,.certificate-sheet.certificate-goc .goc-foot,.certificate-sheet.certificate-goc .goc-cert-qr{position:absolute;box-sizing:border-box}
+.certificate-sheet.certificate-goc .goc-pres{top:calc(var(--u)*402);left:0;width:100%;text-align:center;font-family:"Liberation Serif","Times New Roman",serif;font-size:calc(var(--u)*23);line-height:calc(var(--u)*32);font-style:italic;color:#241a0c}
+.certificate-sheet.certificate-goc .goc-name{top:calc(var(--u)*432);left:calc(var(--u)*351);width:calc(var(--u)*606);height:calc(var(--u)*52);text-align:center;white-space:nowrap;overflow:hidden;font-family:"Liberation Serif","Times New Roman",serif;font-style:italic;font-weight:bold;font-size:calc(var(--u)*38);line-height:calc(var(--u)*50);color:#3a2a0c}
+.certificate-sheet.certificate-goc .goc-recipient-long{font-size:calc(var(--u)*30)}
+.certificate-sheet.certificate-goc .goc-recipient-extra-long{font-size:calc(var(--u)*25)}
+.certificate-sheet.certificate-goc .goc-name-rule{top:calc(var(--u)*484);left:calc(var(--u)*351);width:calc(var(--u)*606);height:calc(var(--u)*3);background:#c9a24a}
+.certificate-sheet.certificate-goc .goc-name-rule-small{top:calc(var(--u)*488);left:calc(var(--u)*391);width:calc(var(--u)*526);height:calc(var(--u)*1);background:#e8c76a}
+.certificate-sheet.certificate-goc .goc-certificate-body{top:calc(var(--u)*520);left:0;width:100%;height:calc(var(--u)*128);font-family:"Liberation Serif","Times New Roman",serif;color:#1d1710}
+.certificate-sheet.certificate-goc .goc-copy-line{position:absolute;left:0;width:100%;text-align:center;white-space:nowrap;font-size:calc(var(--u)*22);line-height:calc(var(--u)*32)}
+.certificate-sheet.certificate-goc .goc-copy-line strong{font-weight:700}
+.certificate-sheet.certificate-goc .goc-foot{top:calc(var(--u)*683);left:0;width:100%;text-align:center;font-family:"Liberation Serif","Times New Roman",serif;font-style:italic;font-size:calc(var(--u)*20.5);line-height:calc(var(--u)*30);color:#5a4a2a}
+.certificate-sheet.certificate-goc .goc-cert-qr{top:calc(var(--u)*660);left:calc(var(--u)*80);display:block;width:calc(var(--u)*88);height:calc(var(--u)*88);padding:calc(var(--u)*3);background:#fff;z-index:5}
+.certificate-staff-profiles{margin:26px 0 12px;padding-top:22px;border-top:1px solid #a78ac44f}
+.certificate-staff-profiles h2{margin:0 0 12px;font-size:14px;color:#d8c3eb}
+.certificate-profile-links{display:flex;flex-wrap:wrap;gap:10px}
+.certificate-profile-links a{display:inline-flex;align-items:center;min-height:42px;padding:10px 14px;border:1px solid #9671b8;border-radius:10px;color:#f2e9ff;text-decoration:none;font-size:13px;font-weight:600;background:#251631}
+.certificate-profile-links a:hover,.certificate-profile-links a:focus-visible{background:#422459;border-color:#c49ae7}
+.certificate-sheet.certificate-goc.certificate-pdf{width:297mm;height:209.5mm;max-width:none;min-width:0;aspect-ratio:auto;background:#fffdf6}
+.certificate-sheet.certificate-goc.certificate-pdf .certificate-template{width:297mm;height:209.5mm}
+@media(max-width:700px){.certificate-sheet.certificate-goc{min-width:700px}.certificate-web.certificate-goc{--u:0.535px}}
+

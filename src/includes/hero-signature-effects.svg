@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="hero-signature-definitions" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- The supplied Photoshop values: inner bevel / smooth / up, depth 178%,
+         size 13px, soften 0, light 90 degrees and altitude 30 degrees;
+         white Screen highlight 70%, black shadow 65%;
+         white Screen inner glow 35%, edge source, choke 0, size 7px. -->
+    <filter id="hero-signature-silver" x="-10%" y="-30%" width="120%" height="160%" color-interpolation-filters="sRGB">
+      <!-- Smooth height map; the final lettering edges stay crisp (soften 0). -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6.5" result="bevel-map"/>
+      <feSpecularLighting in="bevel-map" surfaceScale="1.78" specularConstant="1" specularExponent="24" lighting-color="#fff" result="bevel-light">
+        <!-- SVG's downward y-axis maps Photoshop's 90-degree light to 270. -->
+        <feDistantLight azimuth="270" elevation="30"/>
+      </feSpecularLighting>
+      <feColorMatrix in="bevel-light" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .70 0" result="highlight"/>
+      <feComposite in="highlight" in2="SourceAlpha" operator="in" result="inner-highlight"/>
+      <feBlend in="SourceGraphic" in2="inner-highlight" mode="screen" result="beveled"/>
+      <feOffset in="SourceAlpha" dy="-1" result="shifted-alpha"/>
+      <feComposite in="SourceAlpha" in2="shifted-alpha" operator="arithmetic" k2="1" k3="-1" result="shadow-edge"/>
+      <feFlood flood-color="#000" flood-opacity=".65" result="shadow-color"/>
+      <feComposite in="shadow-color" in2="shadow-edge" operator="in" result="inner-shadow"/>
+      <feComposite in="inner-shadow" in2="beveled" operator="over" result="shaded"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3.5" result="glow-map"/>
+      <feComposite in="SourceAlpha" in2="glow-map" operator="arithmetic" k2="1" k3="-1" result="glow-edge"/>
+      <feFlood flood-color="#fff" flood-opacity=".35" result="glow-color"/>
+      <feComposite in="glow-color" in2="glow-edge" operator="in" result="inner-glow"/>
+      <feBlend in="shaded" in2="inner-glow" mode="screen"/>
+    </filter>
+  </defs>
+</svg>

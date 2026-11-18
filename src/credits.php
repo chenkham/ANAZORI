@@ -1,0 +1,11 @@
+<?php
+require_once __DIR__.'/includes/festival.php';$activePage='credits';$pageTitle='Artwork credits — '.setting('site_name');require __DIR__.'/includes/header.php';
+?>
+<section class="page-intro section-pad"><h1>A little<br>movie magic.</h1><p>Sources for decorative artwork used around the festival.</p></section>
+<section class="detail-next section-pad"><div><h2>Artwork<br>credits.</h2></div><div class="detail-steps">
+<article><span>01</span><div><h3>Genie and Phoenix Wright</h3><p>The Genie cutout for Inauguration is sourced from <a href="https://mail.1papacaio.com.br/atividades/png-imagens-transparentes/png-disney/png-disney-aladdin" target="_blank" rel="noopener">1papacaio</a>. The Phoenix Wright reference for Youth Parliament is from <a href="https://www.pngaaa.com/detail/3189581" target="_blank" rel="noopener">PNGAAA</a>, with the handheld microphone added using imagegen. Genie and Phoenix Wright belong to Disney and Capcom respectively; their appearance does not indicate an official partnership with Anazori.</p></div></article>
+<article><span>02</span><div><h3>The pixel robot crew</h3><p>Gum Bot, Geralt and Robot J5 are from <a href="https://grafxkid.itch.io/sprite-pack-3" target="_blank" rel="noopener">Sprite Pack 3 by GrafxKid</a>, released under <a href="/assets/2026/pixel-character/LICENSE.txt">CC0 1.0</a>. Their original PNG animation frames appear in the small platform scene below the homepage hero.</p></div></article>
+<article><span>03</span><div><h3>Character artwork</h3><p>Other character artwork was supplied for this website or sourced from the character asset references maintained with the project. The characters remain associated with their respective creators. Their decorative appearance does not indicate an official partnership with Anazori.</p></div></article>
+<article><span>04</span><div><h3>Additional source illustrations</h3><p>The previously used diya lamp and speaking head artwork, retained with the project, are from <a href="https://github.com/microsoft/fluentui-emoji" target="_blank" rel="noopener">Microsoft Fluent Emoji</a>, under the <a href="/assets/2026/graphics/fluent-emoji-LICENSE.txt">MIT license</a>.</p></div></article>
+</div></section>
+<?php require __DIR__.'/includes/footer.php'; ?>

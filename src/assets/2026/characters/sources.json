@@ -1,0 +1,114 @@
+[
+  {
+    "id": "pikachu",
+    "source": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
+    "file": "assets/2026/characters/pikachu.webp",
+    "width": 475,
+    "height": 475,
+    "bytes": 22490
+  },
+  {
+    "id": "gengar",
+    "source": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/094.png",
+    "file": "assets/2026/characters/gengar.webp",
+    "width": 475,
+    "height": 475,
+    "bytes": 18278
+  },
+  {
+    "id": "charizard",
+    "source": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/006.png",
+    "file": "assets/2026/characters/charizard.webp",
+    "width": 475,
+    "height": 475,
+    "bytes": 31644
+  },
+  {
+    "id": "minion",
+    "source": "https://www.illumination.com/wp-content/themes/illumination/assets/images/bumper_minion.png",
+    "file": "assets/2026/characters/minion.webp",
+    "width": 415,
+    "height": 300,
+    "bytes": 15312
+  },
+  {
+    "id": "stuart",
+    "source": "https://www.illumination.com/wp-content/uploads/2019/11/SHM_PRINTS_P1880.png",
+    "file": "assets/2026/characters/stuart.webp",
+    "width": 503,
+    "height": 600,
+    "bytes": 33094
+  },
+  {
+    "id": "doraemon",
+    "source": "https://www.dora-world.com/assets/images/hd/hd_bg_s01_chara.webp",
+    "file": "assets/2026/characters/doraemon.webp",
+    "width": 600,
+    "height": 303,
+    "bytes": 40356
+  },
+  {
+    "id": "sonic",
+    "source": "https://sonic.sega.jp/SonicForces/character/image/sp_pic_01.png",
+    "file": "assets/2026/characters/sonic.webp",
+    "width": 366,
+    "height": 600,
+    "bytes": 78448
+  },
+  {
+    "id": "mlbb-gusion",
+    "source": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/876c3469-6c49-47bc-a474-e157a30d6d40/de60tw2-42b42c2d-8790-432a-ac89-c663b9ba8967.png/v1/fill/w_1117%2Ch_715/gusion___cosmic_gleam_png__chesterkay30__by_chesterkay30_de60tw2-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODIwIiwicGF0aCI6IlwvZlwvODc2YzM0NjktNmM0OS00N2JjLWE0NzQtZTE1N2EzMGQ2ZDQwXC9kZTYwdHcyLTQyYjQyYzJkLTg3OTAtNDMyYS1hYzg5LWM2NjNiOWJhODk2Ny5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.c7Iwhqac39wEKBUEoGri4rghGYW_UBXSYAEVlO4Hh8Y",
+    "file": "assets/2026/characters/mlbb-gusion.webp",
+    "width": 720,
+    "height": 461,
+    "bytes": 91808,
+    "character": "Gusion \u2014 Cosmic Gleam (Legend)",
+    "source_page": "https://www.deviantart.com/chesterkay30/art/Gusion-Cosmic-Gleam-PNG-chesterkay30-856642898",
+    "credit": "MOONTON character artwork; transparent source shared by chesterkay30",
+    "usage_rights": "Not verified; public download does not establish a reuse licence."
+  },
+  {
+    "id": "kirby",
+    "source": "https://www.smashbros.com/assets_v2/img/fighter/kirby/main.png",
+    "source_sha256": "a5b56502b44d0646d83f8f685b4bc887986b02e432032c2f57d3c311a1251cfc",
+    "file": "assets/2026/characters/kirby.webp",
+    "width": 529,
+    "height": 700,
+    "bytes": 34384,
+    "credit": "Official Super Smash Bros. character artwork",
+    "usage_rights": "Publisher artwork; no independent reuse licence asserted."
+  },
+  {
+    "id": "link",
+    "source": "https://www.smashbros.com/assets_v2/img/fighter/link/main.png",
+    "source_sha256": "c8d2b190573ab61cd966959438930b68804eca173d531e80aa1a61492960acb0",
+    "file": "assets/2026/characters/link.webp",
+    "width": 645,
+    "height": 700,
+    "bytes": 110368,
+    "credit": "Official Super Smash Bros. character artwork",
+    "usage_rights": "Publisher artwork; no independent reuse licence asserted."
+  },
+  {
+    "id": "megaman",
+    "source": "https://www.smashbros.com/assets_v2/img/fighter/mega_man/main.png",
+    "source_sha256": "c888b469fef763d4c85d89fce229797337e0d01cd2c83961a59b9c43cc5c83b0",
+    "file": "assets/2026/characters/megaman.webp",
+    "width": 675,
+    "height": 700,
+    "bytes": 70196,
+    "credit": "Official Super Smash Bros. character artwork",
+    "usage_rights": "Publisher artwork; no independent reuse licence asserted."
+  },
+  {
+    "id": "roz-research",
+    "source": "https://www.dreamworks.com/storage/cms-uploads/the-wild-robot-gallery1.jpg",
+    "source_sha256": "ef8a089356babb5da049b6de590947e3492f98c12034e176945c99aa71580366",
+    "file": "assets/2026/characters/roz-research.webp",
+    "width": 900,
+    "height": 506,
+    "bytes": 107486,
+    "credit": "DreamWorks Animation",
+    "usage_rights": "Publisher artwork; no independent reuse licence asserted."
+  }
+]

@@ -1,0 +1,48 @@
+/* Content-led, flat artwork. Small companions occupy their own reserved space. */
+.content-performance{position:relative;display:block;width:100px;height:100px;pointer-events:none;contain:layout paint;user-select:none}
+.content-performance>img{display:block;width:100%;height:100%;object-fit:contain}
+.content-performance.theatre-character{width:88%;height:330px;overflow:hidden}
+.programme-pane[data-programme-pane=goc] .theatre-art{padding-bottom:35px}
+.programme-pane[data-programme-pane=goc] .theatre-character{height:285px;max-width:320px}
+.code-terminal{position:absolute;bottom:0;left:14%;right:5%;height:76px;z-index:4;padding:18px 25px;color:#b6f2d9;background:linear-gradient(120deg,#132a29ed,#173b37ed);border:1px solid #93b7a95c;border-radius:5px}
+.code-terminal::before{content:'';position:absolute;inset:-4px;background:url('/assets/2026/ornaments/code-panel.svg') center/100% 100% no-repeat;opacity:.22;z-index:-1}
+.code-terminal b{font:500 22px/1 var(--mono)}.code-terminal>span{font:9px/1.5 var(--mono);position:absolute;right:20px;top:30px;letter-spacing:.1em}
+.code-terminal>i{position:absolute;left:25px;bottom:11px;width:35%;height:2px;background:#99d4bd}
+.programme-pane[data-programme-pane=paper-presentation] .theatre-character{width:70%;height:250px;align-self:center;margin-bottom:40px}
+.research-folio{position:absolute;left:15%;right:10%;bottom:15px;height:85px;border:1px solid #dcd3b3a1;transform:rotate(-5deg);background:#e8e2cb;border-radius:4px;z-index:4;box-shadow:8px 7px 0 #a6baab}
+.research-folio::before{content:'';position:absolute;left:9%;top:17px;bottom:15px;width:26%;border-left:3px solid #577764;background:linear-gradient(90deg,#8daf9666,transparent)}
+.research-folio i{position:absolute;left:47%;right:12%;top:22px;height:2px;background:#78988a}.research-folio i:nth-child(2){top:39px;right:17%}.research-folio i:nth-child(3){top:56px;right:25%}
+.research-signal{position:absolute;inset:11% 0 16%;border:1px solid #86ccb257;border-radius:50%;pointer-events:none;z-index:4;transform:rotate(-15deg)}
+.research-signal i{position:absolute;width:7px;height:7px;border-radius:50%;background:#b4e4c1;top:26%;left:2%}.research-signal i:nth-child(2){left:auto;right:2%;top:70%}.research-signal i:nth-child(3){left:70%;top:-1%}
+.programme-pane[data-programme-pane=workshops] .character-megaman{height:345px;width:75%}
+.record-musician.content-performance{position:absolute;right:-6%;bottom:6%;z-index:5;width:var(--sprite-size);height:var(--sprite-size);pointer-events:none}.record-musician img{width:100%;height:100%;object-fit:contain}
+.tech-half{position:relative}.power-companion{display:block;width:65px;height:70px;margin:25px 0 0 auto;position:relative;isolation:isolate}.power-companion img{height:100%;width:100%}.power-companion i{position:absolute;bottom:6px;left:12%;width:76%;height:2px;background:#e8e5a0;opacity:.5;z-index:-1}
+.clock-card{isolation:isolate;overflow:hidden}.festival-snow{position:absolute;inset:0;z-index:-1;opacity:.15;pointer-events:none}.festival-snow .content-performance{width:100%;height:100%}.festival-snow img{object-fit:cover}
+@keyframes festival-flurries{from{transform:translateY(-8px);opacity:.12}to{transform:translateY(12px);opacity:.22}}
+.sponsor-installation{padding-bottom:105px}.sponsor-crew{position:absolute;bottom:6px;left:calc(50% - 44px);border:0;background:none;padding:0;cursor:pointer;width:88px;height:92px;color:#a75484;z-index:2}
+.sponsor-crew .content-performance{width:88px;height:88px}.stitch-ribbon{position:absolute;left:-48px;right:-48px;bottom:9px;height:1px;background:linear-gradient(90deg,transparent,#b38299,#85bdba,transparent);pointer-events:none;transform-origin:50% 50%}
+.sponsor-crew:focus-visible{outline:2px solid #755275;outline-offset:5px}.sponsor-installation.scene-reacting .stitch-ribbon{animation:ribbon-pull 2.8s ease-in-out}
+@keyframes ribbon-pull{0%,100%{transform:translateY(0) scaleX(1)}40%{transform:translateY(-12px) scaleX(.88)}}
+.visit-guide{position:relative;width:140px;height:135px;margin:24px 0 0;pointer-events:none}.visit-guide .content-performance{width:130px;height:130px;position:relative;z-index:2}.guide-path{position:absolute;bottom:0;left:15px;right:-140px;height:1px;background:linear-gradient(90deg,#49604a88,transparent)}
+.faq{position:relative;padding-top:62px}.faq-helper{position:absolute;top:-4px;right:4px;width:76px;height:65px;pointer-events:none}.faq-helper .content-performance{width:76px;height:65px}
+.banner-companion .content-performance{width:100%;height:120px}.gallery-guardian .festival-character{height:125px;width:150px;object-fit:contain;margin-left:auto}
+.gallery-item::before{border:12px solid transparent;border-image:url('/assets/2026/ornaments/gallery-border.svg') 12 / 12px / 0 stretch;background:none;opacity:.25;inset:0}
+.passport-guide{display:block;width:62px;height:82px;flex:0 0 62px}.passport-guide img{height:100%;width:100%;object-fit:contain}.passport-journey{--journey-progress:0;position:relative;height:76px;margin-bottom:10px;overflow:hidden;border-bottom:1px solid #96966d;isolation:isolate}
+.passport-track{position:absolute;bottom:1px;left:0;right:0;height:10px;background:repeating-linear-gradient(90deg,#768459 0 24px,#aeb789 24px 25px);opacity:.35}
+.passport-runner.content-performance{width:64px;height:64px;position:absolute;bottom:8px;left:clamp(0px,calc(var(--journey-progress)*1% - 32px),calc(100% - 64px))}
+.passport-gem{position:absolute;right:3px;bottom:19px;width:22px;height:22px;background:url('/assets/2026/ornaments/passport-gem.svg') center/contain no-repeat}.passport-dialog::before{content:'';position:absolute;inset:7px;border:14px solid transparent;border-image:url('/assets/2026/ornaments/passport-border.svg') 14 / 14px / 0 stretch;opacity:.25;pointer-events:none}
+.passport-prize:not([hidden]){display:flex;align-items:center;gap:14px;padding-top:18px;font-size:12px;color:#634f68}.passport-prize img{width:55px;height:65px;object-fit:contain}.passport-prize[hidden]{display:none!important}
+.gaming-guest{position:absolute;bottom:-18px;right:16px;width:70px;height:85px;pointer-events:none;z-index:3}.gaming-guest img{width:100%;height:100%;object-fit:contain}.detail-art{position:relative}
+.page-events .page-intro{position:relative}.event-guide{display:block;width:76px;height:76px;margin:18px 0 0 auto}.event-guide .content-performance{width:76px;height:76px}
+.scene-still .content-performance,.scene-still .festival-snow{animation:none!important}
+@media(max-width:700px){
+ .content-performance.theatre-character{height:235px;width:88%}.programme-pane[data-programme-pane=goc] .theatre-character{height:205px;max-width:235px}.programme-pane[data-programme-pane=goc] .theatre-art{padding-bottom:30px}
+ .code-terminal{height:56px;left:10%;right:1%;padding:12px 18px}.code-terminal b{font-size:18px}.code-terminal>span{font-size:7px;top:20px;right:14px}.code-terminal>i{left:18px;bottom:8px}
+ .programme-pane[data-programme-pane=paper-presentation] .theatre-character{height:165px;width:66%;margin-bottom:30px}.research-folio{height:63px;bottom:14px}.research-folio i{top:16px}.research-folio i:nth-child(2){top:29px}.research-folio i:nth-child(3){top:42px}
+ .record-musician.content-performance{right:-8%}.record-musician img{max-height:125px}.power-companion{width:49px;height:55px;margin-top:15px}.sponsor-installation{padding-bottom:95px}.sponsor-crew{height:82px;width:78px;left:calc(50% - 39px)}.sponsor-crew .content-performance{width:78px;height:78px}
+ .visit-guide{width:100px;height:100px;margin-top:18px}.visit-guide .content-performance{width:95px;height:95px}.faq{padding-top:52px}.faq-helper{width:64px;height:52px}.faq-helper .content-performance{width:64px;height:52px}
+ .banner-companion .content-performance{height:90px}.gallery-guardian .festival-character{height:95px;width:115px}.passport-guide{width:52px;height:70px;flex-basis:52px}.passport-invitation:has(.passport-guide) button{margin-left:68px}
+ .gaming-guest{width:55px;height:68px;bottom:-12px}.gallery-item::before{border-width:9px;border-image-width:9px}
+}
+@media(prefers-reduced-motion:reduce){.festival-snow,.stitch-ribbon{animation:none!important}}
+@media print{.content-performance,.power-companion,.passport-guide,.gaming-guest{display:none!important}}

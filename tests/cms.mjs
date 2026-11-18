@@ -1,0 +1,98 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import AxeBuilder from '@axe-core/playwright';
+import {spawn,execFileSync} from 'node:child_process';
+import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {countdownState} from '../frontend/experience.js';
+const temp=await mkdtemp(join(tmpdir(),'anazori-cms-')),mediaDir=join(temp,'media');await mkdir(mediaDir);
+const env={...process.env,ANAZORI_DB_PATH:join(temp,'qa.sqlite'),ANAZORI_MEDIA_DIR:mediaDir},base='http://127.0.0.1:8099';
+const server=spawn('php',['-d','upload_max_filesize=64M','-d','post_max_size=70M','-S','127.0.0.1:8099','-t','src','scripts/router.php'],{env,windowsHide:true,stdio:'ignore'});
+const browser=await chromium.launch();const context=await browser.newContext({viewport:{width:1440,height:1000}});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));let passed=0;const ok=s=>{passed++;console.log('PASS '+s);};
+const php=code=>JSON.parse(execFileSync('php',['-r',`require 'includes/cms.php';${code}`],{env,encoding:'utf8'}));
+const rows=sql=>php(`echo json_encode(cms_db()->query(${JSON.stringify(sql)})->fetchAll());`);
+const defaults=type=>php(`$out=[];foreach(cms_content_schema()['${type}']['fields'] as $k=>$v)$out[$k]=$v[2]??'';echo json_encode($out);`);
+async function token(p=page){await p.goto(base+'/admin.php');return p.locator('[name=csrf_token]').first().inputValue();}
+async function post(data,p=page,csrf=null){const t=csrf??await token(p);const form=new URLSearchParams({csrf_token:t});for(const [k,v] of Object.entries(data)){if(Array.isArray(v))v.forEach(x=>form.append(k+'[]',String(x)));else if(v!==null)form.append(k,String(v));}const r=await p.request.post(base+'/admin.php',{data:form.toString(),headers:{'Content-Type':'application/x-www-form-urlencoded'}});return r.text();}
+async function content(type,values={},id=0,p=page){let fields=defaults(type),old=null;if(id){old=rows('SELECT * FROM cms_content WHERE id='+id)[0];fields={...fields,...JSON.parse(old.data)};}const data={action:'save_content',type,id,revision:old?.revision??0,title:old?.title??'QA '+type,slug:old?.slug??'qa-'+type,status:old?.status??'PUBLISHED',sort_order:0,...fields,...values};const schema=php(`echo json_encode(cms_content_schema()['${type}']['fields']);`);for(const [k,d]of Object.entries(schema))if(d[1]==='checkbox'&&data[k]!=='1')data[k]=null;const html=await post(data,p);return {html,record:rows(`SELECT * FROM cms_content WHERE type='${type}' AND slug='${data.slug}'`)[0]};}
+async function login(p,user,password){await p.goto(base+'/login.php');await p.locator('#login-user').fill(user);await p.locator('#login-pass').fill(password);await p.locator('[type=submit]').click();await p.waitForURL('**/admin.php**');}
+async function changePassword(p,old,next){const html=await post({action:'change_password',current_password:old,password:next,confirm_password:next},p);assert.match(html,/Password updated/);}
+async function createUser(user,role,modules){const html=await post({action:'save_user',username:user,display_name:'QA '+role,email:user+'@example.com',password:'Temporary-QA-2026!',role,active:1,permissions:modules.flatMap(m=>role==='VOLUNTEER'?[m+'.view',m+'.edit']:[m+'.view',m+'.edit',m+'.publish',m+'.delete'])});assert.match(html,/Staff access saved/);return rows(`SELECT * FROM users WHERE username='${user}'`)[0];}
+try{
+ for(let i=0;i<100;i++){try{if((await fetch(base)).ok)break;}catch{}await new Promise(r=>setTimeout(r,150));}
+ const config=php('echo json_encode([ANAZORI_SUPER_EMAIL,DEFAULT_ADMIN_PASS]);');
+ await login(page,...config);assert.match(await page.textContent('body'),/Set your own password/);
+ assert.match(await post({action:'save_content',type:'faq',title:'Bypass',status:'PUBLISHED'}),/Set a new password/);
+ await changePassword(page,config[1],'Owner-QA-Changed-2026!');
+ assert.equal(rows("SELECT role FROM users WHERE username='"+config[0]+"'")[0].role,'SUPERADMIN');
+ ok('Existing administrator migrates to the fixed master Super Admin; temporary password must change before mutations.');
+ await page.goto(base+'/');assert.deepEqual(await page.locator('[data-count]').allTextContents(),['00','00','00','00']);assert.match(await page.locator('.edition-badge').textContent(),/V16/);
+ assert.equal(await page.locator('.site-header').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)');assert.equal(await page.locator('img[src*="doodle"]').count(),0);
+ const now=Date.UTC(2030,0,1);assert.deepEqual(countdownState(NaN,NaN,now).values,[0,0,0,0]);assert.deepEqual(countdownState(now+90061000,now+180000000,now).values,[1,1,1,1]);assert.equal(countdownState(now-1000,now+60000,now).phase,'live');assert.equal(countdownState(now-2000,now-1000,now).phase,'ended');
+ await page.goto(base+'/admin.php?section=settings');const settings=page.locator('#group-festival-dates');await settings.locator('summary').click();await settings.locator('[name=starts_at]').fill('2030-10-12T10:00');await settings.locator('[name=ends_at]').fill('2030-10-25T22:00');await settings.locator('[type=submit]').click();await page.waitForURL('**/admin.php?section=settings**');
+ await page.goto(base+'/');assert.equal(await page.locator('#festival-clock').getAttribute('data-start'),'2030-10-12T10:00:00+05:30');
+ ok('V16, transparent home navbar, zero dates, editable IST dates, and all countdown phases work.');
+ const image=await readFile('src/assets/logo.png');await token();const csrf=await page.locator('[name=csrf_token]').first().inputValue();
+ let result=await page.request.post(base+'/admin.php',{multipart:{action:'upload_media',csrf_token:csrf,file:{name:'qa-cover.png',mimeType:'image/png',buffer:image}}});assert.match(await result.text(),/Uploaded\./);
+ const uploaded=rows("SELECT * FROM cms_media WHERE title='qa-cover.png'")[0];assert.match(uploaded.path,/^\/uploads\/media\/[a-f0-9]{36}\.png$/);
+ result=await page.request.post(base+'/admin.php',{multipart:{action:'upload_media',csrf_token:csrf,file:{name:'qa-rules.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.4\n1 0 obj << /Type /Catalog >> endobj\n%%EOF')}}});assert.match(await result.text(),/Uploaded\./);
+ const pdf=rows("SELECT * FROM cms_media WHERE title='qa-rules.pdf'")[0];
+ result=await page.request.post(base+'/admin.php',{multipart:{action:'upload_media',csrf_token:csrf,file:{name:'disguised.png',mimeType:'image/png',buffer:Buffer.from('<?php echo "bad";')}}});assert.match(await result.text(),/Use JPG/);
+ let {record:event}=await content('event',{title:'QA Spectrum Challenge',slug:'qa-spectrum',image:uploaded.path,rules_pdf:pdf.path,description:'Build a new idea.',rules:'Keep it original.',registration_questions:'Team name\nTeam members'});assert.ok(event);
+ assert.match(await post({action:'remove_media',id:uploaded.id}),/still used/);
+ await page.goto(base+'/event.php?name=qa-spectrum');assert.equal(await page.locator('[data-interest]').textContent(),"I'm interested ");assert.equal(await page.locator('.rules-download').getAttribute('href'),pdf.path);
+ ok('Validated image/PDF uploads attach to events; disguised scripts and removal of used media are blocked.');
+ const attendee=await browser.newContext();const visitor=await attendee.newPage();await visitor.goto(base+'/event.php?name=qa-spectrum');
+ const participant={event:'qa-spectrum',name:'QA Student',email:'qa-student@example.com',college:'Test University',consent:'yes'};let publicToken=await visitor.locator('[name=csrf_token]').inputValue();
+ const submit=async(data)=>{const r=await visitor.request.post(base+'/api/interest.php',{form:{csrf_token:publicToken,...participant,...data}});return {status:r.status(),body:await r.json()};};
+ assert.equal((await submit({purpose:'interest'})).status,201);
+ await content('event',{registration_mode:'open',registration_fee:'0'},event.id);await visitor.reload();assert.equal(await visitor.locator('[data-interest]').count(),0);assert.equal(await visitor.getByRole('link',{name:/Choose tickets/}).getAttribute('href'),'/checkout.php?event=qa-spectrum');
+ assert.equal((await submit({purpose:'interest'})).status,422);
+ assert.equal((await submit({purpose:'registration',phone:'9876543210'})).status,422);
+ const registration={purpose:'registration',phone:'9876543210','answers[0]':'Spectrum team','answers[1]':'Two students'};assert.equal((await submit(registration)).status,422); // Ticket events cannot bypass account-backed checkout with the legacy application form.
+ let submissions=rows('SELECT * FROM submissions');assert.equal(submissions.length,1);assert.equal(JSON.parse(submissions[0].form_data).type,'INTEREST');assert.equal(submissions[0].status,'PENDING');
+ await content('event',{registration_mode:'closed'},event.id);assert.equal((await submit(registration)).status,422);await visitor.reload();assert.equal(await visitor.locator('[data-interest]').count(),0);assert.match(await visitor.locator('.registration-closed').textContent(),/closed/);
+ await content('event',{registration_mode:'completed'},event.id);await visitor.reload();assert.match(await visitor.locator('.registration-closed').textContent(),/completed/);
+ const phases=php("$e=['registration_mode'=>'scheduled','registration_opens'=>'2030-01-01T10:00','registration_closes'=>'2030-01-02T10:00','ends_at'=>'2030-01-03T10:00'];echo json_encode(array_map(fn($d)=>cms_event_phase($e,cms_date($d)->getTimestamp()),['2030-01-01T09:00','2030-01-01T10:00','2030-01-02T10:00','2030-01-03T10:00']));");assert.deepEqual(phases,['interest','open','closed','completed']);
+ const legacyId=rows("SELECT id FROM events WHERE slug='qa-spectrum'")[0].id;const legacy=await visitor.request.post(base+'/api/submit.php',{form:{csrf_token:publicToken,event_id:String(legacyId),name:'Bypass',phone:'9876543210'}});assert.equal(legacy.status(),409);
+ await post({action:'submission_status',id:submissions[0].id,status:'CONFIRMED'});assert.equal(rows('SELECT status FROM submissions WHERE id='+submissions[0].id)[0].status,'CONFIRMED');
+ ok('Interest → registration → closed → completed works; scheduled boundaries, required questions, deduplication, stale forms, and legacy bypass are checked.');
+ const {record:photo}=await content('gallery',{title:'QA Memory',image:uploaded.path,description:'A new shared memory',category:'qa-album',alt:'Team on stage'});
+ const {record:person}=await content('person',{title:'QA Management Lead',group:'Management leads',role:'Festival lead',image:uploaded.path,description:'Making this happen.'});
+ await content('sponsor',{title:'QA Partner',image:uploaded.path,tier:'Innovation partner',link:'https://example.com'});
+ await content('faq',{title:'Can I join the test?',answer:'Yes, this is a test answer.'});
+ assert.match(await (await page.request.get(base+'/gallery.php')).text(),/QA Memory/);assert.match(await (await page.request.get(base+'/teams.php')).text(),/Management leads/);assert.match(await (await page.request.get(base+'/')).text(),/QA Partner/);
+ await content('gallery',{status:'ARCHIVED'},photo.id);assert.doesNotMatch(await (await page.request.get(base+'/gallery.php')).text(),/QA Memory/);
+ await content('person',{image:'',title:'QA Lead Without Portrait'},person.id);assert.match(await (await page.request.get(base+'/teams.php')).text(),/QA Lead Without Portrait/);
+ const revision=rows('SELECT revision FROM cms_content WHERE id='+person.id)[0].revision;
+ assert.match(await post({action:'delete_content',id:person.id,revision:revision-1}),/changed/);
+ await post({action:'delete_content',id:person.id,revision});assert.equal(rows('SELECT id FROM cms_content WHERE id='+person.id).length,0);
+ assert.match((await content('sponsor',{title:'Bad URL',slug:'bad-url',link:'javascript:alert(1)'})).html,/http or https/);
+ const before=rows('SELECT COUNT(*) n FROM cms_content')[0].n;await post({action:'delete_content',id:photo.id,revision:1},page,'bad');assert.equal(rows('SELECT COUNT(*) n FROM cms_content')[0].n,before);
+ ok('Gallery, custom people groups, portraits, sponsors, FAQs, archive/delete, URL validation, revisions, and CSRF protections work.');
+ const volunteer=await createUser('qa-volunteer','VOLUNTEER',['gallery','person','media']);const editor=await createUser('qa-editor','EDITOR',['event','gallery','person']);const admin=await createUser('qa-admin','ADMIN',[]);
+ const vc=await browser.newContext();const vp=await vc.newPage();await login(vp,'qa-volunteer','Temporary-QA-2026!');await changePassword(vp,'Temporary-QA-2026!','Volunteer-QA-Changed!');
+ for(const section of ['settings','users','submissions','audit','event'])assert.equal((await vp.request.get(base+'/admin.php?section='+section)).status(),403);
+ let draft=await content('person',{title:'Volunteer Draft',slug:'volunteer-draft',status:'DRAFT'},0,vp);assert.equal(draft.record.status,'DRAFT');
+ assert.match((await content('person',{status:'PUBLISHED'},draft.record.id,vp)).html,/cannot publish/);assert.equal(rows('SELECT status FROM cms_content WHERE id='+draft.record.id)[0].status,'DRAFT');
+ assert.match(await post({action:'delete_content',id:draft.record.id,revision:1},vp),/cannot remove/);
+ assert.match(await post({action:'save_user',username:'intruder',role:'OWNER'},vp),/Only the master Super Admin/);
+ assert.match((await content('gallery',{title:'Stolen edit'},photo.id,vp)).html,/do not have access/);
+ const ec=await browser.newContext();const ep=await ec.newPage();await login(ep,'qa-editor','Temporary-QA-2026!');await changePassword(ep,'Temporary-QA-2026!','Editor-QA-Changed-2026!');await content('person',{status:'PUBLISHED'},draft.record.id,ep);assert.equal(rows('SELECT status FROM cms_content WHERE id='+draft.record.id)[0].status,'PUBLISHED');
+ assert.equal((await ep.request.get(base+'/admin.php?section=users')).status(),403);assert.equal((await ep.request.get(base+'/admin.php?section=sponsor')).status(),403);
+ const ac=await browser.newContext();const ap=await ac.newPage();await login(ap,'qa-admin','Temporary-QA-2026!');await changePassword(ap,'Temporary-QA-2026!','Admin-QA-Changed-2026!');assert.match(await post({action:'save_user',id:volunteer.id,username:'qa-volunteer',role:'OWNER',active:1},ap),/Only the master Super Admin/);
+ assert.match(await post({action:'save_user',id:1,username:config[0],role:'EDITOR',active:1}),/master account is fixed/);
+ await post({action:'save_user',id:editor.id,username:'qa-editor',email:'qa-editor@example.com',role:'EDITOR',active:1,permissions:['event.view','event.edit']});assert.equal((await ep.request.get(base+'/admin.php',{maxRedirects:0})).status(),302);
+ ok('Super Admin and staff enforce granular permissions, draft review, authority limits, and immediate session revocation.');
+ php(`$d=cms_db();$master=$d->query("SELECT * FROM users WHERE role='SUPERADMIN'")->fetch();$eid=${event.id};st_finance_mutate($master,'allocate',['environment'=>'live','event_id'=>$eid,'amount'=>'1000','note'=>'UI fixture allocation','revision'=>'0','request_key'=>bin2hex(random_bytes(24))]);$s=$d->prepare('INSERT INTO st_expenses(event_id,environment,title,category,payee,amount,description,invoice_reference,created_by,status,revision,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)');foreach(['SUBMITTED','APPROVED','PAID'] as $state)$s->execute([$eid,'live','QA '.$state,'production','QA Supplier',1000,'Fixture for interface review','QA-INVOICE-'.$state,${volunteer.id},$state,1,gmdate('c'),gmdate('c')]);echo 'true';`.replaceAll("'QA '.$state","'QA '.$state").replaceAll("'QA-INVOICE-'.$state","'QA-INVOICE-'.$state"));
+ await mkdir('.local/flagship',{recursive:true});const scans=[];
+ for(const section of ['overview','event','gallery','media','users','submissions','settings','participants','payments','tickets','finance','budgets','expenses','reports','audit','integrations','profile']){await page.goto(base+'/admin.php?section='+section);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);const scan=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();scans.push({section,violations:scan.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))});if(['overview','event','users','finance','budgets','expenses','reports'].includes(section))await page.screenshot({path:'.local/flagship/admin-'+section+'.png',fullPage:section==='overview'});}
+ await page.setViewportSize({width:390,height:844});await page.goto(base+'/admin.php');if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)){console.log(await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>({tag:e.tagName,c:e.className,w:e.getBoundingClientRect().width,x:e.getBoundingClientRect().x})).slice(0,20)));await page.screenshot({path:'.local/flagship/admin-overflow.png',fullPage:true});}assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:'.local/flagship/admin-mobile.png',fullPage:true});
+ for(const width of [320,360,390,768,950,1440]){await page.setViewportSize({width,height:900});for(const section of ['overview','users','payments','budgets','expenses','reports']){await page.goto(base+'/admin.php?section='+section);if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)){console.log('OVERFLOW',section,width,await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1&&!e.closest('.studio-sidebar')).map(e=>({tag:e.tagName,c:e.className,w:Math.round(e.getBoundingClientRect().width),x:Math.round(e.getBoundingClientRect().x)})).slice(0,20)));await page.screenshot({path:'.local/flagship/studio-narrow-overflow.png',fullPage:true});}assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,section+' width '+width);}}
+ await page.setViewportSize({width:390,height:844});await page.goto(base+'/admin.php');const menu=page.locator('.studio-menu-button');await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');assert.equal(await page.locator('.studio-body').evaluate(e=>e.inert),true);assert.equal(await page.locator('.studio-nav-group[open]').count(),1);const publishing=page.locator('.studio-nav-group[data-group=publishing]');await publishing.locator('summary').click();assert.equal(await publishing.evaluate(e=>e.open),true);await publishing.locator('summary').click();assert.equal(await publishing.locator('a').first().isVisible(),false);await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.getElementById('studio-sidebar').contains(document.activeElement)),true);await page.keyboard.press('Escape');assert.equal(await menu.getAttribute('aria-expanded'),'false');assert.equal(await menu.evaluate(e=>e===document.activeElement),true);
+ await writeFile('.local/flagship/admin-accessibility.json',JSON.stringify(scans,null,2));assert.deepEqual(scans.flatMap(s=>s.violations.map(v=>({section:s.section,...v}))),[]);assert.deepEqual(errors,[]);
+ const audit=rows('SELECT action FROM cms_audit');assert.ok(audit.some(r=>r.action==='account.save'));assert.ok(audit.some(r=>r.action==='event.save'));
+ ok('Admin desktop/mobile layout, WCAG A/AA scan, browser errors, and audit logging pass.');
+ console.log(passed+' CMS check groups passed against a disposable database and upload directory.');
+}finally{await browser.close();if(server.exitCode===null){const exit=new Promise(r=>server.once('exit',r));server.kill();await exit;}await rm(temp,{recursive:true,force:true});}

@@ -1,0 +1,15 @@
+@import './console.css';
+@import './studio.css';
+@import './studio-refinements.css';
+@import './studio-clean.css';
+@import './release57.css';
+@import './typography59.css';
+@import './form-builder.css';
+@import './native-forms78.css';
+@import './form-workspace78.css';
+@import './studio-theme79.css';
+.fixed-form-fields{margin:12px 0 24px;padding-left:20px;color:#bdcddd;line-height:1.8}.fixed-form-fields small{font-size:11px;margin-left:10px;color:#91c9b8}
+
+
+
+.game-form-links81{padding:18px;border:1px solid var(--line);border-radius:10px;margin-block:12px}.game-form-links81>strong{display:block;margin-bottom:12px}

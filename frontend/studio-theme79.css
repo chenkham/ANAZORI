@@ -1,0 +1,148 @@
+/* Shared with Form setup. Foregrounds and surfaces stay paired in every state. */
+.console {
+  --bg:#171020;--panel:#281c35;--line:#594564;--text:#f4eafc;--muted:#c6b3d3;
+  --cyan:#c69bfa;--violet:#c69bfa;--pink:#d8b9f1;
+  --studio-shell:#22162f;--studio-input:#21152d;--studio-button:#352143;
+  --studio-hover:#4b2e60;--studio-active:#683794;--studio-primary:#8544b9;
+  --studio-primary-hover:#9852ce;--studio-border:#735585;
+  background:var(--bg);color:var(--text);color-scheme:dark;
+}
+
+/* A real desktop column keeps the header, sidebar and content aligned. */
+@media(min-width:950.01px) {
+  body.console.studio-console {display:grid;grid-template-columns:var(--studio-nav-width) minmax(0,1fr);align-items:start}
+  .studio-console .studio-sidebar {position:sticky;inset:auto;top:0;width:100%;height:100dvh;min-width:0;align-self:start;scrollbar-gutter:stable}
+  .studio-console .studio-body {width:100%;margin:0;min-height:100dvh}
+  .studio-console .studio-sidebar {padding-top:0}
+  .studio-console .studio-sidebar>.console-brand {min-height:80px;padding-block:12px}
+  .studio-console .studio-header {min-height:80px}
+}
+.studio-console .studio-header,.studio-console .studio-main {width:100%;min-width:0}
+.studio-console .studio-title {flex-wrap:wrap;gap:16px 24px}
+.studio-console .studio-title>div {flex:1 1 230px}
+.studio-console .user-chip {max-width:100%;flex:0 1 auto}
+.studio-console .user-name {min-width:0;overflow-wrap:anywhere}
+.studio-console .studio-sidebar>.console-brand {gap:12px;padding-inline:6px;min-width:0}
+.studio-console .console-brand>span {flex:1;min-width:0}
+.studio-console .console-brand .anazori-wordmark {width:min(140px,100%)}
+.studio-console .studio-sidebar {scrollbar-color:#735585 transparent}
+
+body.console:not(.form-workspace) :is(.studio-sidebar,.studio-header,.login-card) {background:var(--studio-shell);border-color:var(--line);color:var(--text)}
+body.console:not(.form-workspace) :is(.studio-main,.studio-body) {background:var(--bg);color:var(--text)}
+body.console:not(.form-workspace) :is(.panel,.content-row,.workspace-card,.media-card,.operation-row,.studio-disclosure,.metric-card,.stat-card,.studio-welcome,.studio-operating-summary,.workspace-switcher,.permission-fields,.permission-group,.price-editor,.finance-close-form) {background:var(--panel);border-color:var(--line);color:var(--text)}
+body.console:not(.form-workspace) .panel {border:1px solid var(--line);border-radius:10px;padding:24px;margin-bottom:20px}
+body.console:not(.form-workspace) .workspace-card {padding:20px;border-radius:8px;margin-bottom:12px}
+body.console:not(.form-workspace) :is(.metric-grid,.stats-grid) {gap:16px;border:0}
+body.console:not(.form-workspace) :is(.metric-card,.stat-card) {padding:20px;border:1px solid var(--line);border-radius:8px}
+body.console.studio-console :is(.metric-card,.stat-card) strong {color:#d9b4fc}
+body.console:not(.form-workspace) .studio-operating-summary {padding:22px 24px;border:1px solid var(--line);border-radius:10px}
+body.console:not(.form-workspace) form.workspace-switcher {padding:18px 20px;border:1px solid var(--line);border-radius:8px;max-width:none}
+
+/* Include nested labels: the older light theme also coloured children directly. */
+body.console:not(.form-workspace) :is(h1,h2,h3,legend,td,dd,strong,.field>span,.check-field,summary,.user-chip,.audit-list article>div) {color:var(--text)}
+body.console:not(.form-workspace) :is(.help,.page-help,.scope-description,small,dt,.sidebar-footer,.studio-footer,.studio-breadcrumb,.content-summary p,.panel-heading p,.workspace-card>p,.studio-operating-summary p,.studio-welcome p,.upload-panel p,.payment-row p,.payment-row details,.timeline-row>span,.metric-label,.metric-note,.metric-card>span,.stat-card>span,.finance-expense-actions details,.login-card>p,.login-card label) {color:var(--muted)}
+body.console:not(.form-workspace) :is(.review-row>span:last-child,.metric-card>a,.metric-card small>span,.stat-card small>span,.studio-welcome h2 em,.field small a,.text-button) {color:#ddbbff}
+body.console:not(.form-workspace) :is(.text-button,.field small a,.metric-card>a):hover {color:var(--text)}
+body.console:not(.form-workspace) :is(.metric-card strong,.stat-card strong,.metric-value) {color:#d9b4fc}
+body.console:not(.form-workspace) :is(.review-row,.timeline-row,.form-actions,.price-row,.finance-breakdown>div,.finance-expense-actions,.submission dl,.audit-list article) {border-color:var(--line)}
+body.console:not(.form-workspace) :is(.content-placeholder,.media-preview,.field-image,.panel code,.disclosure-count) {background:#352143;color:#ead4ff;border-color:var(--studio-border)}
+
+body.console:not(.form-workspace) :is(input,textarea,select) {background:var(--studio-input);color:var(--text);border-color:var(--studio-border);color-scheme:dark}
+body.console:not(.form-workspace) :is(input,textarea)::placeholder {color:#b8a2c6;opacity:1}
+body.console:not(.form-workspace) :is(input,textarea,select):hover {border-color:#a780bd}
+body.console:not(.form-workspace) :is(input,textarea,select):focus {border-color:#c69bfa;box-shadow:0 0 0 3px #c69bfa26}
+body.console:not(.form-workspace) :is(input[readonly],input:disabled,textarea:disabled,select:disabled) {background:#30203e;color:#d3bfdc;border-color:#735585;opacity:1}
+body.console:not(.form-workspace) :is(input[type=checkbox],input[type=radio],progress) {accent-color:#b17cdd}
+.console input[type=file]::file-selector-button {background:#683794;color:#fff;border:1px solid #ac77d6;border-radius:4px;padding:8px 12px}
+.console input[type=file]::file-selector-button:hover {background:#8544b9;color:#fff}
+
+/* Pair foregrounds with surfaces in every interactive state, including nested labels. */
+body.console :is(.primary-button,.quiet-button,.danger-button) {color:#fff;-webkit-text-fill-color:currentColor}
+body.console:not(.form-workspace) :is(button.primary-button,a.primary-button,button.quiet-button,a.quiet-button,button.danger-button,a.danger-button) :is(span,strong,b,em,i,small,svg) {color:inherit;-webkit-text-fill-color:currentColor}
+.console .primary-button {background:var(--studio-primary);border-color:#ac77d6}
+body.console .primary-button:not(:disabled):is(:hover,:focus-visible,:active) {background:var(--studio-primary-hover);border-color:#c69bfa;color:#fff}
+.console .quiet-button {background:var(--studio-button);border-color:var(--studio-border)}
+body.console .quiet-button:not(:disabled):is(:hover,:focus-visible,:active) {background:var(--studio-hover);border-color:#ac87c2;color:#fff}
+.console .danger-button {background:#542b49;border-color:#ad638f;color:#fff}
+body.console .danger-button:not(:disabled):is(:hover,:focus-visible,:active) {background:#713857;border-color:#d58bb6;color:#fff}
+body.console:not(.form-workspace) :is(.studio-menu-button,.studio-menu-close) {background:var(--studio-button);color:#fff;border-color:var(--studio-border)}
+body.console:not(.form-workspace) :is(.studio-menu-button,.studio-menu-close):hover {background:var(--studio-hover);color:#fff}
+.console :is(a,button,input,select,textarea,summary):focus-visible {outline:3px solid #d2a5ff;outline-offset:3px}
+body.console:not(.form-workspace) button:disabled {background:#352d40;color:#d3bfdc;border-color:#735585;opacity:1;cursor:not-allowed}
+
+body.console:not(.form-workspace) :is(.settings-jumps a,.event-work-tabs a) {color:#fff;background:var(--studio-button);border:1px solid var(--studio-border);border-radius:6px}
+body.console:not(.form-workspace) :is(.settings-jumps a,.event-work-tabs a):is(:hover,:focus-visible,:active) {color:#fff;background:var(--studio-hover);border-color:#ac87c2}
+body.console:not(.form-workspace) :is(.settings-jumps a,.event-work-tabs a)[aria-current=page] {background:var(--studio-active);border-color:#ac77d6;color:#fff}
+body.console:not(.form-workspace) .studio-workspace-tabs a {color:var(--muted)}
+body.console:not(.form-workspace) .studio-workspace-tabs a:hover {color:#fff;border-bottom-color:#c69bfa}
+body.console:not(.form-workspace) .studio-workspace-tabs a[aria-current=page] {color:#e1c0ff;border-bottom-color:#c69bfa}
+
+body.console:not(.form-workspace) .studio-sidebar nav a {color:#ede0f8}
+body.console:not(.form-workspace) .studio-sidebar nav a:is(:hover,:focus-visible,:active) {background:var(--studio-hover);color:#fff}
+body.console:not(.form-workspace) .studio-sidebar nav a[aria-current=page] {background:var(--studio-active);border-color:#ac77d6;color:#fff}
+body.console:not(.form-workspace) .studio-sidebar nav a[aria-current=page]:is(:hover,:focus-visible,:active) {background:#7e44ad;color:#fff}
+body.console:not(.form-workspace) .studio-sidebar nav a[aria-current=page]::before {background:#d2a5ff}
+body.console:not(.form-workspace) .studio-nav-group>summary {background:transparent;color:var(--text);border-color:var(--line)}
+body.console:not(.form-workspace) .studio-nav-group[open]>summary {background:transparent;color:var(--text)}
+body.console:not(.form-workspace) .studio-nav-group>summary:is(:hover,:focus-visible,:active) {background:var(--studio-hover);color:#fff}
+
+/* The whole disclosure row is a target, with the same palette when open. */
+body.console:not(.form-workspace) details.studio-disclosure {padding:0;border:1px solid var(--line);border-radius:8px;margin-bottom:12px}
+body.console:not(.form-workspace) :is(details.studio-disclosure,.setup-row,.operation-row)>summary {padding:20px 24px;color:var(--text);background:transparent;border-color:var(--line);margin:0;border-radius:inherit}
+body.console:not(.form-workspace) :is(details.studio-disclosure,.setup-row,.operation-row)[open]>summary {background:#30203e;color:var(--text);border-bottom:1px solid var(--line);border-bottom-left-radius:0;border-bottom-right-radius:0;margin:0}
+body.console:not(.form-workspace) :is(details.studio-disclosure,.setup-row,.operation-row)>summary:is(:hover,:focus-visible,:active) {background:var(--studio-hover);color:#fff}
+body.console:not(.form-workspace) :is(details.studio-disclosure,.setup-row,.operation-row)>summary:is(:hover,:focus-visible,:active) :is(strong,small,span:not(.badge)) {color:inherit;-webkit-text-fill-color:currentColor}
+body.console:not(.form-workspace) :is(details.studio-disclosure,.setup-row,.operation-row)>summary::after {content:'›';color:#d9b4fc;transform:none}
+body.console:not(.form-workspace) :is(details.studio-disclosure,.setup-row,.operation-row)[open]>summary::after {content:'›';transform:rotate(90deg)}
+body.console:not(.form-workspace) details.studio-disclosure>.disclosure-content {padding:24px}
+body.console:not(.form-workspace) .operation-row {padding:0;border:1px solid var(--line);border-radius:9px;margin:12px 0}
+body.console:not(.form-workspace) .operation-row .studio-disclosure {margin:12px 0}
+body.console:not(.form-workspace) .operation-row>form {padding:20px 24px}
+
+body.console:not(.form-workspace) :is(.table-wrap,table,th) {background:#24182f;border-color:var(--line);color:#eadcf5}
+body.console:not(.form-workspace) table :is(th,td) {color:var(--text);border-color:var(--line)}
+body.console:not(.form-workspace) table tbody tr:hover {background:var(--studio-hover);color:#fff}
+body.console:not(.form-workspace) table tbody tr:hover :is(td,td>strong,td>small) {color:#fff}
+body.console:not(.form-workspace) :is(a.metric-card,a.stat-card):is(:hover,:focus-visible,:active) {background:var(--studio-hover);border-color:#ac87c2;color:#fff}
+body.console:not(.form-workspace) .badge {background:#382147;color:#f3e8fb;border-color:#826292}
+body.console:not(.form-workspace) .badge:is(.published,.paid,.approved,.active,.success) {background:#193e34;color:#c6f3dd;border-color:#4e8b71}
+body.console:not(.form-workspace) .badge:is(.draft,.pending,.review,.submitted,.warning) {background:#463520;color:#ffe1a3;border-color:#9b7a45}
+body.console:not(.form-workspace) .badge:is(.rejected,.failed,.void,.error) {background:#49273c;color:#ffd4e8;border-color:#ad638f}
+body.console:not(.form-workspace) :is(.notice,.notice.success,.notice.warning) {background:#322043;color:var(--text);border-color:#9c6cbb}
+body.console:not(.form-workspace) .notice.error {background:#472538;color:#fff1f7;border-color:#bf78a1}
+
+.console .console-brand .anazori-wordmark {display:block;position:relative;overflow:hidden;width:140px;height:auto;aspect-ratio:1490/344}
+.console .console-brand .anazori-wordmark>img {display:block;position:absolute;width:144.966443%;max-width:none;height:auto;left:-22.550336%;top:-263.953488%;object-fit:contain}
+.console .event-work-tabs {display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;padding:16px 0;border-block:1px solid var(--line)}
+.console .event-work-tabs a {padding:9px 13px;font-size:12px}
+.console .export-actions {display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:20px 0}
+.console .export-actions>span {color:#d3bddf;margin-right:10px;font-size:12px}
+.console .direct-media-upload {display:block;border:1px dashed #9a73b2;padding:12px;margin-top:12px;border-radius:6px;color:#fff;font-size:12px}
+.console .direct-media-upload input {margin-top:8px}
+.console :is(.form-top-actions>button,.form-side-tools>button,.question-card-footer button,.question-type-menu button,.question-type-button) {color:#fff}
+
+@media(max-width:1100px) and (min-width:951px) {
+  .studio-console .metric-grid,.studio-console .stats-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px) {
+  .studio-console .studio-header {display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 16px;padding:12px 16px}
+  .studio-console .studio-header>.studio-menu-button {grid-column:1;grid-row:1}
+  .studio-console .studio-header>div {grid-column:2;grid-row:1;justify-self:end;flex-wrap:nowrap}
+  .studio-console .studio-header>.studio-breadcrumb {grid-column:1/-1;grid-row:2}
+  body.console:not(.form-workspace) :is(.panel,.studio-operating-summary) {padding:20px 16px}
+  body.console:not(.form-workspace) details.studio-disclosure {padding:0}
+  body.console:not(.form-workspace) :is(details.studio-disclosure,.setup-row,.operation-row)>summary {padding:18px 16px}
+  body.console:not(.form-workspace) details.studio-disclosure>.disclosure-content {padding:20px 16px}
+  body.console:not(.form-workspace) form.workspace-switcher {padding:16px}
+  .console .event-work-tabs {gap:6px}
+  .console .event-work-tabs a {font-size:11px;padding:9px 10px}
+  .console .export-actions>span {width:100%}
+  .console form.list-toolbar {flex-direction:column;align-items:stretch}
+  .console .list-toolbar>input[type=search],.console .list-toolbar>select {flex:0 0 auto;width:100%;min-width:0}
+  .console .list-toolbar>button {align-self:flex-start}
+}
+@media print {
+  body.console.studio-console {display:block;--bg:#fff;--panel:#fff;--text:#111;--muted:#444;--line:#ccc}
+  .studio-console .studio-body {margin:0}
+  body.console.studio-console table :is(th,td) {background:#fff;color:#111}
+}

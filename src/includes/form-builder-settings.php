@@ -1,0 +1,43 @@
+<?php
+declare(strict_types=1);
+
+function st_form_settings_editor(array $fields,string $phase): void {
+    $settings=az_form_settings($fields,$phase);$ticket=$phase==='registration'&&az_participation_mode($fields)==='registration';
+    echo '<details class="question-settings form-settings" open><summary>Response settings</summary><div class="form-grid">';
+    foreach(['accepting'=>'Accept responses','one_response'=>'One response per person','allow_edit'=>'Allow editing before approval','progress'=>'Show section progress','shuffle'=>'Shuffle questions within sections','quiz'=>'Score answers using answer keys','show_score'=>'Show quiz score to participant'] as $key=>$label){
+        if(!$ticket&&in_array($key,['allow_edit','quiz','show_score'],true))continue;
+        if($ticket&&$key==='one_response'){echo '<p class="help wide">One registration per '.(!empty($fields['_form_game'])?'game':'event').' per account is always enforced.</p><input type="hidden" name="'.$phase.'_settings[one_response]" value="1">';continue;}
+        echo '<label class="check-field"><input type="checkbox" name="'.$phase.'_settings['.$key.']" value="1"'.(!empty($settings[$key])?' checked':'').'><span>'.$label.'</span></label>';
+    }
+    if($ticket)echo '<label class="field wide"><span>Message after submission</span><textarea name="'.$phase.'_settings[confirmation]" maxlength="1000" rows="3">'.e($settings['confirmation']).'</textarea></label><p class="help wide">A ticket is issued after coordinator approval. Interest and contribution forms collect responses only.</p>';
+    else echo '<input type="hidden" name="'.$phase.'_settings[confirmation]" value="'.e($settings['confirmation']).'"><p class="help wide">Collected responses are available in your event workspace. This form does not issue tickets.</p>';
+    echo '</div></details>';
+}
+
+function st_form_question_settings(string $name,array $field,array $media,array $tickets=[]): void {
+    echo '<details class="question-settings advanced-question-settings"><summary>Uploads, grids, conditions and validation</summary><div class="form-grid">';
+    echo '<label class="field wide" data-for-types="image video"><span>Image / QR or video</span><select name="'.e($name).'[media]" data-question-media><option value="">Choose uploaded media</option>';
+    foreach($media as $item)if(str_starts_with($item['mime'],'image/')||str_starts_with($item['mime'],'video/'))echo '<option value="'.e($item['path']).'" data-mime="'.e($item['mime']).'"'.(($field['media']??'')===$item['path']?' selected':'').'>'.e($item['title']).'</option>';
+    echo '</select><small>Add a new file directly below. QR instructions and images are public; participant uploads stay private.</small><input type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4" data-form-media-upload form="media-upload-only"></label>';
+    echo '<label class="check-field wide" data-for-types="image"><input type="checkbox" name="'.e($name).'[payment_dynamic]" value="1"'.(!empty($field['payment_dynamic'])?' checked':'').'><span>Generate payment QR automatically from the selected ticket price</span></label><label class="field wide" data-for-types="image"><span>Receiving account name</span><input name="'.e($name).'[payment_name]" maxlength="80" value="'.e($field['payment_name']??'').'" placeholder="Account holder / event name"><small>Automatic mode needs a receiving UPI ID below; no QR image upload is required. A registration reference is included in the payment note.</small></label>';
+    if($tickets){
+        echo '<label class="field wide" data-for-types="image"><span>Linked ticket for this payment QR</span><select name="'.e($name).'[payment_ticket]"><option value="">All paid tickets in automatic mode / general image</option>';
+        foreach($tickets as $ticket)if((int)$ticket['price']>0)echo '<option value="'.e($ticket['id']).'"'.(($field['payment_ticket']??'')===$ticket['id']?' selected':'').'>'.e($ticket['label'].' · '.az_money((int)$ticket['price'])).'</option>';
+        echo '</select><small>Participants choose their ticket directly above the QR. Only the matching QR appears, with this ticket’s fixed price. Automatic mode can cover all paid tickets with one receiving account. Edit the amounts in Form Settings → Ticket prices. Uploaded QR images keep their existing ticket links.</small></label>';
+    }
+    echo '<label class="field wide" data-for-types="image"><span>UPI ID for fast payment (optional)</span><input name="'.e($name).'[payment_upi]" maxlength="120" value="'.e($field['payment_upi']??'').'" placeholder="event@bank"><small>Add the receiving UPI ID shown by your QR. Participants can open their payment app after their progress saves.</small></label>';
+    foreach(['file_types'=>['Allowed file types',['images-pdf'=>'Images and PDF','images'=>'Images only','pdf'=>'PDF only','documents'=>'Documents (PDF, text, Office)','audio'=>'Audio','video'=>'Video','all'=>'All supported safe types']],
+        'purpose'=>['Upload purpose',[''=>'General field / attachment','payment'=>'Payment / receipt','identity'=>'Identity proof']]] as $key=>[$label,$choices]){
+        echo '<label class="field" data-for-types="'.($key==='purpose'?'file image text date':'file').'"><span>'.($key==='purpose'?'Field purpose':$label).'</span><select name="'.e($name.'['.$key.']').'">';
+        foreach($choices as $value=>$title)echo '<option value="'.e($value).'"'.(($field[$key]??($key==='file_types'?'images-pdf':''))===$value?' selected':'').'>'.e($title).'</option>';echo '</select></label>';
+    }
+    foreach(['file_count'=>['Maximum files',1,10,1],'file_size'=>['Maximum size per file (MB)',1,20,5]] as $key=>[$label,$min,$max,$default])echo '<label class="field" data-for-types="file"><span>'.$label.'</span><input type="number" name="'.e($name.'['.$key.']').'" min="'.$min.'" max="'.$max.'" value="'.(int)($field[$key]??$default).'"></label>';
+    echo '<label class="field"><span>Show only when an earlier answer…</span><select name="'.e($name).'[condition_field]" data-condition-source data-saved-condition="'.e($field['condition_field']??'').'"><option value="">Always show</option></select></label><label class="field"><span>…equals this choice / value</span><input name="'.e($name).'[condition_value]" maxlength="120" value="'.e($field['condition_value']??'').'"><small>A condition on a section applies to all its questions.</small></label>';
+    echo '<label class="field" data-for-types="text textarea number email tel"><span>Response validation</span><select name="'.e($name).'[validation]">';
+    foreach([''=>'Standard answer validation','length'=>'Text length','number'=>'Number range','email'=>'Email format','url'=>'Website URL','contains'=>'Text contains','not_contains'=>'Text does not contain'] as $key=>$label)echo '<option value="'.$key.'"'.(($field['validation']??'')===$key?' selected':'').'>'.$label.'</option>';
+    echo '</select></label><label class="field" data-for-types="text textarea number email tel"><span>Validation text (contains / does not contain)</span><input name="'.e($name).'[validation_value]" maxlength="120" value="'.e($field['validation_value']??'').'"></label>';
+    foreach(['min'=>'Minimum','max'=>'Maximum','validation_message'=>'Custom validation error'] as $key=>$label)echo '<label class="field" data-for-types="text textarea number multiselect"><span>'.$label.'</span><input name="'.e($name.'['.$key.']').'" maxlength="'.($key==='validation_message'?200:20).'" value="'.e($field[$key]??'').'"></label>';
+    foreach(['other'=>'Allow Other answer','shuffle'=>'Shuffle choices'] as $key=>$label)echo '<label class="check-field" data-for-types="radio multiselect select"><input type="checkbox" name="'.e($name.'['.$key.']').'" value="1"'.(!empty($field[$key])?' checked':'').'><span>'.$label.'</span></label>';
+    echo '<div class="form-grid wide" data-for-types="text textarea radio multiselect select scale rating grid checkgrid date time email tel number checkbox"><label class="field"><span>Quiz points (0 = ungraded)</span><input type="number" min="0" max="1000" name="'.e($name).'[points]" value="'.(int)($field['points']??0).'"></label><label class="field"><span>Correct answers, one per line</span><textarea name="'.e($name).'[answer_key]" rows="2">'.e(implode("\n",$field['answer_key']??[])).'</textarea><small>Keys remain private. Text answers ignore letter case; checkbox answers must match the full selection.</small></label><label class="field wide"><span>Quiz feedback</span><textarea name="'.e($name).'[feedback]" maxlength="500" rows="2">'.e($field['feedback']??'').'</textarea></label></div>';
+    echo '</div></details>';
+}

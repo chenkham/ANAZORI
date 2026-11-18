@@ -1,0 +1,56 @@
+<?php
+declare(strict_types=1);
+$temp=sys_get_temp_dir().'/anazori-brochure63-'.bin2hex(random_bytes(8));mkdir($temp,0700);
+putenv('ANAZORI_PRIVATE_CONFIG=/nonexistent');putenv('ANAZORI_DB_DRIVER=sqlite');putenv('ANAZORI_DB_PATH='.$temp.'/test.sqlite');putenv('ANAZORI_SECRET_PATH='.$temp.'/key');putenv('ANAZORI_TEST_MODE=1');
+require __DIR__.'/../src/includes/commerce.php';
+require_once __DIR__.'/../src/includes/brochure-update63.php';
+$check=static function(bool $condition,string $message): void {if(!$condition)throw new RuntimeException($message);};
+try {
+ $db=cms_db();
+ $db->exec("DELETE FROM cms_settings WHERE setting_key='brochure_release_63'");
+ $old=cms_unpack($db->query("SELECT * FROM cms_content WHERE type='event' AND slug='youth-parliament'")->fetch());$id=(int)$old['id'];
+ $legacy=(int)$db->query("SELECT id FROM events WHERE slug='youth-parliament'")->fetchColumn();
+ $fields=$old['fields'];$fields['starts_at']='2027-02-01T10:30';$fields['fees']='Saved fee';$fields['image']='/assets/2026/culture.webp';
+ $fields['registration_mode']='closed';$fields['registration_closed_message']='Saved closed message';
+ $fields['interest_form']='[{"id":"college","label":"Saved college question","type":"text","required":true}]';
+ $fields['registration_form']='[{"id":"phone","label":"Saved phone question","type":"tel","required":true}]';
+ $fields['ticket_types']='[{"id":"original-entry","label":"Saved pass","price":25000,"capacity":25,"active":true}]';
+ $fields['payment_methods']='[{"id":"original-bank","kind":"bank","recipient":"Saved recipient","active":true}]';
+ $db->prepare("UPDATE cms_content SET slug='prativa',title='Prativa',data=? WHERE id=?")->execute([json_encode($fields),$id]);
+ $db->prepare("UPDATE events SET slug='prativa',title='Prativa' WHERE id=?")->execute([$legacy]);
+ foreach(['cms_content','events'] as $table)$db->exec("DELETE FROM $table WHERE slug IN ('inauguration','cultural-night')");
+ $joystick=az_event('joystick');$games=json_decode($joystick['fields']['game_categories'],true);
+ $games=array_values(array_filter($games,fn($g)=>$g['id']!=='free-fire'));foreach($games as &$g)if($g['id']==='bgmi'){$g['active']=false;$g['team_size']=4;}unset($g);
+ $gameFields=$joystick['fields'];$gameFields['game_categories']=json_encode($games);$db->prepare('UPDATE cms_content SET data=? WHERE id=?')->execute([json_encode($gameFields),$joystick['id']]);
+ $db->prepare('INSERT INTO st_event_assignments(user_id,event_id,assigned_by,assigned_at) VALUES(1,?,1,?)')->execute([$id,gmdate('c')]);
+ $now=gmdate('c');$snapshot=json_encode(['title'=>'Prativa','name'=>'Isolated historical participant','type'=>'Saved pass']);
+ $db->prepare("INSERT INTO az_orders(public_id,participant_id,event_id,event_slug,ticket_type,snapshot,answers,quantity,unit_price,amount,state,environment,expires_at,created_at,updated_at) VALUES('BROCHURE-TEST',900,?,'prativa','original-entry',?,'{}',1,25000,25000,'PAID','test',0,?,?)")->execute([$id,$snapshot,$now,$now]);
+ $beforeOrder=$db->query("SELECT * FROM az_orders WHERE public_id='BROCHURE-TEST'")->fetch();
+ $beforeStaff=$db->query('SELECT * FROM users ORDER BY id')->fetchAll();
+ $site=cms_settings();$site['hero_line1']='Saved custom headline';$site['starts_at']='2027-02-01T10:30';$site['show_events']='0';cms_put_setting('site',json_encode($site));
+ az_apply_brochure63($db);
+ $after=cms_record($id);$check($after['slug']==='youth-parliament'&&$after['title']==='Youth Parliament','Existing event ID was not retained.');
+ foreach(['starts_at','fees','image','registration_mode','registration_closed_message','interest_form','registration_form','ticket_types','payment_methods'] as $key)$check($after['fields'][$key]===$fields[$key],'Saved operational field changed: '.$key);
+ $check((int)$db->query("SELECT id FROM events WHERE slug='youth-parliament'")->fetchColumn()===$legacy,'Legacy event ID changed.');
+ $check($db->query("SELECT * FROM az_orders WHERE public_id='BROCHURE-TEST'")->fetch()===$beforeOrder,'Historical order or snapshot changed.');
+ $check($db->query('SELECT * FROM users ORDER BY id')->fetchAll()===$beforeStaff,'Staff account or access changed.');
+ $check((int)$db->query('SELECT event_id FROM st_event_assignments WHERE user_id=1')->fetchColumn()===$id,'Staff assignment changed.');
+ $check(count(cms_records('event'))===9,'Brochure lineup is incomplete.');
+ $check(count(cms_records('person'))===13,'Confirmed organising committee is incomplete.');
+ $current=json_decode($db->query("SELECT value FROM cms_settings WHERE setting_key='site'")->fetchColumn(),true);
+ foreach(['hero_line1','starts_at','show_events'] as $key)$check($current[$key]===$site[$key],'Unspecified site setting changed: '.$key);
+ $check($current['email']==='info@ccsdu.in'&&$current['contact_phone1']==='+91 6003440122','Confirmed contact details missing.');
+ $currentGames=json_decode(cms_record((int)$joystick['id'])['fields']['game_categories'],true);
+ $check(count($currentGames)===3,'Games were duplicated or missing.');
+ foreach($currentGames as $game)if($game['id']==='bgmi')$check($game['active']===false&&$game['team_size']===4,'Existing game settings changed.');
+ $check((int)$db->query("SELECT COUNT(*) FROM cms_media WHERE path LIKE '%ANAZORI_V16_Brochure_Neon.pdf'")->fetchColumn()===1,'Brochure media duplicated or missing.');
+ $current['contact_person1']='Later Studio contact';$current['brochure_pdf']='';cms_put_setting('site',json_encode($current));
+ $db->prepare('UPDATE cms_content SET title=? WHERE id=?')->execute(['Later Studio event title',$id]);
+ az_apply_brochure63($db);
+ $check(cms_record($id)['title']==='Later Studio event title','Migration overwrote later Studio edits.');
+ $saved=json_decode($db->query("SELECT value FROM cms_settings WHERE setting_key='site'")->fetchColumn(),true);
+ $check($saved['contact_person1']==='Later Studio contact'&&$saved['brochure_pdf']==='','Migration overwrote later contact edits or document clearing.');
+ echo "PASS Brochure migration: nine events, thirteen committee members, confirmed contacts and three games; IDs, staff, assignments, orders, snapshots, forms, prices, payments, dates and later Studio edits preserved.\n";
+} finally {
+ foreach(glob($temp.'/*')?:[] as $file)if(is_file($file))unlink($file);rmdir($temp);
+}

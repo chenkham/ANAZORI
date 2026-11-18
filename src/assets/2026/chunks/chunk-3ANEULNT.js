@@ -1,0 +1,1 @@
+function n(){return typeof globalThis.scheduler?.yield=="function"?globalThis.scheduler.yield():new Promise(e=>setTimeout(e,0))}function o(){let e=Promise.resolve();return t=>{let r=e.then(async()=>(await n(),t()));return e=r.catch(()=>{}),r}}export{o as a};

@@ -1,0 +1,32 @@
+@font-face{font-family:'Anazori Signature';src:url('/assets/fonts/bilbo/Bilbo-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.hero-signature-definitions{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+/* Only the hero motto takes the handwritten edition style. The text still comes
+   from Studio's hero_line1 and hero_line2; the main logo remains its source image. */
+.reference-background .hero-copy h2.hero-signature{
+  font-family:'Anazori Signature',cursive;
+  font-size:clamp(54px,6.7vw,104px);
+  font-style:italic;
+  font-weight:400;
+  font-synthesis:style;
+  line-height:1.05;
+  letter-spacing:0;
+  margin:0;
+  max-width:100%;
+  padding-right:.16em;
+}
+.hero-signature .hero-signature-line{
+  display:inline-block;
+  max-width:100%;
+  padding:.04em .12em .08em .015em;
+  background:linear-gradient(180deg,#faf7ff 0%,#ded7e5 20%,#a89dae 41%,#f9f5ff 49%,#cfc3d9 67%,#b1a4bd 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-stroke:.35px #f6efff80;
+  text-shadow:none;
+  filter:url('#hero-signature-silver');
+  overflow-wrap:anywhere;
+}
+@media(max-width:700px){.reference-background .hero-copy h2.hero-signature{font-size:clamp(48px,11.5vw,70px);line-height:1.06}}
+@media(forced-colors:active){.hero-signature .hero-signature-line{background:none;color:CanvasText;filter:none;-webkit-text-stroke:0}}
+@media print{.hero-signature .hero-signature-line{background:none;color:#111;filter:none;-webkit-text-stroke:0}}

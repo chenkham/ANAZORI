@@ -1,0 +1,15 @@
+/* These artwork windows already have fixed dimensions and clip their contents.
+   Their layout and scroll anchors stay the same while distant artwork can sleep. */
+@supports (content-visibility: auto) {
+  .page-events .event-art,
+  .page-teams .person-photo,
+  .page-home .programme-photo-frame {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none;
+  }
+}
+@media print {
+  .page-events .event-art,
+  .page-teams .person-photo,
+  .page-home .programme-photo-frame { content-visibility: visible; }
+}

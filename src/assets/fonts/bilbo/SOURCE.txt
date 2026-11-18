@@ -1,0 +1,3 @@
+Bilbo by TypeSETit. Official Google Fonts source: https://github.com/google/fonts/tree/main/ofl/bilbo
+Original TTF is unmodified. WOFF2 is a lossless webfont conversion. License: OFL.txt
+Used to visually match the handwritten edition lettering in the supplied Anazori artwork.

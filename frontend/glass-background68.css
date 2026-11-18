@@ -1,0 +1,77 @@
+/* Pixel-inspired glass and soft light share one non-interactive backdrop.
+   Existing frames, artwork and the opaque sponsor poster stay above it. */
+.festival-glass-background { display: none; }
+@media screen {
+  body.reference-background:not(.legacy-admin) {
+    isolation: isolate;
+    background: radial-gradient(ellipse at 80% 8%,#a24bff30,transparent 52%),
+      radial-gradient(ellipse at 0 80%,#6fd3ff18,transparent 45%),
+      linear-gradient(145deg,#080316,#100620 55%,#120824);
+    background-attachment: fixed;
+  }
+  .reference-background .festival-glass-background {
+    display: block; position: fixed; inset: 0; z-index: -1;
+    pointer-events: none; overflow: hidden; contain: strict;
+  }
+  .festival-glass-background>span { position: absolute; pointer-events: none; }
+  .glass-world-aurora {
+    inset: -9%;
+    background: radial-gradient(ellipse at 84% 26%,#a24bff50,transparent 45%),
+      radial-gradient(ellipse at 100% 68%,#ff3fc834,transparent 43%),
+      radial-gradient(ellipse at 8% 95%,#6fd3ff2c,transparent 40%),
+      radial-gradient(ellipse at 48% -10%,#ff3fc824,transparent 50%);
+    animation: glass-world-breathe 26s ease-in-out infinite alternate;
+  }
+  .glass-world-sculptures {
+    inset: -5%;
+    background: url('/assets/2026/graphics/festival-pixel-glass.svg') center/cover no-repeat;
+    opacity: .85;
+  }
+  .glass-world-pixels {
+    inset: 0;
+    background-image: linear-gradient(#6fd3ff80,#6fd3ff80),linear-gradient(#e3d6f860,#e3d6f860),
+      linear-gradient(#ff3fc870,#ff3fc870),linear-gradient(#a24bff80,#a24bff80),
+      linear-gradient(#6fd3ff70,#6fd3ff70),linear-gradient(#e3d6f850,#e3d6f850);
+    background-size: 4px 4px,3px 3px,6px 6px,4px 4px,6px 6px,3px 3px;
+    background-position: 12% 24%,43% 13%,91% 64%,66% 82%,33% 89%,78% 36%;
+    background-repeat: no-repeat;
+    animation: glass-world-pixel-glints 7s steps(4,end) infinite alternate;
+  }
+  .glass-world-shade {
+    inset: 0;
+    background: radial-gradient(ellipse at 28% 46%,#03001099,transparent 64%),
+      linear-gradient(90deg,#03001038,transparent 70%),
+      linear-gradient(0deg,#03001050,transparent 28%,transparent 85%,#03001020);
+  }
+  @keyframes glass-world-breathe {
+    from { transform: translate3d(-1%,-1%,0); opacity: .72; }
+    to { transform: translate3d(2%,2%,0); opacity: 1; }
+  }
+  @keyframes glass-world-pixel-glints {
+    from { opacity: .25; }
+    to { opacity: .85; }
+  }
+  html.motion-paused .festival-glass-background>span,
+  .festival-glass-background.motion-outside>span { animation-play-state: paused; }
+  body[data-scene-motion=off] .festival-glass-background>span { animation: none; }
+
+  @media (max-width:760px) {
+    .glass-world-aurora { animation: none; opacity: .8; }
+    .glass-world-pixels { animation: none; opacity: .4; }
+    .glass-world-sculptures {
+      background-position: 69% center;
+      opacity: .65; animation: none;
+    }
+    .glass-world-shade { background: linear-gradient(90deg,#03001070,#03001035 70%,#03001018); }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .festival-glass-background>span { animation: none; }
+  }
+  @media (prefers-reduced-transparency:reduce) {
+    .festival-glass-background { display: none !important; }
+  }
+  @media (forced-colors:active) {
+    body.reference-background:not(.legacy-admin) { background: Canvas; }
+    .festival-glass-background { display: none !important; }
+  }
+}

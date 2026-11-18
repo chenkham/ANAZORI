@@ -1,0 +1,13 @@
+/* One self-hosted text family, with the supplied Anazori artwork kept intact. */
+:root{--sans:Satoshi,Arial,sans-serif;--display:Satoshi,Arial,sans-serif;--head:Satoshi,Arial,sans-serif;--festival-display:Satoshi,Arial,sans-serif}
+body,body.console{font-family:Satoshi,Arial,sans-serif}
+.reference-background :is(h1,h2,h3,h4){font-weight:700;letter-spacing:-.035em}
+.reference-background .hero-copy h2{font-weight:700;letter-spacing:-.04em}
+.reference-background .keepsake-heading h3{font-weight:700;letter-spacing:-.035em}
+.keepsake-stage{background:#181020;border-color:#bba0d966;box-shadow:0 22px 50px -30px #32134e66}
+.keepsake-actions .keepsake-download{background:#38234f;border-color:#38234f;color:#fbf6ff;font-weight:700}
+.keepsake-actions .keepsake-download:hover{background:#583779;border-color:#583779}
+.keepsake-name-row input{background:#fcf8ff;border-color:#c1abd0;color:#30213f}
+.keepsake-studio :is(a,button,input):focus-visible{outline-color:#8655ba}
+.simple-event-ticket .ticket-downloads .button{background:#38234f}
+.simple-event-ticket .ticket-downloads .text-link{color:#38234f}

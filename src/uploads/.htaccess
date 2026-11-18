@@ -1,0 +1,23 @@
+# All user uploads are data, never executable web content.
+Options -Indexes -ExecCGI -MultiViews
+RemoveHandler .php .php3 .php4 .php5 .php7 .php8 .phtml .phar .cgi .pl .py .sh .html .htm .shtml
+RemoveType .php .php3 .php4 .php5 .php7 .php8 .phtml .phar .cgi .pl .py .sh .html .htm .shtml
+AddType application/pdf .pdf
+<FilesMatch "(?i)^(?![a-z0-9][a-z0-9_.-]*\.(?:jpg|jpeg|png|webp|gif|pdf|mp4|webm|mp3|m4a|wav|ogg)$)">
+ <IfModule mod_authz_core.c>
+  Require all denied
+ </IfModule>
+ <IfModule !mod_authz_core.c>
+  Order Allow,Deny
+  Deny from all
+ </IfModule>
+</FilesMatch>
+<IfModule mod_headers.c>
+ Header always set X-Content-Type-Options "nosniff"
+ Header always set Cross-Origin-Resource-Policy "same-origin"
+ <FilesMatch "(?i)\.pdf$">
+  Header always set Content-Disposition "inline"
+  # The browser's PDF viewer supplies its own sandbox; CSP sandbox blocks it in Chromium.
+  Header always set Content-Security-Policy "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"
+ </FilesMatch>
+</IfModule>

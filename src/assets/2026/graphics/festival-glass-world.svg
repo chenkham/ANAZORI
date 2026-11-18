@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="glass" x1="865" y1="95" x2="1460" y2="685" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3D6F8" stop-opacity=".44"/><stop offset=".16" stop-color="#6FD3FF" stop-opacity=".12"/>
+      <stop offset=".43" stop-color="#A24BFF" stop-opacity=".04"/><stop offset=".7" stop-color="#FF3FC8" stop-opacity=".23"/>
+      <stop offset=".86" stop-color="#6FD3FF" stop-opacity=".26"/><stop offset="1" stop-color="#E3D6F8" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="860" y1="120" x2="1470" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6FD3FF" stop-opacity=".1"/><stop offset=".2" stop-color="#E3D6F8" stop-opacity=".83"/>
+      <stop offset=".38" stop-color="#A24BFF" stop-opacity=".22"/><stop offset=".66" stop-color="#FF3FC8" stop-opacity=".75"/>
+      <stop offset=".82" stop-color="#6FD3FF" stop-opacity=".85"/><stop offset="1" stop-color="#E3D6F8" stop-opacity=".15"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="-150" y1="900" x2="1650" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6FD3FF" stop-opacity=".04"/><stop offset=".19" stop-color="#6FD3FF" stop-opacity=".28"/>
+      <stop offset=".38" stop-color="#A24BFF" stop-opacity=".06"/><stop offset=".68" stop-color="#FF3FC8" stop-opacity=".15"/>
+      <stop offset=".86" stop-color="#E3D6F8" stop-opacity=".26"/><stop offset="1" stop-color="#A24BFF" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="ribbon-edge" x1="0" y1="800" x2="1500" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6FD3FF" stop-opacity=".5"/><stop offset=".3" stop-color="#A24BFF" stop-opacity="0"/>
+      <stop offset=".62" stop-color="#FF3FC8" stop-opacity=".28"/><stop offset=".83" stop-color="#E3D6F8" stop-opacity=".6"/><stop offset="1" stop-color="#6FD3FF" stop-opacity=".12"/>
+    </linearGradient>
+    <linearGradient id="pill" x1="130" y1="550" x2="450" y2="1050" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3D6F8" stop-opacity=".32"/><stop offset=".23" stop-color="#6FD3FF" stop-opacity=".05"/>
+      <stop offset=".72" stop-color="#A24BFF" stop-opacity=".25"/><stop offset="1" stop-color="#FF3FC8" stop-opacity=".18"/>
+    </linearGradient>
+    <linearGradient id="facet" x1="1210" y1="830" x2="1620" y2="990" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3D6F8" stop-opacity=".32"/><stop offset=".36" stop-color="#A24BFF" stop-opacity=".03"/>
+      <stop offset=".8" stop-color="#FF3FC8" stop-opacity=".19"/><stop offset="1" stop-color="#6FD3FF" stop-opacity=".24"/>
+    </linearGradient>
+    <radialGradient id="pearl"><stop stop-color="#E3D6F8" stop-opacity=".8"/><stop offset=".22" stop-color="#6FD3FF" stop-opacity=".38"/><stop offset=".65" stop-color="#A24BFF" stop-opacity=".09"/><stop offset="1" stop-color="#A24BFF" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <!-- A curved glass ribbon crosses behind the sculptures, never the content. -->
+  <path d="M-180 845C170 570 425 950 790 635S1280 185 1740 420L1740 503C1285 265 1150 465 835 710S210 660-180 930Z" fill="url(#ribbon)"/>
+  <path d="M-180 845C170 570 425 950 790 635S1280 185 1740 420" stroke="url(#ribbon-edge)" stroke-width="1.6"/>
+  <path d="M-180 930C210 660 520 955 835 710S1285 265 1740 503" stroke="url(#ribbon-edge)" stroke-width=".8" opacity=".6"/>
+  <path d="M-180 865C170 590 425 970 800 655S1280 205 1740 440" stroke="url(#ribbon-edge)" stroke-width=".7" opacity=".35"/>
+
+  <!-- Thick, clear torus: two refracted rims and a broad transparent body. -->
+  <g transform="rotate(-29 1190 380)">
+    <ellipse cx="1190" cy="393" rx="304" ry="218" stroke="#030010" stroke-opacity=".44" stroke-width="75"/>
+    <ellipse cx="1190" cy="380" rx="304" ry="218" stroke="url(#glass)" stroke-width="67"/>
+    <ellipse cx="1190" cy="380" rx="338" ry="252" stroke="url(#rim)" stroke-width="1.8"/>
+    <ellipse cx="1190" cy="380" rx="271" ry="185" stroke="url(#rim)" stroke-width="1.3"/>
+    <ellipse cx="1190" cy="377" rx="327" ry="241" stroke="url(#rim)" stroke-width=".6" opacity=".45"/>
+    <path d="M857 367C869 218 1056 116 1240 137" stroke="#E3D6F8" stroke-opacity=".24" stroke-width="5" stroke-linecap="round"/>
+    <path d="M1172 565C1308 579 1434 524 1460 424" stroke="#6FD3FF" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g transform="rotate(-29 1190 380)" opacity=".35">
+    <ellipse cx="1190" cy="380" rx="385" ry="294" stroke="#A24BFF" stroke-width=".8"/>
+    <path d="M846 140C1046-31 1462 89 1560 335" stroke="#6FD3FF" stroke-width=".7"/>
+  </g>
+
+  <!-- Smaller off-canvas glass forms give the page depth without clutter. -->
+  <g transform="rotate(36 160 770)">
+    <rect x="40" y="495" width="220" height="548" rx="110" fill="url(#pill)" stroke="#C8A6FF" stroke-opacity=".25" stroke-width="1.2"/>
+    <rect x="52" y="508" width="195" height="520" rx="97" stroke="#E3D6F8" stroke-opacity=".12" stroke-width=".8"/>
+    <path d="M67 749V609C67 564 101 529 143 528" stroke="#E3D6F8" stroke-opacity=".22" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g transform="rotate(-18 1455 910)">
+    <rect x="1220" y="800" width="530" height="235" rx="70" fill="url(#facet)" stroke="#FF3FC8" stroke-opacity=".22" stroke-width="1.2"/>
+    <rect x="1230" y="810" width="510" height="215" rx="61" stroke="#E3D6F8" stroke-opacity=".11"/>
+    <path d="M1250 864C1250 838 1271 817 1297 817H1650" stroke="#E3D6F8" stroke-opacity=".26" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <circle cx="841" cy="131" r="40" fill="url(#pearl)" opacity=".65"/>
+  <circle cx="1517" cy="681" r="23" fill="url(#pearl)" opacity=".8"/>
+  <circle cx="521" cy="947" r="30" fill="url(#pearl)" opacity=".6"/>
+  <g fill="#E3D6F8" opacity=".26">
+    <circle cx="1300" cy="80" r="1.4"/><circle cx="1540" cy="179" r="1.1"/><circle cx="978" cy="760" r="1.2"/>
+    <circle cx="150" cy="392" r="1.3"/><circle cx="706" cy="823" r="1"/><circle cx="615" cy="150" r="1.1"/>
+    <circle cx="1284" cy="711" r="1"/><circle cx="384" cy="489" r="1.2"/><circle cx="900" cy="900" r="1.4"/>
+  </g>
+  <g stroke="#6FD3FF" stroke-width=".8" opacity=".32">
+    <path d="M1430 120v10m-5-5h10M738 756v10m-5-5h10M342 326v8m-4-4h8"/>
+  </g>
+</svg>

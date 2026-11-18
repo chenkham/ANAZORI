@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" shape-rendering="crispEdges">
+  <defs>
+    <linearGradient id="glass" x1="864" y1="64" x2="1536" y2="672" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3D6F8" stop-opacity=".3"/><stop offset=".24" stop-color="#6FD3FF" stop-opacity=".12"/>
+      <stop offset=".48" stop-color="#A24BFF" stop-opacity=".035"/><stop offset=".72" stop-color="#FF3FC8" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#6FD3FF" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="864" y1="96" x2="1536" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6FD3FF" stop-opacity=".2"/><stop offset=".22" stop-color="#E3D6F8" stop-opacity=".65"/>
+      <stop offset=".48" stop-color="#A24BFF" stop-opacity=".16"/><stop offset=".7" stop-color="#FF3FC8" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#6FD3FF" stop-opacity=".65"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0" y1="832" x2="1600" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6FD3FF" stop-opacity=".18"/><stop offset=".35" stop-color="#A24BFF" stop-opacity=".025"/>
+      <stop offset=".7" stop-color="#FF3FC8" stop-opacity=".14"/><stop offset="1" stop-color="#E3D6F8" stop-opacity=".17"/>
+    </linearGradient>
+    <linearGradient id="slab" x1="64" y1="576" x2="288" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3D6F8" stop-opacity=".22"/><stop offset=".35" stop-color="#6FD3FF" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#A24BFF" stop-opacity=".22"/>
+    </linearGradient>
+    <linearGradient id="tile" x1="1248" y1="832" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3D6F8" stop-opacity=".23"/><stop offset=".35" stop-color="#A24BFF" stop-opacity=".025"/>
+      <stop offset="1" stop-color="#FF3FC8" stop-opacity=".2"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#C8A6FF" stroke-opacity=".055" stroke-width="1"/>
+    </pattern>
+    <pattern id="dither" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 0h2v2H0zm8 8h2v2H8z" fill="#E3D6F8" fill-opacity=".1"/>
+    </pattern>
+    <mask id="fade-grid"><radialGradient id="grid-light"><stop stop-color="white"/><stop offset="1" stop-color="black"/></radialGradient><rect x="640" width="960" height="900" fill="url(#grid-light)"/></mask>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#grid)" mask="url(#fade-grid)"/>
+  <!-- Transparent glass with a pixel-stepped silhouette, on a 32-unit grid. -->
+  <path d="M1056 64H1344V96H1440V128H1504V192H1536V256H1568V480H1536V544H1504V608H1440V640H1344V672H1056V640H960V608H896V544H864V480H832V256H864V192H896V128H960V96H1056ZM1088 160V192H992V224H960V288H928V448H960V512H992V544H1088V576H1312V544H1408V512H1440V448H1472V288H1440V224H1408V192H1312V160Z" fill="#030010" fill-opacity=".4" fill-rule="evenodd" transform="translate(12 16)"/>
+  <path d="M1056 64H1344V96H1440V128H1504V192H1536V256H1568V480H1536V544H1504V608H1440V640H1344V672H1056V640H960V608H896V544H864V480H832V256H864V192H896V128H960V96H1056ZM1088 160V192H992V224H960V288H928V448H960V512H992V544H1088V576H1312V544H1408V512H1440V448H1472V288H1440V224H1408V192H1312V160Z" fill="url(#glass)" fill-rule="evenodd" stroke="url(#edge)" stroke-width="2"/>
+  <path d="M1056 64H1344V96H1440V128H1504V192M864 256V192H896V128H960V96H1056V64" stroke="#E3D6F8" stroke-opacity=".25" stroke-width="4"/>
+  <path d="M1088 576H1312V544H1408V512H1440V448H1472" stroke="#6FD3FF" stroke-opacity=".2" stroke-width="4"/>
+  <path d="M992 32H1376V64H1472V96H1536V160H1568V224H1600M800 480V224H832V160H864V96H928V64H992" stroke="#A24BFF" stroke-opacity=".19"/>
+  <path d="M1088 96H1312V128H1408M864 288V448H896V512M1344 608H1408V576H1472" stroke="#E3D6F8" stroke-opacity=".1"/>
+
+  <!-- The refracted ribbon follows the same grid while the light stays soft. -->
+  <path d="M-64 800H160V832H416V800H544V736H672V672H800V608H928V544H1120V480H1312V448H1536V480H1664V608H1536V544H1312V512H1120V544H928V608H800V672H672V736H544V800H416V864H160V832H-64Z" fill="url(#trail)"/>
+  <path d="M-64 800H160V832H416V800H544V736H672V672H800V608H928V544H1120V480H1312V448H1536V480H1664" stroke="url(#edge)" stroke-opacity=".55"/>
+  <path d="M-64 832H160V864H416V800H544V736H672V672H800V608H928V544H1120V512H1312V544H1536V608H1664" stroke="url(#edge)" stroke-opacity=".2"/>
+
+  <path d="M96 576H256V608H288V928H256V960H96V928H64V608H96Z" fill="url(#slab)" stroke="#C8A6FF" stroke-opacity=".22"/>
+  <path d="M96 592H240V624H272V912H240V944H112V912H80V624H96Z" stroke="#E3D6F8" stroke-opacity=".1"/>
+  <path d="M80 736V624H112V592H192" stroke="#E3D6F8" stroke-opacity=".2" stroke-width="3"/>
+  <path d="M96 832H256V928H224V960H128V928H96Z" fill="url(#dither)" opacity=".65"/>
+
+  <path d="M1280 832H1632V1024H1248V864H1280Z" fill="url(#tile)" stroke="#FF3FC8" stroke-opacity=".23"/>
+  <path d="M1280 848H1600M1264 864V992" stroke="#E3D6F8" stroke-opacity=".16" stroke-width="3"/>
+  <path d="M1344 800H1664V992M1408 768H1696" stroke="#A24BFF" stroke-opacity=".18"/>
+  <rect x="1440" y="896" width="160" height="104" fill="url(#dither)" opacity=".4"/>
+
+  <!-- Sparse square constellations echo the original Anazori wordmark. -->
+  <g fill="#6FD3FF" fill-opacity=".26">
+    <path d="M784 96h8v8h8v8h-8v8h-8v-8h-8v-8h8zM1488 720h8v8h8v8h-8v8h-8v-8h-8v-8h8z"/>
+    <rect x="752" y="144" width="4" height="4"/><rect x="1536" y="704" width="4" height="4"/>
+    <rect x="528" y="912" width="8" height="8"/><rect x="560" y="944" width="4" height="4"/>
+  </g>
+  <g fill="#FF3FC8" fill-opacity=".28">
+    <rect x="384" y="464" width="8" height="8"/><rect x="352" y="496" width="4" height="4"/>
+    <rect x="1280" y="752" width="8" height="8"/><rect x="1312" y="720" width="4" height="4"/>
+    <rect x="1408" y="32" width="8" height="8"/>
+  </g>
+  <g fill="#E3D6F8" fill-opacity=".2">
+    <rect x="608" y="160" width="4" height="4"/><rect x="160" y="384" width="4" height="4"/>
+    <rect x="704" y="864" width="4" height="4"/><rect x="960" y="768" width="4" height="4"/>
+  </g>
+</svg>

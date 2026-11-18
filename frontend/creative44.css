@@ -1,0 +1,105 @@
+/* Anazori motion club: original art, live partner placards, and quiet navigation. */
+.creative-eyebrow{display:flex;align-items:center;gap:9px;font:10px/1.5 var(--mono);letter-spacing:.12em}
+.partner-parade{position:relative;isolation:isolate;display:grid;grid-template-columns:.85fr 1.15fr;align-items:center;gap:20px;padding:60px 6% 25px;margin:36px 0 48px;min-height:580px;border:1px solid #3c2b4526;border-radius:24px;background:#d8c8ed;color:#302537;overflow:hidden}
+.partner-parade:before{content:'';position:absolute;width:510px;height:510px;right:-100px;bottom:-190px;border:1px solid #38254128;border-radius:50%;z-index:-1;box-shadow:0 0 0 48px #38254105,0 0 0 96px #38254104}
+.partner-parade:after{content:'';position:absolute;left:6%;right:6%;bottom:38px;height:1px;background:#392a4326;z-index:-1}
+.parade-copy{align-self:stretch;display:flex;flex-direction:column;padding:22px 0 55px;position:relative;z-index:2}
+.parade-copy h3{font:500 clamp(29px,3.5vw,51px)/1.15 var(--festival-display);letter-spacing:-.055em;margin:30px 0 22px}
+.parade-copy h3 em{font:italic 1.26em/1 Georgia,serif;letter-spacing:-.065em}
+.parade-copy p{font-size:17px;line-height:1.6;margin:0;color:#4b3a52}
+.parade-doodle{display:block;font:100px/1 Georgia,serif;width:100px;margin:24px 0 12px;color:#64507d;transform:rotate(-15deg)}
+.parade-footnote{font:9px/1.7 var(--mono);letter-spacing:.1em;margin-top:auto}
+.placard-rig{position:relative;align-self:end;display:flex;flex-direction:column;align-items:center;transform-origin:54% 95%;padding-top:8px}
+.partner-placard{position:relative;z-index:2;width:100%;max-width:440px;padding:20px 26px 18px;border:1px solid #3b2a453b;border-radius:7px;background:#fffae9;box-shadow:5px 6px 0 #79628b,9px 12px 25px #4936571f;transform:rotate(-5deg)}
+.placard-topline{display:flex;justify-content:space-between;align-items:center;font:9px/1.5 var(--mono);letter-spacing:.07em;padding-bottom:12px;border-bottom:1px solid #3b2a452a}
+.placard-topline>span:last-child{font:23px/1 sans-serif}
+.placard-partners{display:grid;gap:8px}
+.placard-partner{display:flex;flex-direction:column;padding-top:16px;text-align:center;min-width:0;color:#302537;transition:background .2s}
+.placard-partner+.placard-partner{border-top:1px solid #3b2a4526}
+.placard-tier{font:10px/1.5 var(--mono);letter-spacing:.15em;text-transform:uppercase}
+.placard-logo{display:grid;place-items:center;min-height:100px;padding:15px}
+.placard-logo img{display:block;width:auto;height:auto;max-height:92px;max-width:100%;object-fit:contain;mix-blend-mode:multiply}
+.placard-logo strong{font:600 clamp(25px,3.4vw,42px)/1.1 var(--head);overflow-wrap:anywhere}
+.placard-name{display:flex;justify-content:space-between;align-items:center;font:500 14px/1.5 var(--head);text-transform:capitalize;padding:5px 0 10px}
+.placard-name>span{border:1px solid #3b2a4555;border-radius:50%;width:27px;height:27px;display:grid;place-items:center;transition:transform .2s}
+a.placard-partner:hover .placard-name>span{transform:rotate(45deg);background:#d6f379}
+.placard-bottomline{display:block;padding-top:13px;border-top:1px solid #3b2a452a;text-align:center;font:8px/1.5 var(--mono);letter-spacing:.13em}
+.placard-mascot{position:relative;display:block;width:320px;max-width:95%;height:auto;align-self:center;object-fit:contain;margin-top:-25px;margin-left:25%;filter:drop-shadow(0 15px 9px #3b264022)}
+.placard-invitation{display:block;padding:28px 0;font:500 30px/1.15 var(--head)}
+.placard-invitation>span{display:block;font:12px/1.5 var(--mono);margin-top:24px}
+.parade-sticker{position:absolute;bottom:74px;right:6%;width:88px;height:88px;display:grid;place-content:center;border:1px solid #3b2a45;background:#e3f59d;border-radius:50%;font:600 12px/1.4 var(--head);text-align:center;transform:rotate(12deg)}
+.scene-running .placard-rig{animation:placard-sway 5s ease-in-out infinite}
+@keyframes placard-sway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg) translateY(-4px)}}
+.sponsor-paper .sponsor-logo-holder{width:min(100%,420px);margin:0 auto;align-self:auto}
+.sponsor-paper .partner-placard{padding:15px 25px 10px;color:#302537;box-shadow:4px 5px 0 #0b5277,7px 10px 22px #003c592b;transform:rotate(3deg)}
+.sponsor-paper .placard-partner{padding-top:5px}
+.sponsor-paper .placard-mascot{width:230px;max-width:92%;margin-top:-12px;margin-left:22%;filter:drop-shadow(0 12px 9px #00395835)}
+.sponsor-paper .placard-logo{min-height:95px;padding:12px}
+.sponsor-paper .placard-logo img{max-height:100px}
+.sponsor-paper .placard-name{font-size:12px;padding-bottom:3px}
+.sponsor-paper .placard-partner:focus-visible{outline:2px solid #302537;outline-offset:4px}
+
+/* The preview and exported video share one 720 Ã— 1280 canvas renderer. */
+.festival-share-station.motion-studio{grid-template-columns:1.08fr .92fr;gap:7%;margin-top:80px;padding:75px 0 30px;border-top:1px solid #42344633;align-items:center;color:#302537}
+.motion-studio-copy{min-width:0}
+.motion-studio-copy .creative-eyebrow{font-size:9px;letter-spacing:.1em}
+.motion-studio-copy .creative-eyebrow>i{height:7px;width:7px;border-radius:50%;background:#75603e;box-shadow:0 0 0 4px #75603e14}
+.motion-studio h3{font:500 clamp(32px,4.2vw,60px)/1.12 var(--festival-display);letter-spacing:-.055em;margin:23px 0}
+.motion-studio h3 em{font:italic 1.25em/.85 Georgia,serif;letter-spacing:-.06em;color:#816090}
+.motion-studio-copy>p:not(.motion-spec):not(.share-feedback){font-size:16px;line-height:1.8;max-width:390px;color:#625468}
+.motion-event-label{display:flex;flex-direction:column;gap:12px;margin-top:30px;font:11px/1.5 var(--mono)}
+.motion-event-label>span{display:flex;gap:13px;color:#8b7a8b}.motion-event-label b{font:500 13px/1.5 var(--head);color:#392b41}
+.motion-event-label select{width:100%;min-height:54px;padding:14px 40px 14px 17px;background:#fff9eb;border:1px solid #77627b66;border-radius:8px;font:500 15px/1.4 var(--head);color:#392b41;cursor:pointer}
+.motion-palette{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0;margin:23px 0 28px;min-width:0}
+.motion-palette legend{font:500 13px/1.5 var(--head);margin-bottom:12px}.motion-palette legend>span{font:11px var(--mono);color:#8b7a8b;margin-right:13px}
+.motion-palette button{display:flex;align-items:center;gap:7px;padding:10px 11px;border:1px solid #75647b40;border-radius:30px;font-size:11px;color:#4b3b53;background:transparent;min-height:42px}
+.motion-palette button[aria-pressed=true]{background:#fff9eb;border-color:#4a3653;box-shadow:0 0 0 1px #4a3653}
+.motion-palette button>i{width:13px;height:13px;border-radius:50%;background:#d6fa7a;border:1px solid #0002}.motion-palette button[data-card-theme=afterhours]>i{background:#8f85e8}.motion-palette button[data-card-theme=sorbet]>i{background:#f3a480}
+.motion-actions{display:flex;align-items:center;gap:17px 22px;flex-wrap:wrap}.motion-actions .motion-download{justify-content:space-between;width:100%;min-height:56px;gap:35px;background:#33233e;color:#fff9ed;border:1px solid #33233e;border-radius:8px;font-size:14px;text-transform:none;letter-spacing:0;padding:16px 20px}.motion-download>span{font-size:23px}.motion-actions .motion-download:hover{background:#634974}.motion-actions .motion-download:disabled{opacity:.65;cursor:wait}
+#partners .motion-actions .text-link,#partners .motion-ready .text-link{color:#4d3b57;border-color:#89708c;font-size:12px;min-height:35px}.motion-actions .text-link:disabled{opacity:.55}
+.motion-spec{display:flex;flex-wrap:wrap;gap:8px 12px;font:9px/1.6 var(--mono);color:#746077;margin:18px 0 0}.motion-spec>span+span:before{content:'Â·';margin-right:12px}
+.motion-studio .share-feedback{font-size:12px;color:#4c3b56;line-height:1.6;min-height:20px;margin:12px 0 0;max-width:390px}
+.motion-progress{width:100%;height:5px;accent-color:#826092;margin-top:10px}
+.motion-viewer{min-width:0;width:100%;max-width:360px;justify-self:center;position:relative}
+.motion-viewer-top{display:flex;justify-content:space-between;gap:10px;font:8px/1.4 var(--mono);letter-spacing:.05em;color:#6e5c72;margin:0 0 15px}.motion-viewer-top>span:first-child{display:flex;align-items:center;gap:6px}.motion-viewer-top i{width:5px;height:5px;background:#568859;border-radius:50%}
+.motion-canvas-wrap{position:relative;padding:10px;border:1px solid #6f5c783b;border-radius:22px;background:#e5d9d0;box-shadow:0 24px 50px -24px #3f245355;transform:rotate(2deg)}
+.motion-canvas-wrap canvas{display:block;width:100%;height:auto;aspect-ratio:9/16;border-radius:14px;background:#d6f481}
+.motion-corner{position:absolute;width:27px;height:27px;border-color:#796486;border-style:solid;pointer-events:none}.corner-one{left:-6px;top:-6px;border-width:1px 0 0 1px;border-radius:7px 0 0 0}.corner-two{right:-6px;bottom:-6px;border-width:0 1px 1px 0;border-radius:0 0 7px 0}
+.motion-player{display:flex;align-items:center;gap:13px;margin:23px 0 0;font:8px/1 var(--mono);color:#6a5673}.motion-player button{width:34px;height:34px;border:1px solid #77627b55;border-radius:50%;display:grid;place-items:center;font-size:14px;color:#503959;flex-shrink:0}.motion-scrubber{height:2px;flex:1;background:#6a567329;overflow:hidden}.motion-scrubber>i{display:block;background:#655074;height:100%;width:0}
+.motion-preview-caption{text-align:center;font:italic 14px/1.5 Georgia,serif;color:#83698a;margin-top:12px}
+.motion-ready{margin-top:15px;display:flex;gap:14px;align-items:center;padding:12px;border:1px solid #74607d33;border-radius:8px}.motion-ready[hidden]{display:none}.motion-ready video{width:68px;height:120px;object-fit:contain;border-radius:5px;background:#211d28}.motion-ready a{line-height:1.5}
+
+/* Treasure Hunt gets its own world: a folded map and a moving trail. */
+.programme-theatre[data-category=adventure] .theatre-scenery,.programme-theatre[data-category=adventure] .crew-discovery,.programme-theatre[data-category=adventure] .crew-cable{visibility:hidden}
+[data-programme-pane=treasure-hunt] .theatre-numeral{font-size:150px;opacity:.3}
+.treasure-scene.theatre-character{height:100%;width:100%;display:flex;flex-direction:column;justify-content:center;align-self:center;margin:0}
+.treasure-overline{font:9px/1.4 var(--mono);letter-spacing:.18em;color:#c3cbb5;margin:4px 0 4px 7%}
+.treasure-map{width:100%;height:auto;max-height:330px;overflow:visible}
+.treasure-map-note{display:flex;align-items:center;gap:9px;font:9px/1.5 var(--mono);letter-spacing:.09em;color:#d9d6b8;margin:0 0 10px 7%}.treasure-map-note i{height:5px;width:5px;background:#d8e999;border-radius:50%}
+.treasure-island{transform-origin:50% 60%}.treasure-needle{transform-origin:0 0}
+.scene-running .treasure-island{animation:map-float 5s ease-in-out infinite}.scene-running .treasure-route{animation:clue-trail 8s linear infinite}.scene-running .treasure-needle{animation:compass-search 6s ease-in-out infinite}
+@keyframes map-float{50%{transform:translateY(-7px) rotate(1deg)}}@keyframes clue-trail{to{stroke-dashoffset:-56}}@keyframes compass-search{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(25deg)}}
+
+/* Keep the original engraved navigation; retain keyboard focus and scroll locking. */
+body.navigation-open{overflow:hidden}
+.menu-backdrop{display:none}
+@media screen and (max-width:960px){
+ .menu-backdrop{display:block;position:fixed;inset:0;z-index:101;background:#08001370;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transition:opacity .22s ease;touch-action:none}
+ .menu-backdrop[hidden]{display:none}
+ .navigation-open .menu-backdrop{opacity:1}
+ .site-header,.page-home .site-header{z-index:103}
+ .mobile-nav{z-index:102}
+ /* The full-screen layer already blurs the page behind this panel. */
+ body.reference-background #mobile-menu.mobile-nav:not([hidden]){-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media (prefers-reduced-motion:reduce){.menu-backdrop{transition:none}}
+@media (prefers-reduced-transparency:reduce){.menu-backdrop{background:#080013f5;-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (forced-colors:active){.menu-backdrop{background:Canvas;opacity:.95;-webkit-backdrop-filter:none;backdrop-filter:none}}
+.partner-parade a:focus-visible,.motion-studio :is(a,button,select):focus-visible{outline:2px solid #846198;outline-offset:5px}
+.scene-dormant .placard-rig,.scene-dormant .treasure-island,.scene-dormant .treasure-route,.scene-dormant .treasure-needle{animation-play-state:paused}
+.motion-paused :is(.placard-rig,.treasure-island,.treasure-route,.treasure-needle){animation-play-state:paused!important}
+
+@media(max-width:900px){.partner-parade{padding:32px 6% 20px;grid-template-columns:.9fr 1.1fr;min-height:500px;gap:10px}.parade-copy h3{font-size:30px}.parade-copy p{font-size:14px}.placard-mascot{width:270px}.partner-placard{padding:15px 20px}.parade-sticker{width:68px;height:68px;font-size:10px;right:4%;bottom:60px}.placard-bottomline{font-size:6px}.parade-footnote{font-size:8px}.festival-share-station.motion-studio{gap:7%;padding-top:50px}.motion-studio h3{font-size:34px}.motion-studio-copy>p:not(.motion-spec):not(.share-feedback){font-size:14px}.motion-palette button{padding:9px;font-size:10px}.motion-viewer-top{font-size:7px;gap:8px}}
+@media(max-width:600px){.partner-parade{grid-template-columns:1fr;padding:30px 25px 18px;gap:0;border-radius:17px;overflow:hidden}.parade-copy{padding:0 0 28px}.parade-copy h3{font-size:33px;margin:17px 0 12px}.parade-copy p{margin:0;font-size:14px}.parade-doodle{position:absolute;right:1px;bottom:38px;font-size:70px;width:70px;margin:0}.parade-footnote{display:none}.placard-rig{width:92%;justify-self:center}.partner-placard{padding:16px 22px}.placard-mascot{width:260px;margin-top:-22px;margin-left:23%}.placard-logo{min-height:95px}.parade-sticker{right:auto;left:22px;bottom:73px;width:73px;height:73px}.creative-eyebrow{font-size:8px}.festival-share-station.motion-studio{grid-template-columns:1fr;gap:34px;margin-top:48px;padding-top:38px}.motion-studio-copy{width:100%}.motion-studio h3{font-size:39px}.motion-studio-copy>p:not(.motion-spec):not(.share-feedback){max-width:100%}.motion-event-label{margin-top:25px}.motion-palette{margin-bottom:24px}.motion-palette button{padding:10px 14px;font-size:11px}.motion-viewer{width:85%;max-width:310px}.motion-viewer-top{font-size:7px}.motion-spec{font-size:8px}.motion-canvas-wrap{transform:rotate(1.5deg)}
+ .treasure-map{max-height:310px}.treasure-overline{font-size:8px}.treasure-map-note{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.scene-running .placard-rig,.scene-running .treasure-island,.scene-running .treasure-route,.scene-running .treasure-needle{animation:none!important}.placard-name>span{transition:none!important}}

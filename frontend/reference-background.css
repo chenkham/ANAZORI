@@ -1,0 +1,18 @@
+/* Background copied verbatim from the supplied anazori-coming-soon.html. */
+html { min-height: 100%; background: #08090e; }
+body.reference-background {
+  background: radial-gradient(ellipse at 0% 0%, rgba(255,255,255,.78) 0%, rgba(214,191,255,.42) 13%, rgba(139,76,224,.24) 30%, transparent 53%), radial-gradient(ellipse at 100% 100%, rgba(239,226,255,.30) 0%, rgba(145,78,222,.25) 20%, transparent 49%), linear-gradient(135deg, #181020 0%, #090910 48%, #140d21 100%);
+  background-attachment: fixed;
+}
+/* Let the page backdrop continue through the dark sections and public pages.
+   Cards, the sponsor poster and the interactive record retain their own surfaces. */
+.reference-background :is(.hero,.festival-clock,.intro,.experiences,.memories,.visit,.site-footer,.event-list,.gallery-section,.team-section,.event-detail,.detail-next) {
+  background: transparent;
+}
+.reference-background .hero::before,
+.reference-background .hero::after {
+  content: none;
+}
+@media print {
+  html,body.reference-background { background: #fff !important; }
+}

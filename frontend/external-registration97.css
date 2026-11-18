@@ -1,0 +1,21 @@
+.external-registration97{max-width:1200px;margin-inline:auto;min-height:65svh}
+.external-registration97 h1{overflow-wrap:anywhere}
+.external-registration97 h2{font-size:clamp(24px,4vw,36px);margin-top:30px}
+.registration-game-grid97{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px}
+.registration-game-card97{display:flex;flex-direction:column;gap:24px;min-width:0;padding:28px 24px;border:1px solid var(--accent-border,#b794ed66);border-radius:4px 24px 4px 4px;background:#140a2ee6;color:var(--pdf-text,#ead8f5);text-decoration:none;transition:transform .2s,border-color .2s}
+.registration-game-card97 strong{font-size:clamp(24px,4vw,36px);line-height:1.2;overflow-wrap:anywhere}
+.registration-game-card97>span:last-child{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
+.registration-game-card97 .action-emblem{flex-shrink:0}
+.registration-game-card97:is(:hover,:focus-visible){transform:translateY(-3px);border-color:var(--accent-text,#e9b7ff)}
+.registration-game-card97:focus-visible{outline:2px solid var(--accent-text,#e9b7ff);outline-offset:5px}
+@media(max-width:700px){.registration-game-grid97{grid-template-columns:1fr;gap:14px}.registration-game-card97{padding:22px;gap:18px}}
+@media(prefers-reduced-motion:reduce){.registration-game-card97{transition:none}.registration-game-card97:is(:hover,:focus-visible){transform:none}}
+
+.joystick-registration105{width:min(960px,calc(100% - 32px));max-height:calc(100dvh - 32px);margin:auto;padding:64px 32px 32px;overflow:auto;overscroll-behavior:contain;border:1px solid var(--accent-border,#b794ed66);border-radius:4px 24px 4px 4px;background:var(--pdf-panel,#140a2e);color:var(--pdf-text,#ead8f5)}
+.joystick-registration105::backdrop{background:#080610e6}
+.joystick-registration105 h2{font-size:clamp(30px,4vw,48px);line-height:1.1;margin-bottom:14px;overflow-wrap:anywhere}
+.joystick-registration105 .dialog-close{position:absolute;top:12px;right:12px;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--accent-border,#b794ed66);border-radius:4px;background:#24123d;color:var(--pdf-text,#ead8f5)}
+.joystick-registration105 .dialog-intro{max-width:62ch;color:var(--pdf-muted,#c7b8da)}
+.joystick-registration105 .registration-game-card97{min-height:180px}
+.joystick-registration105 :focus-visible{outline:2px solid var(--pdf-link,#d5aaff);outline-offset:4px}
+@media(max-width:700px){.joystick-registration105{width:calc(100% - 24px);max-height:calc(100dvh - 24px);padding:64px 20px 24px}.joystick-registration105 .registration-game-card97{min-height:144px}}

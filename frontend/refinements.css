@@ -1,0 +1,82 @@
+@import './display-font.css';
+/* A shared display face; body copy stays compact and readable. */
+:root{--festival-display:'Satoshi',Arial,sans-serif}
+h1,h2,.event-card h3,.atlas-event-copy>strong,.detail-copy h1,.flash-wordmark,.brand{font-family:var(--festival-display);font-weight:500;letter-spacing:-.025em}
+.account-story h1,.account-card h2,.checkout-grid h1,.dashboard-heading h1,.order-card h2,.digital-pass h1,.interest-dialog h2,.detail-next h2{font-family:var(--festival-display);letter-spacing:-.025em}
+.hero-wordmark #hero-title{font-family:var(--festival-display);font-size:clamp(50px,10.8vw,184px);font-weight:800;letter-spacing:-.02em;line-height:1.13;gap:clamp(12px,2vw,30px)}
+.hero-wordmark .edition-badge{font-family:var(--festival-display);font-size:clamp(20px,3vw,50px);font-weight:700;letter-spacing:-.04em}
+.brand{font-size:21px;letter-spacing:-.04em}
+.hero-copy h2{font-size:clamp(31px,3.9vw,62px);line-height:1.14;letter-spacing:-.055em}
+.section-heading h2,.intro h2,.visit h2,.footer-top h2{font-size:clamp(28px,3.8vw,60px);line-height:1.17;letter-spacing:-.05em;text-wrap:balance}
+.page-intro h1{font-size:clamp(34px,5.6vw,86px);line-height:1.17;text-wrap:balance}
+.detail-copy h1{font-size:clamp(32px,4vw,62px);line-height:1.18;overflow-wrap:anywhere}
+.clock-card h2{font-size:clamp(24px,2.4vw,38px);line-height:1.25}
+.duration-await{font-family:var(--festival-display);font-size:clamp(24px,3.1vw,45px);line-height:1.3}
+.culture-half h2{font-family:Georgia,serif;font-weight:700}
+.tech-half h2{font-family:var(--festival-display);font-size:clamp(43px,5.7vw,86px);letter-spacing:-.055em}
+.team-section h2,.programme-banner h2{font-size:clamp(22px,2.5vw,38px);line-height:1.25}
+.footer-wordmark{font-family:var(--festival-display);font-size:12vw;letter-spacing:-.065em;line-height:1.2;font-weight:800}
+
+/* Wordless energy conduit. All travelling layers animate only transform/opacity. */
+.ticker.energy-conduit{height:70px;padding:0;position:relative;isolation:isolate;background:radial-gradient(ellipse at 50% 50%,#557e9b14,transparent 65%),#091321;border-block:1px solid #b5cadb30;overflow:hidden}
+.energy-conduit::before{content:'';position:absolute;inset:15px 0;background:repeating-linear-gradient(90deg,transparent 0 70px,#9af0e021 70px 71px,transparent 71px 80px);clip-path:polygon(0 50%,4% 15%,21% 15%,24% 50%,65% 50%,68% 85%,88% 85%,91% 50%,100% 50%,100% 55%,91% 55%,88% 90%,68% 90%,65% 55%,24% 55%,21% 20%,4% 20%,0 55%)}
+.conduit-rail{position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,#7fe4dc66,#a899ef66,transparent)}
+.conduit-rail::before,.conduit-rail::after{content:'';position:absolute;width:46%;height:10px;left:17%;top:-15px;border-top:1px solid #b3a2f740;border-inline:1px solid #b3a2f740;transform:skewX(-40deg)}
+.conduit-rail::after{left:42%;width:33%;top:5px;transform:rotate(180deg) skewX(-40deg)}
+.energy-packet{position:absolute;left:0;top:calc(50% - 9px);width:100%;height:18px;animation:conduit-flight var(--beam-cycle,6s) linear infinite;pointer-events:none}
+.energy-packet::before{content:'';position:absolute;left:-240px;width:240px;height:18px;background:linear-gradient(90deg,transparent,#8b77de55 35%,#96f7e7 80%,#f2ffe8);clip-path:polygon(0 44%,68% 40%,88% 0,100% 50%,88% 100%,68% 60%,0 56%)}
+.energy-packet::after{content:'';position:absolute;left:-90px;top:8px;width:85px;height:2px;background:#e8fff3;box-shadow:0 0 12px 4px #93f4e84a}
+.energy-packet:nth-of-type(3){animation-delay:calc(var(--beam-cycle,6s) / -2);animation-duration:calc(var(--beam-cycle,6s) * 1.3);top:calc(50% + 11px);opacity:.45}
+@keyframes conduit-flight{from{transform:translateX(-10%);opacity:0}8%{opacity:1}90%{opacity:1}to{transform:translateX(calc(100% + 240px));opacity:0}}
+
+/* A jewel-cornered cinema frame, ready for the real film in Studio settings. */
+.intro,.intro:has(.video-stage.is-blank){grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:clamp(28px,5vw,80px)}
+.intro h2{font-size:clamp(26px,3vw,44px);line-height:1.2}
+.intro-content{min-width:0}
+.intro .connection-art.video-stage,.intro .connection-art.video-stage.is-blank{position:relative;display:block;visibility:visible;opacity:1;width:100%;height:auto;min-height:0;aspect-ratio:16/9;margin:0;padding:13px;border:1px solid #b5a0e874;border-radius:16px;background:linear-gradient(145deg,#a3ddda13,#a58cda15),#0b1220;box-shadow:0 20px 60px #0003,inset 0 0 0 5px #090e1b;overflow:visible;transform:none;clip-path:none}
+.video-stage .sculpture-grid,.video-stage .sculpture-fallback,.video-stage .sculpture-corner{display:none}
+.connection-art .intro-video-wrapper,.connection-art .intro-video-blank{position:absolute;inset:13px;width:calc(100% - 26px);height:calc(100% - 26px);max-height:none;border:1px solid #a7cdd535;border-radius:6px;overflow:hidden;opacity:1;display:block;background:#090f1d}
+.connection-art.is-blank .intro-video-blank{inset:13px;width:calc(100% - 26px);height:calc(100% - 26px);background:radial-gradient(ellipse at 50% 55%,#4b46765c,transparent 65%),linear-gradient(130deg,#101d2b,#171327);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.intro-video-player,.intro-video-iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border:0}
+.film-placeholder-art{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.film-placeholder-art::before,.film-placeholder-art::after{content:'';width:58%;aspect-ratio:1;border:1px solid #bfa6f53b;border-radius:50%;position:absolute;transform:rotateX(62deg) rotate(-20deg)}
+.film-placeholder-art::after{width:74%;transform:rotateX(62deg) rotate(20deg);border-color:#82dacd30}
+.film-placeholder-play{width:58px;height:58px;display:grid;place-items:center;border:1px solid #d8bded8c;border-radius:50%;background:#c7bbf210;box-shadow:0 0 30px #a895ed14;color:#dcecff;position:relative}
+.film-placeholder-play svg{width:20px;height:20px;fill:currentColor;stroke:none;margin-left:3px}
+.film-placeholder-label{position:relative;font:11px/1.5 var(--mono);letter-spacing:.07em;color:#c6d3e9;text-align:center;padding-inline:12px;margin-top:100px}
+.arcane-frame{position:absolute;inset:-3px;z-index:5;pointer-events:none;border-radius:inherit}
+.arcane-frame i{position:absolute;width:68px;height:68px;background:url('/assets/2026/arcane-corner.svg') top left/contain no-repeat}
+.arcane-frame i:nth-child(1){left:0;top:0}.arcane-frame i:nth-child(2){right:0;top:0;transform:rotate(90deg)}
+.arcane-frame i:nth-child(3){right:0;bottom:0;transform:rotate(180deg)}.arcane-frame i:nth-child(4){left:0;bottom:0;transform:rotate(270deg)}
+.video-stage>.arcane-frame{inset:-8px}.video-stage>.arcane-frame i{width:82px;height:82px}
+
+/* Festival relics: metallic corner tracery, inset rims and a category-coloured seam. */
+.event-list{padding-top:48px}
+.event-card,.person-card{position:relative;border-radius:15px;border:1px solid #b9b3d34d;background:linear-gradient(155deg,#202a3a,#141a2b 58%,#211e32);clip-path:none;overflow:visible;box-shadow:0 18px 40px #02071538,inset 0 0 0 4px #090e1766}
+.event-card::before,.person-card::before{content:'';display:block;position:absolute;inset:7px;width:auto;height:auto;border:1px solid #c3c8e026;border-radius:9px;z-index:2;pointer-events:none;background:none}
+.event-card::after,.person-card::after{content:'';position:absolute;left:24%;right:24%;height:2px;top:-1px;bottom:auto;background:linear-gradient(90deg,transparent,var(--card-accent,#c3a5ec),transparent);clip-path:none;border:0;border-radius:0;box-shadow:none;opacity:.9}
+.event-card::before,.event-card::after,.person-card::before,.person-card::after{transform:none;rotate:none;translate:none;scale:none;animation:none}
+.event-card::after,.person-card::after{width:auto}
+.event-card:hover,.person-card:hover{border-color:#c8b8efaa;background:linear-gradient(155deg,#263447,#181d30 58%,#2b2340);box-shadow:0 18px 40px #02071538,inset 0 0 0 4px #090e1766}
+.event-card-link{padding:15px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:100%;border-radius:inherit}
+.event-art{border:1px solid #bfd8df4d;border-radius:7px;overflow:hidden}
+.event-art::before{inset:7px;border-radius:3px;border-color:#e6e5f33b}
+.event-card-body{margin:14px 0 0;padding:21px 8px 9px;display:flex;flex-direction:column;flex:1}
+.event-card h3{font-family:var(--festival-display);font-size:clamp(19px,1.75vw,27px);font-weight:500;letter-spacing:-.025em;line-height:1.25;overflow-wrap:anywhere;text-wrap:balance}
+.event-card-body>p{margin-top:15px;margin-bottom:18px;font-size:14px;line-height:1.75}
+.event-card-foot{margin-top:auto;padding-top:18px;font-size:11px}
+.event-card .card-arrow{bottom:14px;right:14px}
+.person-card{padding:17px 17px 26px;color:#eef4ff}
+.person-card:nth-child(n){background:linear-gradient(150deg,#212b3a,#151b2b 55%,#251e33)}
+.person-photo{border:1px solid #d3bcdf73;border-radius:8px;position:relative}
+.person-photo::after{content:'';position:absolute;inset:7px;border:1px solid #f3dfca45;border-radius:3px;pointer-events:none}
+.person-photo img{filter:none;border-radius:inherit}
+.person-card>.arcane-frame i{width:53px;height:53px}
+.person-card h3{font-size:clamp(19px,1.65vw,27px);line-height:1.25;margin:22px 6px 9px;color:#f2f4ff}
+.person-card p{color:#bec9de;margin-inline:6px}.person-card .person-edition{color:#b4a4d1}
+.person-card a{color:#b6f1e2;margin-inline:6px}
+
+.motion-outside .energy-packet,.motion-paused .energy-packet{animation-play-state:paused}
+@media(max-width:960px){.intro,.intro:has(.video-stage.is-blank){grid-template-columns:1fr;gap:48px}.intro-content{max-width:720px}.connection-art{max-width:760px;justify-self:center}.hero-wordmark #hero-title{font-size:11vw}.hero-copy h2{font-size:clamp(29px,4.3vw,44px)}}
+@media(max-width:700px){.hero-wordmark #hero-title{font-size:13vw;display:block;line-height:1.12;letter-spacing:-.02em}.hero-wordmark .edition-badge{font-size:25px;margin-top:12px}.brand{font-size:16px}.hero-copy h2{font-size:clamp(27px,7.1vw,40px)}.section-heading h2,.intro h2,.visit h2,.footer-top h2{font-size:clamp(26px,6.8vw,38px)}.page-intro h1{font-size:clamp(30px,8.5vw,48px)}.tech-half h2{font-size:clamp(35px,9.7vw,57px)}.energy-conduit.ticker{height:52px}.event-list{padding-top:32px}.event-card h3{font-size:clamp(20px,5.4vw,28px)}.brand-stage{height:190px}.brand-orbits i{width:230px;height:150px}.brand-orbits i:nth-child(2){width:210px;height:120px}.brand-orbits i:nth-child(3){width:170px;height:170px}.partner-logo-card.brand-showcase{padding:22px}.brand-stage>.redbull-preview-wordmark{font-size:52px}.video-stage>.arcane-frame i{width:62px;height:62px}.film-placeholder-label{font-size:10px}.footer-wordmark{font-size:12vw}}
+@media(prefers-reduced-motion:reduce){.energy-packet,.brand-orbits i,.brand-stage>img,.brand-stage>.redbull-preview-wordmark{animation:none!important}.energy-packet{transform:translateX(55%);opacity:.7}}

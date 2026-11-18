@@ -1,0 +1,31 @@
+/* Motion has no layout cost: no pins, spacer elements or altered scrolling. */
+.motion-outside, .motion-outside::before, .motion-outside::after,
+.motion-outside *, .motion-outside *::before, .motion-outside *::after { animation-play-state: paused !important; }
+/* Same border glint path, using a compositor translation rather than relaying out `left`. */
+.clock-card::after, .sponsor-card::after { animation-name: edge-travel-composited; }
+@keyframes edge-travel-composited {
+  0%,15% { transform: translateX(0); opacity: 0; }
+  30% { opacity: 1; }
+  65%,100% { transform: translateX(242.857%); opacity: 0; }
+}
+.scroll-motion-enabled .hero-media { overflow: hidden; }
+.scroll-motion-enabled .festival-clock { overflow-x: clip; }
+.scroll-motion-enabled .memory-main { overflow: hidden; }
+.atlas-scroll-light { display: none; }
+.scroll-motion-enabled .atlas-scroll-light {
+  display: block; position: absolute; inset: 0 auto 0 0; width: 32%;
+  background: linear-gradient(90deg,transparent,#83f4ed08 65%,#83f4ed22 99%,transparent);
+  pointer-events: none; border-right: 1px solid #b6fff729;
+}
+/* Keyboard interaction brings the whole animated control into a readable pose immediately. */
+[data-scroll-motion]:focus-within { opacity: 1 !important; translate: 0px 0px !important; rotate: 0deg !important; scale: 1 !important; }
+@media (max-width:760px) {
+  .scroll-motion-enabled .atlas-scroll-light { opacity: .5; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .scroll-motion-enabled .atlas-scroll-light { display: none; }
+}
+@media print {
+  [data-scroll-motion] { translate: none !important; rotate: none !important; scale: none !important; opacity: 1 !important; }
+  .scroll-motion-enabled .atlas-scroll-light { display: none; }
+}

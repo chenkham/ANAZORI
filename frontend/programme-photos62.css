@@ -1,0 +1,29 @@
+/* The original photograph leads; its existing event artwork overlaps the lower right. */
+.programme-photo-theatre{container-type:inline-size}
+.programme-photo-theatre .programme-pane{min-height:0}
+.programme-photo-theatre .theatre-art.programme-photo-scene{display:block;height:auto;min-height:0;aspect-ratio:1.48;padding:0}
+.programme-photo-frame{position:absolute;left:6%;top:10%;width:88%;height:76%;border:clamp(4px,1cqw,7px) solid #e5d7b4;transform:rotate(-5deg);background:#211c2e;box-shadow:0 9px 0 #0b0e1740,0 16px 32px #08090e30;z-index:1;overflow:hidden}
+.programme-event-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.programme-photo-frame.is-awaiting-photo{background:radial-gradient(ellipse at 20% 10%,#c5a5e31a,transparent 65%),linear-gradient(140deg,#2c233c,#171722)}
+.programme-photo-placeholder{position:absolute;inset:0;display:grid;place-content:center;padding:12%;font:600 clamp(18px,5cqw,32px)/1.2 var(--sans);text-align:center;color:#e3d3f140;overflow-wrap:anywhere}
+.programme-companion{position:absolute;right:0;bottom:0;width:36%;height:66%;z-index:3;pointer-events:none;filter:drop-shadow(0 6px 4px #08090e30)}
+.programme-photo-theatre .programme-companion>.theatre-character{position:relative;width:100%;height:100%;max-width:none;margin:0;align-self:auto;justify-self:auto;object-position:center bottom}
+.programme-companion>.content-performance>img{object-position:center bottom}
+.programme-companion .gaming-mlbb{inset:0;width:100%;height:100%;transform:none}
+.programme-companion .gaming-mlbb img{width:100%;height:100%;max-height:none;object-position:center bottom}
+.programme-companion .gaming-mlbb>span{display:none}
+.programme-photo-theatre .programme-companion>.treasure-scene{justify-content:end}
+.programme-companion .treasure-map{width:100%;max-height:100%;height:auto}
+.programme-companion :is(.treasure-overline,.treasure-map-note){display:none}
+.programme-photo-theatre .theatre-caption{padding:24px 6% 0}
+.programme-photo-theatre .crew-discovery{top:calc(100cqw / 1.48 - 88px);left:0;width:90px;height:104px}
+.programme-photo-theatre .crew-discovery .festival-character{width:84px}
+.programme-photo-theatre .crew-cable{top:calc(100cqw / 1.48 - 28px);left:0;width:59%}
+.programme-photo-theatre[data-category=adventure] .theatre-scenery{visibility:visible}
+@media(max-width:700px){
+ .programme-photo-theatre .theatre-caption{padding-top:20px}
+ .programme-photo-theatre .crew-discovery{top:calc(100cqw / 1.48 - 78px);width:72px;height:90px}
+ .programme-photo-theatre .crew-discovery .festival-character{width:68px}
+ .programme-photo-theatre .crew-cable{top:calc(100cqw / 1.48 - 24px)}
+ .programme-photo-theatre .programme-swipe-controls{margin-top:26px}
+}

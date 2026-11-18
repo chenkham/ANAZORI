@@ -1,0 +1,74 @@
+/* Reversible colour trial. Remove this import to restore the original sponsor palette.
+   The folded poster, mascot, brand artwork, typography and geometry stay intact. */
+body.reference-background #partners {
+  --ink: #e3d6f8; --paper: #140a2e; --mint: #6fd3ff; --orange: #ff3fc8;
+  --lilac: #c8a6ff; --pink: #ffc8f5; --line: #a24bff45; --muted: #b9a4e8;
+  --panel: #140a2e; --frame: #c8a6ff35; --cyan: #6fd3ff;
+  --accent: #a24bff; --accent-hover: #b567ff; --accent-text: #c8a6ff;
+  --accent-ink: #c8a6ff; --accent-link: #c8a6ff; --accent-focus: #6fd3ff;
+  --accent-pink: #ff3fc8; --accent-cyan: #6fd3ff;
+  --accent-border: #a24bff66; --accent-wash: #a24bff16;
+  color: var(--pdf-text);
+  background: radial-gradient(ellipse at 85% 8%,#a24bff15,transparent 48%),linear-gradient(145deg,#140a2ee8,#080712eb);
+  border-color: #a24bff40;
+}
+body.reference-background #partners .section-heading h2 { color: var(--pdf-heading); }
+body.reference-background #partners .section-heading h2>span { color: var(--pdf-link); }
+body.reference-background #partners .sponsor-poster-wall {
+  background: linear-gradient(110deg,#211336,#443063 48%,#25183f);
+}
+body.reference-background #partners .locker-seams i {
+  border-color: #140a2e80; box-shadow: inset -3px 0 #c8a6ff25;
+}
+body.reference-background #partners .locker-seams i::before,
+body.reference-background #partners .locker-seams i::after {
+  background: repeating-linear-gradient(#211336 0 4px,#9e89c2 5px 6px,transparent 8px 12px);
+}
+body.reference-background #partners .sponsor-paper {
+  color: #f4edff;
+  background: linear-gradient(90deg,#695491,#8d79b4 49.8%,#7c68a4 50%,#615081);
+  box-shadow: 8px 15px 0 #03001025,0 22px 40px #03001055;
+}
+body.reference-background #partners .sponsor-paper::before {
+  background: linear-gradient(0deg,transparent 48%,#140a2e33 49%,#f5ebff22 50%,transparent 53%),linear-gradient(90deg,transparent 49%,#f5ebff33 50%,#140a2e22 51%,transparent 53%);
+}
+body.reference-background #partners .paper-tape { background: #e3d6f8eb; }
+body.reference-background #partners .sponsor-paper .partner-placard {
+  background: #f1ebfc; color: #302537; border-color: #3025373b;
+  box-shadow: 4px 5px 0 #38254f,7px 10px 22px #140a2e45;
+}
+body.reference-background #partners .sponsor-paper .placard-mascot { filter: drop-shadow(0 12px 9px #140a2e35); }
+body.reference-background #partners a.placard-partner:hover .placard-name>span { background: #d9c4fa; }
+body.reference-background #partners .poster-partner-link { background: #302046; color: #f4edff; }
+body.reference-background #partners .sponsor-bento>* { border-color: #a24bff50; }
+body.reference-background #partners .sponsor-bento>article::after { border-color: #c8a6ff30; }
+body.reference-background #partners .bento-invitation {
+  background: radial-gradient(ellipse at 100% 0,#ff3fc81a,transparent 65%),linear-gradient(135deg,#2e1649,#1c1031);
+}
+body.reference-background #partners .bento-signal { background: linear-gradient(145deg,#182b40,#13152d); color: #e3d6f8; }
+body.reference-background #partners .bento-signal::after { border-color: #6fd3ff3a !important; }
+body.reference-background #partners .bento-ticket {
+  background: radial-gradient(ellipse at 100% 0,#a24bff30,transparent 75%),#1d1233; color: #e3d6f8;
+}
+body.reference-background #partners .bento-ticket-art { border-color: #c8a6ff70; color: #c8a6ff; }
+body.reference-background #partners .bento-ticket-art::before,
+body.reference-background #partners .bento-ticket-art::after { background: #1d1233; border-color: #c8a6ff70; }
+body.reference-background #partners .ticket-barcode { background: repeating-linear-gradient(90deg,#c8a6ff 0 2px,transparent 2px 5px,#c8a6ff 5px 6px,transparent 6px 9px); }
+body.reference-background #partners :is(.connect-copy h3,.bento-signal h3,.bento-ticket h3,.collaboration-heading h3,.keepsake-heading h3) { color: var(--pdf-heading); }
+body.reference-background #partners :is(.connect-copy>p,.bento-signal p,.bento-ticket p,.collaboration-heading p,.collaboration-card p,.keepsake-heading p,.keepsake-actions label,.share-feedback) { color: var(--pdf-muted); }
+body.reference-background #partners :is(.bento-contact,.collaboration-invitation) { background: #1a102bcc; color: var(--pdf-text); border-color: #a24bff55; }
+body.reference-background #partners :is(.collaboration-section,.keepsake-studio) { border-color: #a24bff40; color: var(--pdf-text); }
+body.reference-background #partners .collaboration-card { background: #1b112d; border-color: #a24bff45; }
+body.reference-background #partners .collaboration-card:hover { border-color: var(--pdf-cyan); }
+body.reference-background #partners .collaboration-kind { color: var(--pdf-cyan); }
+body.reference-background #partners .keepsake-name-row input { background: #10091e; border-color: #a24bff66; color: var(--pdf-text); }
+body.reference-background #partners .keepsake-name-row input::placeholder { color: var(--pdf-muted); }
+body.reference-background #partners :is(.bento-invitation .button,.keepsake-download) { background: var(--pdf-violet); border-color: var(--pdf-violet); color: #fff; }
+body.reference-background #partners :is(.bento-invitation .button,.keepsake-download):is(:hover,:focus-visible) { background: #b567ff; border-color: #b567ff; }
+body.reference-background #partners .keepsake-stage { border-color: #a24bff66; box-shadow: 0 20px 45px -28px #03001080; }
+body.reference-background #partners .keepsake-save-again { color: var(--pdf-link); }
+body.reference-background #partners .keepsake-feedback progress { accent-color: var(--pdf-violet); }
+@media (forced-colors:active) {
+  body.reference-background #partners { background: Canvas; color: CanvasText; }
+  body.reference-background #partners :is(.collaboration-card,.bento-contact,.collaboration-invitation,.keepsake-name-row input) { background: Canvas; color: CanvasText; border-color: CanvasText; }
+}

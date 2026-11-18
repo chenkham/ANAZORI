@@ -1,0 +1,13 @@
+[
+  {
+    "files": ["roz-code-still.svg", "roz-code-motion.svg"],
+    "description": "Original flat vector rendition inspired by Roz, created in SVG for the coding scene. Not official DreamWorks character artwork.",
+    "reference": "https://www.thewildrobotmovie.com/",
+    "raster": false
+  },
+  {
+    "files": ["link.svg", "kirby.svg"],
+    "description": "Original small vector renditions for the optional festival passport. Not official Nintendo character artwork.",
+    "raster": false
+  }
+]

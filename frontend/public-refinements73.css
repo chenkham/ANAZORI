@@ -1,0 +1,35 @@
+/* Satoshi for public text; the supplied wordmark and handwritten hero signature remain artwork. */
+body.reference-background { --mono: Satoshi,Arial,sans-serif; }
+body.reference-background :is(p,a,button,input,textarea,select,label,summary,small,output),
+body.reference-background :is(.serif-word,.programme-heading em,.culture-half h2,.footer-top h2>em,.poster-masthead,.poster-colophon) { font-family: var(--sans); }
+body.reference-background .programme-photo-theatre .programme-source-art { object-fit: contain; object-position: center bottom; }
+body.reference-background img[src$="parliament-voice73.png"] { filter: brightness(2.8) drop-shadow(0 0 12px #c8a6ff30); }
+body.reference-background #partners { --muted: #e1dbea; --pdf-muted: #e1dbea; --pdf-text: #faf7ff; }
+body.reference-background #partners :is(.connect-copy h3,.bento-signal h3,.bento-ticket h3,.collaboration-heading h3,.collaboration-card h4,.keepsake-heading h3) { color: #faf7ff; }
+body.reference-background #partners :is(.connect-copy>p,.bento-signal p,.bento-ticket p,.collaboration-heading p,.collaboration-card p,.keepsake-heading p,.keepsake-actions label,.share-feedback) { color: #e9e3f2; }
+body.reference-background #partners .bento-ticket-art { background: #d9caf4; color: #35204f; border-color: #a992ce; }
+body.reference-background #partners .ticket-barcode { background: repeating-linear-gradient(90deg,#35204f 0 2px,transparent 2px 5px,#35204f 5px 6px,transparent 6px 9px); }
+
+/* Frosted colour pools sit underneath the label, keeping its contrast stable. */
+body.reference-background #partners .keepsake-actions .keepsake-download {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: radial-gradient(ellipse at 5% 0,#6fd3ff65,transparent 52%),radial-gradient(ellipse at 100% 100%,#ff3fc85c,transparent 58%),linear-gradient(115deg,#372a72ed,#662cb2ed 60%,#792b8fed);
+  border-color: #d3b5ff8c; color: #fff;
+  box-shadow: inset 0 1px 0 #ffffff40,inset 0 -1px 0 #ffffff0a,0 8px 24px -14px #a24bff80;
+  backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
+  transition: border-color .2s,box-shadow .2s,background-color .2s;
+}
+body.reference-background #partners .keepsake-actions .keepsake-download::before {
+  content: ''; position: absolute; z-index: -1; inset: 0;
+  background: linear-gradient(115deg,transparent 25%,#fff2 48%,transparent 68%);
+  transform: translateX(-100%); transition: transform .65s; pointer-events: none;
+}
+body.reference-background #partners .keepsake-actions .keepsake-download:is(:hover,:focus-visible) { border-color: #d9ccff; box-shadow: inset 0 1px 0 #ffffff55,0 8px 24px -12px #a24bffb0; }
+body.reference-background #partners .keepsake-actions .keepsake-download:is(:hover,:focus-visible)::before { transform: translateX(100%); }
+
+@media(prefers-reduced-motion:reduce) {
+  body.reference-background #partners .keepsake-download::before { display: none; }
+}
+@media(forced-colors:active) {
+  body.reference-background #partners .keepsake-actions .keepsake-download { background: ButtonFace; color: ButtonText; border-color: ButtonText; box-shadow: none; }
+}

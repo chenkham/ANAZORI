@@ -1,0 +1,381 @@
+/* Collectible festival frames. Shared content, navigation and behaviour stay in their own layers. */
+.gallery-item,
+.person-card,
+.partner-logo-card {
+  --frame-ink: #302632;
+  --frame-line: #4b35482e;
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--frame-line);
+  border-radius: 18px;
+  background: #fff2da;
+  color: var(--frame-ink);
+  box-shadow: 0 12px 32px #08050d12;
+  clip-path: none;
+}
+.gallery-item::before,
+.person-card::before,
+.partner-logo-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--frame-line);
+  border-radius: 12px;
+  pointer-events: none;
+}
+.gallery-item:focus-visible,
+.person-card:focus-within,
+.partner-logo-card:focus-within {
+  outline: 3px solid #93dfc6;
+  outline-offset: 5px;
+}
+.gallery-item:hover,
+.person-card:hover,
+.partner-logo-card:hover { border-color: #b69cd0; }
+
+/* Photographs sit in an actual paper frame, with one clear caption. */
+.gallery-grid { gap: 24px; align-items: start; }
+.gallery-item { padding: 12px; }
+.gallery-photo { border: 1px solid #4b354825; border-radius: 10px; background: #28212e; }
+.gallery-photo > span {
+  bottom: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: #fff2da;
+  color: #302632;
+  border: 1px solid #30263230;
+  border-radius: 10px;
+  box-shadow: 0 5px 18px #17151d25;
+}
+.gallery-caption {
+  align-items: baseline;
+  padding: 17px 6px 7px;
+  color: #302632;
+  font: 550 16px/1.45 var(--display);
+  letter-spacing: -.015em;
+}
+.gallery-caption > span { min-width: 0; overflow-wrap: anywhere; }
+.gallery-caption > small { flex-shrink: 0; color: #665463; font-size: 10px; letter-spacing: .025em; }
+.gallery-item:nth-child(4n+2) { background: #ddd0f5; }
+.gallery-item:nth-child(4n+3) { background: #d4ebdf; }
+
+/* Organisers read as a considered collection of portrait cards. */
+.team-section h2 {
+  padding-top: 44px;
+  margin-bottom: 30px;
+  border-color: #fff2da35;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.team-grid { align-items: start; gap: 22px; }
+.person-card { padding: 13px 13px 25px; }
+.person-photo { border: 1px solid #30263220; border-radius: 10px; background: #cfc0da; }
+.person-photo img { filter: saturate(.8); }
+.person-card h3 {
+  margin: 22px 9px 9px;
+  font-size: clamp(20px, 1.65vw, 27px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+}
+.person-card p { margin: 5px 9px 0; font-size: 13px; line-height: 1.6; color: #665463; }
+.person-card .person-edition { font-size: 11px; color: #705276; }
+.person-card .person-bio { padding-top: 9px; }
+.person-card a { margin: 18px 9px 0; color: #4d345b; font-size: 13px; font-weight: 650; }
+.person-initials {
+  background: radial-gradient(ellipse at 80% 20%, #fff2da90, transparent 70%), #c8b5e4;
+  color: #4d345b;
+  font: 600 clamp(50px, 5vw, 84px)/1 var(--display);
+  letter-spacing: -.04em;
+}
+.person-card:nth-child(4n+2) { background: #ddd0f5; }
+.person-card:nth-child(4n+3) { background: #d4ebdf; }
+.person-card:nth-child(4n+4) { background: #f8d3bd; }
+
+/* A quiet, consistent control family for both programme and gallery. */
+.filter-toolbar { gap: 24px; padding-block: 30px; }
+.filters { gap: 9px; }
+.filters button {
+  min-height: 46px;
+  padding: 11px 19px;
+  border: 1px solid #fff2da45;
+  border-radius: 999px;
+  background: #24202c;
+  color: #fff2da;
+  font-size: 13px;
+  font-weight: 600;
+}
+.filters button:hover { border-color: #c5afff; background: #302638; }
+.filters button[aria-pressed=true] { background: #d5c2ff; color: #30213c; border-color: #d5c2ff; }
+.filters button > span { color: inherit; font-size: 11px; }
+.event-search {
+  min-height: 48px;
+  max-width: 280px;
+  padding: 10px 16px;
+  border: 1px solid #fff2da45;
+  border-radius: 999px;
+  background: #24202c;
+  color: #e4d6e4;
+}
+.event-search input { color: #fff2da; font-size: 14px; outline-offset: 5px; }
+.event-search input::placeholder { color: #cbbccc; }
+.event-search:focus-within { outline: 2px solid #93dfc6; outline-offset: 3px; border-color: #93dfc6; }
+.event-search input:focus-visible { outline: none; }
+
+/* Event details: a framed poster and small, readily scanned fact tiles. */
+.detail-copy h1 { font-weight: 600; letter-spacing: -.035em; }
+.detail-tagline { font-size: clamp(20px, 1.9vw, 28px); letter-spacing: -.02em; }
+.detail-description { font-size: 16px; line-height: 1.85; }
+.detail-facts { gap: 12px; border: 0; padding: 0; margin-block: 32px; }
+.detail-facts > div {
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid #fff2da28;
+  border-radius: 12px;
+  background: #26212e;
+  box-shadow: inset 0 0 0 5px #17151d35;
+}
+.detail-facts .eyebrow { display: block; margin-bottom: 10px; font-size: 10px; color: #d5bcdf; letter-spacing: .065em; }
+.detail-facts strong { color: #fff2da; font-size: 14px; line-height: 1.65; font-weight: 550; overflow-wrap: anywhere; }
+.detail-facts > div:last-child { background: #203730; border-color: #93dfc63d; }
+.detail-actions { flex-wrap: wrap; }
+.small-note { font-size: 13px; line-height: 1.75; }
+.detail-art {
+  border: 1px solid #fff2da4d;
+  border-radius: 22px;
+  clip-path: none;
+  box-shadow: 0 18px 50px #09050e30;
+}
+.detail-art::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  z-index: 3;
+  border: 1px solid #fff2da32;
+  border-radius: 15px;
+  pointer-events: none;
+}
+.detail-art-label,
+.detail-art.art-dance .detail-art-label {
+  bottom: 22px;
+  left: 22px;
+  right: 22px;
+  padding: 17px 20px;
+  background: #fff2da;
+  color: #302632;
+  border: 1px solid #30263220;
+  border-radius: 10px;
+  font: 600 clamp(24px, 2.4vw, 36px)/1.15 var(--display);
+  letter-spacing: -.025em;
+}
+.detail-next { background: #201c28; border-block: 1px solid #fff2da25; }
+.detail-next h2 { font-weight: 600; letter-spacing: -.035em; }
+.detail-steps { display: grid; gap: 14px; }
+.detail-steps article,
+.detail-steps article:first-child {
+  padding: 25px;
+  border: 1px solid #fff2da2e;
+  border-radius: 14px;
+  background: #29232f;
+  gap: 21px;
+}
+.detail-steps article > span { color: #93dfc6; font-size: 12px; }
+.detail-steps article > div { min-width: 0; }
+.detail-steps h3 { font-size: 24px; font-weight: 600; line-height: 1.18; letter-spacing: -.025em; }
+.detail-steps p { color: #d9cbd9; font-size: 15px; line-height: 1.8; overflow-wrap: anywhere; }
+
+/* FAQ and partner frames use the same restraint as the larger festival cards. */
+.faq { display: grid; gap: 12px; align-content: start; }
+.faq details { padding-inline: 23px; border: 1px solid #fff2da35; border-radius: 12px; background: #fff2da08; }
+.faq summary { font-size: 17px; font-weight: 550; padding-block: 23px; line-height: 1.45; }
+.faq summary > span { flex-shrink: 0; color: #d0f1d6; }
+.faq details > p { padding: 0 22px 24px 0; font-size: 15px; line-height: 1.8; color: #d7e9dc; }
+.faq details[open] { background: #fff2da0d; border-color: #b8debd70; }
+.faq details[open] summary { color: #fff2da; }
+.partner-logo-card { padding: 30px; border-radius: 16px; }
+.partner-logo-card::before { border-radius: 10px; }
+.partner-logo-card:focus-within { outline-color: #71548a; }
+.partner-logo-card img { margin-bottom: 24px; height: 80px; }
+.partner-logo-card .eyebrow { font-size: 10px; color: #705276; }
+.partner-logo-card h3 { font-weight: 600; font-size: 25px; letter-spacing: -.025em; }
+.partner-logo-card p { color: #665463; font-size: 14px; line-height: 1.75; }
+.partner-logo-card a { color: #4d345b; font-size: 14px; font-weight: 650; }
+
+/* Form surfaces stay calm and task-focused, with strong label and field contrast. */
+.account-card,
+.order-card,
+.dashboard-empty {
+  position: relative;
+  border: 1px solid #fff2da40;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #302736, #211c28);
+  color: #fff2da;
+  box-shadow: inset 0 0 0 6px #fff2da03, 0 20px 50px #08050d25;
+}
+.account-card { padding: clamp(28px, 3.2vw, 46px); }
+.account-card h2,
+.order-card h2,
+.dashboard-empty h2 { font-family: var(--display); font-weight: 600; letter-spacing: -.025em; }
+.account-form { gap: 23px; }
+.account-form label { font-weight: 600; font-size: 15px; }
+.account-form input:not([type=checkbox]):not([type=radio]),
+.account-form select,
+.account-form textarea {
+  min-height: 54px;
+  padding: 14px 16px;
+  border: 1px solid #c7b8d46b;
+  border-radius: 10px;
+  background: #17151d;
+  color: #fff2da;
+  box-shadow: inset 0 2px 6px #08050d15;
+}
+.account-form input:focus,
+.account-form select:focus,
+.account-form textarea:focus { outline: 2px solid #93dfc6; outline-offset: 3px; border-color: #93dfc6; }
+.account-card > p,
+.account-form small,
+.account-help,
+.account-links,
+.order-meta { color: #d8cbdc; }
+.account-links { gap: 17px; padding-top: 24px; border-top: 1px solid #fff2da24; }
+.account-links a { width: fit-content; }
+.google-button { min-height: 54px; border: 1px solid #30263220; border-radius: 10px; background: #fff8ed; color: #302632; font-weight: 650; }
+.google-button:hover { background: #fff2da; }
+.account-notice { background: #c5afff10; border-color: #c5afff60; border-radius: 12px; color: #eadcf4; padding: 18px; }
+.account-notice.error { background: #fda7c110; border-color: #fda7c175; color: #ffc6d6; }
+.order-card { padding: 32px; }
+.order-card:nth-child(even) { background: linear-gradient(145deg, #22372f, #1d2b27); border-color: #93dfc64d; }
+.order-top { flex-wrap: wrap; }
+.order-meta { line-height: 1.7; }
+.payment-badge { border-radius: 7px; padding: 7px 11px; background: #c5afff16; color: #e3d5fb; border-color: #c5afff70; }
+.payment-badge.state-paid { color: #b9f1d4; border-color: #93dfc67a; }
+.payment-badge.test { color: #ffe0a9; border-color: #ffe0a970; }
+.pass-link { background: #17151d45; border-color: #fff2da35; border-radius: 11px; padding: 18px; }
+.pass-link:hover { background: #fff2da08; border-color: #93dfc6; }
+.pass-link small { color: #d7c9db; }
+.dashboard-empty { background: radial-gradient(ellipse at 50% 0, #c5afff15, transparent 65%), #24202c; padding: 64px 28px; }
+.dashboard-empty > span { color: #c5afff; }
+.dashboard-empty h2 { margin: 20px 0 30px; line-height: 1.2; }
+.ticket-option { border-radius: 12px; border-color: #fff2da35; padding: 19px; gap: 14px !important; }
+.ticket-option:has(input:checked) { background: #93dfc612; border-color: #93dfc6; box-shadow: inset 0 0 0 1px #93dfc640; }
+.ticket-option input,
+.account-consent input { accent-color: #93dfc6; }
+.ticket-option span { min-width: 0; }
+.ticket-option strong { overflow-wrap: anywhere; }
+.checkout-total { border-color: #fff2da35; }
+.checkout-summary { border-color: #fff2da35; }
+.digital-pass {
+  border: 1px solid #fff2da66;
+  border-radius: 24px;
+  background: linear-gradient(150deg, #302736, #222f2a);
+  box-shadow: inset 0 0 0 8px #fff2da04, 0 20px 50px #08050d25;
+}
+.digital-pass h1,
+.digital-pass h2 { font-weight: 600; letter-spacing: -.025em; }
+.digital-pass p { color: #e0d4e4; }
+.ticket-perforation { border-color: #fff2da50; }
+.ticket-qr { border-radius: 12px; }
+
+/* The interest form is a warm paper invitation; media viewers remain dark. */
+.interest-dialog {
+  border: 1px solid #fff2da;
+  border-radius: 22px;
+  background: #fff2da;
+  color: #302632;
+  padding: 44px;
+  box-shadow: inset 0 0 0 7px #30263209, 0 30px 120px #0008;
+}
+.interest-dialog h2 { font-weight: 600; letter-spacing: -.035em; }
+.interest-dialog :focus-visible { outline-color: #71548a; }
+.interest-dialog h2 > span { color: #bb5147; }
+.interest-dialog .dialog-intro,
+.interest-dialog .consent-label,
+.interest-dialog .small-note,
+.interest-dialog #interest-success > p { color: #665463; font-size: 14px; }
+.interest-dialog form > label:not(.consent-label) { font-size: 14px; }
+.interest-dialog input:not([type=checkbox]):not([type=hidden]),
+.interest-dialog textarea {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 9px;
+  padding: 14px 15px;
+  border: 1px solid #70527665;
+  border-radius: 9px;
+  background: #fffaf0;
+  color: #302632;
+  font: inherit;
+}
+.interest-dialog input::placeholder { color: #71616f; }
+.interest-dialog input:focus-visible,
+.interest-dialog textarea:focus-visible { outline: 2px solid #71548a; outline-offset: 3px; border-color: #71548a; }
+.interest-dialog .consent-label input { accent-color: #71548a; }
+.interest-dialog .dialog-close { width: 44px; height: 44px; background: #302632; color: #fff2da; border-color: #302632; border-radius: 10px; }
+.interest-dialog .dialog-close:hover { background: #705276; }
+.interest-dialog .dialog-close:focus-visible { outline-color: #71548a; }
+.interest-dialog .form-message { color: #9c302e; font-size: 14px; }
+.interest-dialog .success-mark { color: #71548a; }
+.interest-dialog .reference { color: #4d345b; border-color: #70527680; border-radius: 10px; }
+.film-dialog,
+.lightbox { background: #211c28; color: #fff2da; border: 1px solid #fff2da4d; border-radius: 18px; padding: 20px; }
+.film-dialog video,
+.lightbox-image { border-radius: 10px; }
+.lightbox-controls button { width: 46px; height: 46px; border-radius: 10px; border-color: #fff2da55; }
+.lightbox-caption,
+.lightbox-count { color: #fff2da; font-size: 13px; }
+.lightbox .dialog-close,
+.dialog-bar .dialog-close { min-width: 44px; min-height: 44px; border-radius: 10px; background: #fff2da; color: #302632; border-color: #fff2da; }
+
+@media (max-width: 800px) {
+  .gallery-grid { gap: 20px; }
+  .team-grid { gap: 18px; }
+  .event-search { max-width: none; width: 100%; }
+  .detail-description { font-size: 15px; }
+  .detail-steps article,
+  .detail-steps article:first-child { padding: 23px; }
+  .account-card { padding: 30px; }
+  .partner-logo-card { padding: 25px; }
+}
+@media (max-width: 560px) {
+  .gallery-item { padding: 11px; }
+  .gallery-caption { font-size: 16px; padding: 16px 6px 7px; }
+  .team-section h2 { font-size: 28px; padding-top: 34px; }
+  .team-grid { gap: 15px; }
+  .person-card { padding: 10px 10px 21px; border-radius: 14px; }
+  .person-card h3 { margin-inline: 5px; font-size: 20px; }
+  .person-card p,
+  .person-card a { margin-inline: 5px; font-size: 12px; }
+  .person-photo { border-radius: 8px; }
+  .filters button { padding-inline: 15px; font-size: 12px; }
+  .detail-facts { gap: 10px; }
+  .detail-facts > div { padding: 17px; }
+  .detail-facts strong { font-size: 13px; }
+  .detail-art-label,
+  .detail-art.art-dance .detail-art-label { left: 19px; right: 19px; bottom: 19px; padding: 15px; }
+  .detail-steps article,
+  .detail-steps article:first-child { padding: 22px 19px; gap: 15px; }
+  .detail-steps h3 { font-size: 23px; }
+  .detail-steps p { font-size: 14px; }
+  .faq details { padding-inline: 20px; }
+  .faq summary { font-size: 16px; padding-block: 21px; }
+  .faq details > p { font-size: 14px; padding-right: 0; }
+  .account-card { padding: 29px 23px; border-radius: 18px; }
+  .order-card { padding: 26px 23px; border-radius: 18px; }
+  .ticket-option { padding: 17px 14px; }
+  .ticket-option b { font-size: 15px; }
+  .digital-pass { padding: 30px 23px; }
+  .interest-dialog { padding: 45px 24px 28px; border-radius: 18px; }
+  .interest-dialog h2 { font-size: 46px; }
+  .film-dialog,
+  .lightbox { padding: 13px; border-radius: 14px; }
+}
+@media print {
+  .digital-pass { background: #fff; color: #000; border: 2px solid #555; box-shadow: none; }
+  .digital-pass p { color: #222; }
+  .digital-pass .payment-badge,
+  .digital-pass .payment-badge.state-paid,
+  .digital-pass .payment-badge.test { color: #222; background: #fff; border-color: #555; }
+}
+@media (min-width: 801px) { .detail-art { top: 130px; } }
